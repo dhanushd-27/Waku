@@ -197,77 +197,93 @@ export default function Home() {
   const availableRatios = selectedPlatform
     ? platformConfigs[selectedPlatform].ratios
     : [];
+  const selectedRatioConfig = availableRatios.find((r) => r.value === selectedRatio);
+  const isReadyForPreview = Boolean(previewUrl && selectedRatio);
 
   return (
-    <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+    <main className="min-h-screen py-10 px-4 sm:px-6 lg:px-10">
+      <div className="max-w-6xl mx-auto space-y-10">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-2 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] bg-clip-text text-transparent">
+        <div className="text-center">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-3 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] bg-clip-text text-transparent">
             Waku
           </h1>
           <p className="text-gray-600 dark:text-gray-400 text-lg">
-            Upload and optimize your images for social media platforms
+            Upload, frame, and download social-ready images in one place.
           </p>
         </div>
 
-        {/* Upload Section */}
-        <div className="bg-white dark:bg-[#1f2937] rounded-2xl shadow-lg p-6 sm:p-8 mb-6 border border-gray-200 dark:border-gray-700">
-          <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-gray-100">
-            Upload Your Image
-          </h2>
-
-          {/* File Upload Area */}
-          <div
-            className={`relative border-2 border-dashed rounded-xl p-12 text-center transition-all ${
-              dragActive
-                ? 'border-[#6366f1] bg-[#6366f1]/5 dark:bg-[#6366f1]/10'
-                : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
-            }`}
-            onDragEnter={handleDrag}
-            onDragLeave={handleDrag}
-            onDragOver={handleDrag}
-            onDrop={handleDrop}
-          >
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleFileInput}
-              className="hidden"
-              id="file-upload"
-            />
-            <label
-              htmlFor="file-upload"
-              className="cursor-pointer flex flex-col items-center"
+        {/* Bento grid */}
+        <div className="grid gap-6 md:grid-cols-2">
+          {/* Upload */}
+          <div className="bg-white dark:bg-[#1f2937] rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                Add Image
+              </h2>
+              <span className="text-xs font-medium px-2 py-1 rounded-full bg-[#6366f1]/10 text-[#4f46e5]">
+                Upload
+              </span>
+            </div>
+            <div
+              className={`relative border-2 border-dashed rounded-xl p-10 text-center transition-all ${
+                dragActive
+                  ? 'border-[#6366f1] bg-[#6366f1]/5 dark:bg-[#6366f1]/10'
+                  : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
+              }`}
+              onDragEnter={handleDrag}
+              onDragLeave={handleDrag}
+              onDragOver={handleDrag}
+              onDrop={handleDrop}
             >
-              <div className="w-16 h-16 mb-4 rounded-full bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center">
-                <svg
-                  className="w-8 h-8 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 4v16m8-8H4"
-                  />
-                </svg>
-              </div>
-              <p className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
-                {selectedFile ? selectedFile.name : 'Click to upload or drag and drop'}
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                PNG, JPG, GIF up to 10MB
-              </p>
-            </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileInput}
+                className="hidden"
+                id="file-upload"
+              />
+              <label
+                htmlFor="file-upload"
+                className="cursor-pointer flex flex-col items-center"
+              >
+                <div className="w-14 h-14 mb-3 rounded-full bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center">
+                  <svg
+                    className="w-7 h-7 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+                </div>
+                <p className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-1">
+                  {selectedFile ? selectedFile.name : 'Click to upload or drag and drop'}
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  PNG, JPG, GIF up to 10MB
+                </p>
+              </label>
+            </div>
           </div>
 
-          {/* Platform Selection */}
-          <div className="mt-6">
+          {/* Platform */}
+          <div className="bg-white dark:bg-[#1f2937] rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                Social Platform
+              </h2>
+              <span className="text-xs font-medium px-2 py-1 rounded-full bg-[#06b6d4]/10 text-[#0ea5e9]">
+                Step 1
+              </span>
+            </div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Select Platform
+              Choose where you are posting
             </label>
             <select
               value={selectedPlatform}
@@ -277,19 +293,31 @@ export default function Home() {
               }}
               className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#111827] text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-[#6366f1] focus:border-transparent transition-all"
             >
-              <option value="">Choose a platform...</option>
+              <option value="">Select a platform...</option>
               <option value="instagram">Instagram</option>
               <option value="twitter">Twitter (X)</option>
               <option value="whatsapp">WhatsApp</option>
             </select>
+            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+              Platforms control which aspect ratios are available.
+            </p>
           </div>
 
-          {/* Ratio Selection */}
-          {selectedPlatform && (
-            <div className="mt-6">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Select Aspect Ratio
-              </label>
+          {/* Aspect ratio */}
+          <div className="bg-white dark:bg-[#1f2937] rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                Aspect Ratio
+              </h2>
+              <span className="text-xs font-medium px-2 py-1 rounded-full bg-[#8b5cf6]/10 text-[#7c3aed]">
+                Step 2
+              </span>
+            </div>
+            {!selectedPlatform ? (
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Pick a platform first to see the supported ratios.
+              </p>
+            ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {availableRatios.map((ratio) => (
                   <button
@@ -310,43 +338,59 @@ export default function Home() {
                   </button>
                 ))}
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
 
-        {/* Preview Section */}
-        {previewUrl && selectedRatio && (
+          {/* Preview */}
           <div className="bg-white dark:bg-[#1f2937] rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-200 dark:border-gray-700">
-            <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-gray-100">
-              Preview
-            </h2>
-            <div className="flex justify-center">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                Preview & Download
+              </h2>
+              <span className="text-xs font-medium px-2 py-1 rounded-full bg-[#10b981]/10 text-[#059669]">
+                Final
+              </span>
+            </div>
+
+            <div className="flex justify-center mb-6">
               <div
-                className="relative bg-white rounded-lg overflow-hidden shadow-inner border border-gray-200 dark:border-gray-600"
+                className="relative bg-white rounded-lg overflow-hidden shadow-inner border border-gray-200 dark:border-gray-600 w-full"
                 style={{
-                  aspectRatio: selectedRatio
-                    ? getAspectRatioValue(
-                        availableRatios.find((r) => r.value === selectedRatio)?.ratio || '1:1'
-                      )
+                  aspectRatio: selectedRatioConfig
+                    ? getAspectRatioValue(selectedRatioConfig.ratio)
                     : 1,
                   maxWidth: '100%',
-                  maxHeight: '600px',
+                  maxHeight: '420px',
                 }}
               >
-                <img
-                  src={previewUrl}
-                  alt="Preview"
-                  className="w-full h-full object-contain"
-                />
+                {isReadyForPreview ? (
+                  <img
+                    src={previewUrl as string}
+                    alt="Preview"
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center text-sm text-gray-500 dark:text-gray-400">
+                    Upload an image, choose platform, then ratio to preview.
+                  </div>
+                )}
               </div>
             </div>
-            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-sm text-gray-500 dark:text-gray-400">
-                Aspect Ratio: {availableRatios.find((r) => r.value === selectedRatio)?.ratio}
+                {selectedRatioConfig
+                  ? `Aspect Ratio: ${selectedRatioConfig.ratio}`
+                  : 'Aspect Ratio: —'}
               </div>
               <button
                 onClick={handleDownload}
-                className="px-6 py-3 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white font-medium rounded-lg hover:from-[#4f46e5] hover:to-[#7c3aed] transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
+                disabled={!isReadyForPreview}
+                className={`px-6 py-3 rounded-lg font-medium flex items-center gap-2 transition-all ${
+                  isReadyForPreview
+                    ? 'bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white hover:from-[#4f46e5] hover:to-[#7c3aed] shadow-lg hover:shadow-xl'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+                }`}
               >
                 <svg
                   className="w-5 h-5"
@@ -365,7 +409,7 @@ export default function Home() {
               </button>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </main>
   );
