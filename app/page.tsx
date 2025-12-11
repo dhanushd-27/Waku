@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AfterPanel } from "../components/AfterPanel";
 import { BeforePanel } from "../components/BeforePanel";
-import { ColorBar } from "../components/ColorBar";
+import { BackgroundColor } from "../components/background-color";
 import { DropdownControls } from "../components/DropdownControls";
 import { PlusCard } from "../components/PlusCard";
 
@@ -33,7 +33,7 @@ export default function Home() {
           </div>
 
           <div className="lg:col-span-1">
-            <ColorBar />
+            <BackgroundColor />
           </div>
 
           <div className="sm:col-span-2 lg:col-span-2">
