@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from "react";
 import { AfterPanel } from "../components/AfterPanel";
 import { BeforePanel } from "../components/BeforePanel";
 import { ColorBar } from "../components/ColorBar";
@@ -7,6 +8,8 @@ import { DropdownControls } from "../components/DropdownControls";
 import { PlusCard } from "../components/PlusCard";
 
 export default function Home() {
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+
   return (
     <main className="min-h-screen bg-[#EEEEEE] text-[#393E46] p-6">
       <div className="mx-auto max-w-6xl space-y-4">
@@ -22,7 +25,7 @@ export default function Home() {
           role="presentation"
         >
           <div className="lg:col-span-1">
-            <PlusCard />
+            <PlusCard onImageSelected={setImagePreviewUrl} />
           </div>
 
           <div className="lg:col-span-2">
@@ -34,7 +37,7 @@ export default function Home() {
           </div>
 
           <div className="sm:col-span-2 lg:col-span-2">
-            <BeforePanel />
+            <BeforePanel imageUrl={imagePreviewUrl} />
           </div>
 
           <div className="sm:col-span-2 lg:col-span-2">

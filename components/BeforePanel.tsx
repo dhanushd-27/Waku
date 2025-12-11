@@ -1,12 +1,26 @@
 import React from "react";
 import BasePanel from "./BasePanel";
 
-export const BeforePanel: React.FC = () => {
+type BeforePanelProps = {
+  imageUrl?: string | null;
+};
+
+export const BeforePanel: React.FC<BeforePanelProps> = ({ imageUrl }) => {
   return (
     <BasePanel title="Before">
-      <div className="flex h-52 items-center justify-center rounded-lg border border-dashed border-[#929AAB]/50 bg-white text-[#929AAB]">
-        Image preview placeholder
-      </div>
+      {imageUrl ? (
+        <div className="flex h-64 items-center justify-center overflow-hidden rounded-lg border border-[#929AAB]/30 bg-white">
+          <img
+            src={imageUrl}
+            alt="Uploaded preview"
+            className="h-full w-full object-contain"
+          />
+        </div>
+      ) : (
+        <div className="flex h-64 items-center justify-center rounded-lg border border-dashed border-[#929AAB]/50 bg-white text-[#929AAB]">
+          Image preview placeholder
+        </div>
+      )}
     </BasePanel>
   );
 };
