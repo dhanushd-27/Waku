@@ -47,7 +47,7 @@ export const PlusCard: React.FC<PlusCardProps> = ({ onImageSelected }) => {
           aria-label="Upload image"
           onClick={handleButtonClick}
         >
-          <span className="text-3xl leading-none">+</span>
+          <span className="text-3xl leading-none flex items-center justify-center">+</span>
         </button>
       </div>
     </BasePanel>
