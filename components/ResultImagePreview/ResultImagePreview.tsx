@@ -1,7 +1,7 @@
 import React from "react";
-import BasePanel from "./BasePanel";
+import BasePanel from "../BasePanel";
 
-export const AfterPanel: React.FC = () => {
+export const ResultImagePreview: React.FC = () => {
   return (
     <BasePanel title="After" footer="Processed image preview">
       <div className="flex h-64 items-center justify-center rounded-lg border border-dashed border-[#929AAB]/50 bg-white text-[#929AAB]">
@@ -11,5 +11,5 @@ export const AfterPanel: React.FC = () => {
   );
 };
 
-export default AfterPanel;
+export default ResultImagePreview;
 

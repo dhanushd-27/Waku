@@ -1,11 +1,13 @@
 import React from "react";
-import BasePanel from "./BasePanel";
+import BasePanel from "../BasePanel";
 
-type BeforePanelProps = {
+type CurrentImagePreviewProps = {
   imageUrl?: string | null;
 };
 
-export const BeforePanel: React.FC<BeforePanelProps> = ({ imageUrl }) => {
+export const CurrentImagePreview: React.FC<CurrentImagePreviewProps> = ({
+  imageUrl,
+}) => {
   return (
     <BasePanel title="Before">
       {imageUrl ? (
@@ -25,5 +27,5 @@ export const BeforePanel: React.FC<BeforePanelProps> = ({ imageUrl }) => {
   );
 };
 
-export default BeforePanel;
+export default CurrentImagePreview;
 

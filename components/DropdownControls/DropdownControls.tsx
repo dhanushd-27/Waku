@@ -1,5 +1,5 @@
 import React from "react";
-import BasePanel from "./BasePanel";
+import BasePanel from "../BasePanel";
 
 const labelClass = "text-sm font-medium text-[#393E46]";
 const selectClass =

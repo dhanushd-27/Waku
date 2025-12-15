@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from "react";
-import { AfterPanel } from "../components/AfterPanel";
-import { BeforePanel } from "../components/BeforePanel";
-import { BackgroundColor } from "../components/background-color";
+import { ResultImagePreview } from "../components/ResultImagePreview";
+import { CurrentImagePreview } from "../components/CurrentImagePreview";
+import { BackgroundColor } from "../components/BackgroundColor";
 import { DropdownControls } from "../components/DropdownControls";
 import { PlusCard } from "../components/PlusCard";
 
@@ -37,11 +37,11 @@ export default function Home() {
           </div>
 
           <div className="sm:col-span-2 lg:col-span-2">
-            <BeforePanel imageUrl={imagePreviewUrl} />
+            <CurrentImagePreview imageUrl={imagePreviewUrl} />
           </div>
 
           <div className="sm:col-span-2 lg:col-span-2">
-            <AfterPanel />
+            <ResultImagePreview />
           </div>
         </section>
       </div>

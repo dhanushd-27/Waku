@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import { prepareImageUpload } from "../services/uploadService";
-import BasePanel from "./BasePanel";
+import { prepareImageUpload } from "../../services/uploadService";
+import BasePanel from "../BasePanel";
 
 type PlusCardProps = {
   onImageSelected?: (previewUrl: string) => void;
