@@ -3,17 +3,19 @@ import React from "react";
 
 interface ImagePreviewProps {
   previewUrl: string;
+  isPlaceholder?: boolean;
   onClear?: () => void;
 }
 
 export const ImagePreview: React.FC<ImagePreviewProps> = ({
   previewUrl,
+  isPlaceholder = false,
   onClear,
 }) => {
   return (
     <div className="mt-4 w-full flex justify-center">
       <div className="group relative flex h-36 w-36 items-center justify-center overflow rounded-lg border border-[#929AAB]/30 bg-white">
-        {onClear && (
+        {onClear && !isPlaceholder && (
           <button
             type="button"
             onClick={onClear}
@@ -37,7 +39,7 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({
         )}
         <Image
           src={previewUrl}
-          alt="Uploaded preview"
+          alt={isPlaceholder ? "Placeholder image" : "Uploaded preview"}
           fill
           className="rounded-lg object-contain"
           sizes="144px"

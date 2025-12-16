@@ -10,7 +10,7 @@ export default function Home() {
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
 
   return (
-    <main className="min-h-screen bg-[#EEEEEE] text-[#393E46] p-6">
+    <main className="min-h-screen bg-[#F5F3FF] text-[#393E46] p-6">
       <div className="mx-auto max-w-6xl space-y-4">
         <header>
           <h1 className="text-2xl font-semibold">Image Layout Preview</h1>

@@ -66,7 +66,7 @@ export const Upload: React.FC<UploadProps> = ({ onImageSelected }) => {
   };
 
   return (
-    <div className="h-full rounded-xl border border-[#929AAB]/30 bg-white p-4 shadow-sm">
+    <div className="h-full rounded-xl border border-[#929AAB]/30 bg-[#F9FAFB] p-4 shadow-sm">
       <div className="space-y-3">
         <UploadArea
           isDragging={isDragging}
@@ -77,8 +77,16 @@ export const Upload: React.FC<UploadProps> = ({ onImageSelected }) => {
           <FileInput inputRef={fileInputRef} onChange={handleFileChange} />
           <UploadButton onClick={handleButtonClick} />
           <UploadInstructions />
-          {previewUrl && (
-            <ImagePreview previewUrl={previewUrl} onClear={handleClearImage} />
+          {!previewUrl ? (
+            <div className="mt-4 w-full flex justify-center">
+              <div className="flex h-36 w-36 items-center justify-center rounded-lg border border-[#929AAB]/30 bg-gray-200" />
+            </div>
+          ) : (
+            <ImagePreview
+              previewUrl={previewUrl}
+              isPlaceholder={false}
+              onClear={handleClearImage}
+            />
           )}
         </UploadArea>
       </div>
