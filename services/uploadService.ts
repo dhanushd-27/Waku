@@ -15,13 +15,18 @@ const readFileAsDataUrl = (file: File): Promise<string> =>
 
 /**
  * Validate and prepare an image file for preview.
- * Throws if the selected file is not an image.
+ * Throws if the selected file is not an image or exceeds the size limit.
  */
 export async function prepareImageUpload(
   file: File,
 ): Promise<ImageUploadResult> {
   if (!file.type.startsWith("image/")) {
     throw new Error("Only image files are allowed.");
+  }
+
+  const maxSizeInBytes = 20 * 1024 * 1024; // 20 MB
+  if (file.size > maxSizeInBytes) {
+    throw new Error("File size exceeds 20 MB limit.");
   }
 
   const previewUrl = await readFileAsDataUrl(file);

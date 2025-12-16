@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import { ResultImagePreview } from "../components/ResultImagePreview";
-import { CurrentImagePreview } from "../components/CurrentImagePreview";
 import { BackgroundColor } from "../components/BackgroundColor";
 import { DropdownControls } from "../components/DropdownControls";
-import { PlusCard } from "../components/PlusCard";
+import { Upload } from "../components/Upload";
 
 export default function Home() {
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
@@ -25,7 +24,7 @@ export default function Home() {
           role="presentation"
         >
           <div className="lg:col-span-1">
-            <PlusCard onImageSelected={setImagePreviewUrl} />
+            <Upload onImageSelected={setImagePreviewUrl} />
           </div>
 
           <div className="lg:col-span-2">
@@ -36,13 +35,9 @@ export default function Home() {
             <BackgroundColor />
           </div>
 
-          <div className="sm:col-span-2 lg:col-span-2">
-            <CurrentImagePreview imageUrl={imagePreviewUrl} />
-          </div>
-
-          <div className="sm:col-span-2 lg:col-span-2">
+          {/* <div className="sm:col-span-2 lg:col-span-2">
             <ResultImagePreview />
-          </div>
+          </div> */}
         </section>
       </div>
     </main>
