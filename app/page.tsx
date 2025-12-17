@@ -1,5 +1,5 @@
-"use client";
-import { BackgroundColor } from "../components/BackgroundColor";
+ "use client";
+import { Tools } from "../components/Tools";
 import { DropdownControls } from "../components/DropdownControls";
 import { Upload } from "../components/Upload";
 
@@ -27,7 +27,7 @@ export default function Home() {
           </div>
 
           <div className="lg:col-span-1">
-            <BackgroundColor />
+            <Tools />
           </div>
         </section>
       </div>
