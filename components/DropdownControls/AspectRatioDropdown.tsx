@@ -3,23 +3,35 @@ import Dropdown from "./Dropdown";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { setAspectRatio } from "@/state/aspectRatioSlice";
+import {
+  PLATFORM_ASPECT_OPTIONS,
+  type AspectRatioId,
+} from "./platformAspectConfig";
 
 export const AspectRatioDropdown: React.FC = () => {
   const aspectRatio = useAppSelector((state) => state.aspectRatio.aspectRatio);
+  const platform = useAppSelector((state) => state.platform.platform);
   const dispatch = useAppDispatch();
 
-  const options = [
-    { value: "1:1", label: "1:1 (Square)" },
-    { value: "4:5", label: "4:5 (Portrait)" },
-    { value: "16:9", label: "16:9 (Landscape)" },
-    { value: "9:16", label: "9:16 (Vertical)" },
-  ];
+  const options = React.useMemo(
+    () => PLATFORM_ASPECT_OPTIONS[platform],
+    [platform],
+  );
+
+  // Ensure aspect ratio is always valid for the current platform
+  React.useEffect(() => {
+    const isValid = options.some((option) => option.value === aspectRatio);
+    if (!isValid && options.length > 0) {
+      dispatch(setAspectRatio(options[0].value));
+    }
+  }, [aspectRatio, options, dispatch]);
 
   return (
     <Dropdown
-      label="Aspect Ratio"
+      label="Aspect ratio"
+      helperText="Shape of the final canvas"
       value={aspectRatio}
-      onChange={(value) => dispatch(setAspectRatio(value as "1:1" | "4:5" | "16:9" | "9:16"))}
+      onChange={(value) => dispatch(setAspectRatio(value as AspectRatioId))}
       options={options}
       placeholder="Select ratio"
     />
@@ -27,4 +39,3 @@ export const AspectRatioDropdown: React.FC = () => {
 };
 
 export default AspectRatioDropdown;
-

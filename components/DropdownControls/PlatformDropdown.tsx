@@ -16,7 +16,8 @@ export const PlatformDropdown: React.FC = () => {
 
   return (
     <Dropdown
-      label="Platform"
+      label="Target platform"
+      helperText="Where you’ll post the image"
       value={platform}
       onChange={(value) => dispatch(setPlatform(value as "x" | "whatsapp" | "instagram"))}
       options={options}

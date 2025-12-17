@@ -22,4 +22,3 @@ const imageTypeSlice = createSlice({
 
 export const { setImageType } = imageTypeSlice.actions;
 export default imageTypeSlice.reducer;
-

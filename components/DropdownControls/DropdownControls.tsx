@@ -14,7 +14,7 @@ export const DropdownControls: React.FC = () => {
           <AspectRatioDropdown />
           <ImageTypeDropdown />
         </div>
-      <ResultImagePreview />
+        <ResultImagePreview />
       </BasePanel>
     </>
   );

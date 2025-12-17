@@ -15,6 +15,7 @@ type DropdownProps = {
   onChange: (value: string) => void;
   options: DropdownOption[];
   placeholder: string;
+  helperText?: string;
 };
 
 export const Dropdown: React.FC<DropdownProps> = ({
@@ -23,10 +24,14 @@ export const Dropdown: React.FC<DropdownProps> = ({
   onChange,
   options,
   placeholder,
+  helperText,
 }) => {
   return (
     <label className="space-y-1">
       <span className={labelClass}>{label}</span>
+      {helperText && (
+        <p className="text-xs text-[#6B7280]">{helperText}</p>
+      )}
       <select
         className={selectClass}
         value={value}

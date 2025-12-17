@@ -1,16 +1,31 @@
 import React from "react";
 import { useAppSelector } from "@/hooks/useAppSelector";
+import type { AspectRatioId } from "@/components/DropdownControls/platformAspectConfig";
 
 const BASE_CANVAS_WIDTH = 512;
 
-const getCanvasDimensions = (aspectRatio: string) => {
+const getCanvasDimensions = (aspectRatio: AspectRatioId) => {
   switch (aspectRatio) {
     case "4:5":
-      return { width: BASE_CANVAS_WIDTH, height: Math.round((BASE_CANVAS_WIDTH * 5) / 4) };
+      return {
+        width: BASE_CANVAS_WIDTH,
+        height: Math.round((BASE_CANVAS_WIDTH * 5) / 4),
+      };
     case "16:9":
-      return { width: BASE_CANVAS_WIDTH, height: Math.round((BASE_CANVAS_WIDTH * 9) / 16) };
+      return {
+        width: BASE_CANVAS_WIDTH,
+        height: Math.round((BASE_CANVAS_WIDTH * 9) / 16),
+      };
     case "9:16":
-      return { width: BASE_CANVAS_WIDTH, height: Math.round((BASE_CANVAS_WIDTH * 16) / 9) };
+      return {
+        width: BASE_CANVAS_WIDTH,
+        height: Math.round((BASE_CANVAS_WIDTH * 16) / 9),
+      };
+    case "1.91:1":
+      return {
+        width: BASE_CANVAS_WIDTH,
+        height: Math.round(BASE_CANVAS_WIDTH / 1.91),
+      };
     case "1:1":
     default:
       return { width: BASE_CANVAS_WIDTH, height: BASE_CANVAS_WIDTH };
@@ -19,7 +34,9 @@ const getCanvasDimensions = (aspectRatio: string) => {
 
 export const ResultImagePreview: React.FC = () => {
   const previewUrl = useAppSelector((state) => state.image.previewUrl);
-  const aspectRatio = useAppSelector((state) => state.aspectRatio.aspectRatio);
+  const aspectRatio = useAppSelector(
+    (state) => state.aspectRatio.aspectRatio,
+  ) as AspectRatioId;
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
 
   const { width, height } = getCanvasDimensions(aspectRatio);
@@ -61,6 +78,7 @@ export const ResultImagePreview: React.FC = () => {
       const offsetX = (canvasWidth - drawWidth) / 2;
       const offsetY = (canvasHeight - drawHeight) / 2;
 
+      // Clear then draw image
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
       ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
     };
@@ -75,12 +93,12 @@ export const ResultImagePreview: React.FC = () => {
         <div className="flex h-full w-full items-center justify-center">
           <canvas
             ref={canvasRef}
-            className="max-h-full max-w-full rounded-md bg-white shadow-sm"
+            className="max-h-full max-w-full bg-white shadow-sm"
           />
         </div>
         {!previewUrl && (
-          <span className="pointer-events-none absolute text-xs text-[#929AAB]">
-            Processed image preview will appear here
+          <span className="pointer-events-none absolute text-xs text-[#929AAB] text-wrap w-42 text-center">
+            Image Preview
           </span>
         )}
       </div>

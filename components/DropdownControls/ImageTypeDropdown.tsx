@@ -16,9 +16,12 @@ export const ImageTypeDropdown: React.FC = () => {
 
   return (
     <Dropdown
-      label="Type of Image"
+      label="Background style"
+      helperText="How to fill the extra space"
       value={imageType}
-      onChange={(value) => dispatch(setImageType(value as "blur" | "colour-bar" | "auto-pick"))}
+      onChange={(value) =>
+        dispatch(setImageType(value as "blur" | "colour-bar" | "auto-pick"))
+      }
       options={options}
       placeholder="Pick an effect"
     />

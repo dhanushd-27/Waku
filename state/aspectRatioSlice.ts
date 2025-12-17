@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { AspectRatioId } from "@/components/DropdownControls/platformAspectConfig";
 
-type AspectRatio = "1:1" | "4:5" | "16:9" | "9:16";
+type AspectRatio = AspectRatioId;
 
 type AspectRatioState = {
   aspectRatio: AspectRatio;
@@ -22,4 +23,3 @@ const aspectRatioSlice = createSlice({
 
 export const { setAspectRatio } = aspectRatioSlice.actions;
 export default aspectRatioSlice.reducer;
-
