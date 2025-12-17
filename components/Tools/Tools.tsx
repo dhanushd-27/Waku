@@ -18,14 +18,18 @@ import {
   type ColorMode,
 } from "@/state/colorSlice";
 
-const AUTO_PICKED_COLORS = ["#000000", "#FFFFFF"];
+const DEFAULT_COLORS = ["#000000", "#FFFFFF"];
 
 export const Tools: React.FC = () => {
   const dispatch = useAppDispatch();
   const { hue, saturation, lightness, opacity, mode, inputValue } = useAppSelector(
     (state) => state.color,
   );
+  const suggestedColors = useAppSelector((state) => state.image.suggestedColors);
   const [copied, setCopied] = useState(false);
+  
+  // Use extracted colors if available, otherwise use default colors
+  const colorsToDisplay = suggestedColors.length > 0 ? suggestedColors : DEFAULT_COLORS;
 
   const baseRgb = useMemo(
     () => hslToRgb(hue, saturation, lightness),
@@ -132,7 +136,7 @@ export const Tools: React.FC = () => {
           onCopy={handleCopy}
         />
 
-        <SuggestedColors colors={AUTO_PICKED_COLORS} onSelect={handleSwatchClick} />
+        <SuggestedColors colors={colorsToDisplay} onSelect={handleSwatchClick} />
       </div>
     </BasePanel>
   );

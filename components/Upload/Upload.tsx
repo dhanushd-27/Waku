@@ -7,7 +7,8 @@ import { FileInput } from "./FileInput";
 import { UploadArea } from "./UploadArea";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { useAppSelector } from "@/hooks/useAppSelector";
-import { clearImage, setImagePreview } from "@/state/imageSlice";
+import { clearImage, setImagePreview, setSuggestedColors } from "@/state/imageSlice";
+import { extractColorsFromImage } from "@/utils/color";
 
 export const Upload: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -20,13 +21,22 @@ export const Upload: React.FC = () => {
   };
 
   const handleClearImage = () => {
-    dispatch(clearImage());
+    dispatch(clearImage()); // This also clears suggestedColors
   };
 
   const processFile = async (file: File) => {
     try {
       const { previewUrl: url } = await prepareImageUpload(file);
       dispatch(setImagePreview(url));
+      
+      // Extract colors from the image
+      try {
+        const colors = await extractColorsFromImage(url, 8);
+        dispatch(setSuggestedColors(colors));
+      } catch (colorError) {
+        console.error("Failed to extract colors:", colorError);
+        dispatch(setSuggestedColors([]));
+      }
     } catch (error) {
       console.error(error);
     }

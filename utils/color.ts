@@ -88,3 +88,84 @@ export const rgbToHsl = ({ r, g, b }: RGB): { h: number; s: number; l: number } 
   return { h, s, l };
 };
 
+/**
+ * Extract dominant colors from an image by analyzing pixel data.
+ * Returns up to maxColors colors ordered by frequency.
+ */
+export async function extractColorsFromImage(
+  imageUrl: string,
+  maxColors: number = 8,
+): Promise<string[]> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+
+    img.onload = () => {
+      try {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          reject(new Error("Could not get canvas context"));
+          return;
+        }
+
+        // Scale down image for performance (max 200px on longest side)
+        const maxDimension = 200;
+        let width = img.width;
+        let height = img.height;
+        if (width > height) {
+          if (width > maxDimension) {
+            height = (height * maxDimension) / width;
+            width = maxDimension;
+          }
+        } else {
+          if (height > maxDimension) {
+            width = (width * maxDimension) / height;
+            height = maxDimension;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(img, 0, 0, width, height);
+
+        const imageData = ctx.getImageData(0, 0, width, height);
+        const data = imageData.data;
+
+        // Count color frequencies (quantize to reduce similar colors)
+        const colorMap = new Map<string, number>();
+        const quantize = (value: number) => Math.round(value / 10) * 10;
+
+        for (let i = 0; i < data.length; i += 4) {
+          const r = quantize(data[i]);
+          const g = quantize(data[i + 1]);
+          const b = quantize(data[i + 2]);
+          const a = data[i + 3];
+
+          // Skip transparent pixels
+          if (a < 128) continue;
+
+          const hex = rgbToHex({ r, g, b });
+          colorMap.set(hex, (colorMap.get(hex) || 0) + 1);
+        }
+
+        // Sort by frequency and take top colors
+        const sortedColors = Array.from(colorMap.entries())
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, maxColors)
+          .map(([color]) => color);
+
+        resolve(sortedColors);
+      } catch (error) {
+        reject(error);
+      }
+    };
+
+    img.onerror = () => {
+      reject(new Error("Failed to load image"));
+    };
+
+    img.src = imageUrl;
+  });
+}
+
