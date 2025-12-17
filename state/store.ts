@@ -3,6 +3,7 @@ import uiReducer from "./uiSlice";
 import platformReducer from "./platformSlice";
 import aspectRatioReducer from "./aspectRatioSlice";
 import imageTypeReducer from "./imageTypeSlice";
+import imageReducer from "./imageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     platform: platformReducer,
     aspectRatio: aspectRatioReducer,
     imageType: imageTypeReducer,
+    image: imageReducer,
   },
 });
 

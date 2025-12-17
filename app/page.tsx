@@ -1,13 +1,9 @@
-'use client';
-
-import { useState } from "react";
+"use client";
 import { BackgroundColor } from "../components/BackgroundColor";
 import { DropdownControls } from "../components/DropdownControls";
 import { Upload } from "../components/Upload";
 
 export default function Home() {
-  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
-
   return (
     <main className="min-h-screen bg-[#EEEEEE] text-[#393E46] p-6">
       <div className="mx-auto max-w-6xl space-y-4">
@@ -23,7 +19,7 @@ export default function Home() {
           role="presentation"
         >
           <div className="lg:col-span-1">
-            <Upload onImageSelected={setImagePreviewUrl} />
+            <Upload />
           </div>
 
           <div className="lg:col-span-2">

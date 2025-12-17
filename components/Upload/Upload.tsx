@@ -1,34 +1,32 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { prepareImageUpload } from "../../services/uploadService";
 import { UploadButton } from "./UploadButton";
 import { UploadInstructions } from "./UploadInstructions";
 import { ImagePreview } from "./ImagePreview";
 import { FileInput } from "./FileInput";
 import { UploadArea } from "./UploadArea";
+import { useAppDispatch } from "@/hooks/useAppDispatch";
+import { useAppSelector } from "@/hooks/useAppSelector";
+import { clearImage, setImagePreview } from "@/state/imageSlice";
 
-type UploadProps = {
-  onImageSelected?: (previewUrl: string | null) => void;
-};
-
-export const Upload: React.FC<UploadProps> = ({ onImageSelected }) => {
+export const Upload: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
+  const dispatch = useAppDispatch();
+  const previewUrl = useAppSelector((state) => state.image.previewUrl);
+  const [isDragging, setIsDragging] = React.useState(false);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
   };
 
   const handleClearImage = () => {
-    setPreviewUrl(null);
-    onImageSelected?.(null);
+    dispatch(clearImage());
   };
 
   const processFile = async (file: File) => {
     try {
       const { previewUrl: url } = await prepareImageUpload(file);
-      setPreviewUrl(url);
-      onImageSelected?.(url);
+      dispatch(setImagePreview(url));
     } catch (error) {
       console.error(error);
     }
