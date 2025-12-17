@@ -4,6 +4,7 @@ import platformReducer from "./platformSlice";
 import aspectRatioReducer from "./aspectRatioSlice";
 import imageTypeReducer from "./imageTypeSlice";
 import imageReducer from "./imageSlice";
+import colorReducer from "./colorSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     aspectRatio: aspectRatioReducer,
     imageType: imageTypeReducer,
     image: imageReducer,
+    color: colorReducer,
   },
 });
 

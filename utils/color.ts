@@ -54,4 +54,37 @@ export const hexToRgb = (hex: string): RGB | null => {
   return { r, g, b };
 };
 
+export const rgbToHsl = ({ r, g, b }: RGB): { h: number; s: number; l: number } => {
+  const rNorm = clamp(r / 255, 0, 1);
+  const gNorm = clamp(g / 255, 0, 1);
+  const bNorm = clamp(b / 255, 0, 1);
+
+  const max = Math.max(rNorm, gNorm, bNorm);
+  const min = Math.min(rNorm, gNorm, bNorm);
+  const delta = max - min;
+
+  let h = 0;
+  const l = (max + min) / 2;
+  let s = 0;
+
+  if (delta !== 0) {
+    s = delta / (1 - Math.abs(2 * l - 1));
+
+    switch (max) {
+      case rNorm:
+        h = 60 * (((gNorm - bNorm) / delta) % 6);
+        break;
+      case gNorm:
+        h = 60 * ((bNorm - rNorm) / delta + 2);
+        break;
+      case bNorm:
+        h = 60 * ((rNorm - gNorm) / delta + 4);
+        break;
+    }
+  }
+
+  if (h < 0) h += 360;
+
+  return { h, s, l };
+};
 

@@ -1,18 +1,18 @@
 import React from "react";
 
-interface AutoPickedColorsProps {
+interface SuggestedColorsProps {
   colors: string[];
   onSelect: (hex: string) => void;
 }
 
-export const AutoPickedColors: React.FC<AutoPickedColorsProps> = ({
+export const SuggestedColors: React.FC<SuggestedColorsProps> = ({
   colors,
   onSelect,
 }) => {
   return (
     <div className="space-y-2">
       <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
-        Auto Picked Colors
+        Suggested Colors
       </div>
       <div className="flex flex-wrap gap-2">
         {colors.map((color) => (
@@ -20,7 +20,7 @@ export const AutoPickedColors: React.FC<AutoPickedColorsProps> = ({
             key={color}
             type="button"
             onClick={() => onSelect(color)}
-            className="h-7 w-7 rounded-full border border-slate-200 shadow-sm transition hover:-translate-y-0.5 hover:shadow"
+            className="h-5 w-5 rounded-full border border-slate-200 shadow-sm transition hover:-translate-y-0.5 hover:shadow"
             style={{ backgroundColor: color }}
             aria-label={`Use color ${color}`}
           />
@@ -30,6 +30,6 @@ export const AutoPickedColors: React.FC<AutoPickedColorsProps> = ({
   );
 };
 
-export default AutoPickedColors;
+export default SuggestedColors;
 
 

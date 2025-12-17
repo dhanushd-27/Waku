@@ -17,7 +17,7 @@ export const ColorBarSlider: React.FC<ColorBarSliderProps> = ({ hue, onChange })
         value={hue}
         onChange={(event) => onChange(Number(event.target.value))}
         aria-label="Select background color"
-        className="h-3 w-full cursor-pointer appearance-none rounded-full border border-[#929AAB]/40"
+        className="color-bar-range h-2 w-full cursor-pointer appearance-none rounded-full border border-[#929AAB]/40"
         style={{ background: gradientStops }}
       />
     </div>

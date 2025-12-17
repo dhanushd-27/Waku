@@ -1,6 +1,7 @@
 import React from "react";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import type { AspectRatioId } from "@/components/DropdownControls/platformAspectConfig";
+import { hslToRgb } from "@/utils/color";
 
 const BASE_CANVAS_WIDTH = 512;
 
@@ -37,6 +38,9 @@ export const ResultImagePreview: React.FC = () => {
   const aspectRatio = useAppSelector(
     (state) => state.aspectRatio.aspectRatio,
   ) as AspectRatioId;
+  const { hue, saturation, lightness, opacity } = useAppSelector(
+    (state) => state.color,
+  );
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
 
   const { width, height } = getCanvasDimensions(aspectRatio);
@@ -53,6 +57,11 @@ export const ResultImagePreview: React.FC = () => {
 
     // Clear previous drawing
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Fill with global color as background
+    const rgb = hslToRgb(hue, saturation, lightness);
+    ctx.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     if (!previewUrl) {
       return;
@@ -78,12 +87,14 @@ export const ResultImagePreview: React.FC = () => {
       const offsetX = (canvasWidth - drawWidth) / 2;
       const offsetY = (canvasHeight - drawHeight) / 2;
 
-      // Clear then draw image
+      // Draw image on top of color background
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      ctx.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
       ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
     };
     img.src = previewUrl;
-  }, [previewUrl, width, height, aspectRatio]);
+  }, [previewUrl, width, height, aspectRatio, hue, saturation, lightness, opacity]);
 
   return (
     <div className="flex h-64 w-full items-center justify-center rounded-lg border border-dashed border-[#929AAB]/50 bg-white text-[#929AAB]">

@@ -8,11 +8,59 @@ interface OpacityBarProps {
 }
 
 export const OpacityBar: React.FC<OpacityBarProps> = ({ opacity, baseRgb, onChange }) => {
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = event.clientX - rect.left;
+  const trackRef = React.useRef<HTMLDivElement | null>(null);
+
+  const updateFromClientX = (clientX: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const rect = track.getBoundingClientRect();
+    const x = clientX - rect.left;
     const ratio = Math.min(1, Math.max(0, x / rect.width));
     onChange(ratio);
+  };
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    updateFromClientX(event.clientX);
+  };
+
+  const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    updateFromClientX(event.clientX);
+
+    const handleMouseMove = (moveEvent: MouseEvent) => {
+      updateFromClientX(moveEvent.clientX);
+    };
+
+    const handleMouseUp = () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+  };
+
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    if (!touch) return;
+    updateFromClientX(touch.clientX);
+
+    const handleTouchMove = (moveEvent: TouchEvent) => {
+      const moveTouch = moveEvent.touches[0];
+      if (!moveTouch) return;
+      updateFromClientX(moveTouch.clientX);
+    };
+
+    const handleTouchEnd = () => {
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("touchcancel", handleTouchEnd);
+    };
+
+    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("touchcancel", handleTouchEnd);
   };
 
   const gradient = {
@@ -27,15 +75,19 @@ export const OpacityBar: React.FC<OpacityBarProps> = ({ opacity, baseRgb, onChan
         Opacity
       </div>
       <div
-        className="relative h-3 w-full cursor-pointer rounded-full bg-[linear-gradient(45deg,#e5e7eb_25%,transparent_25%,transparent_75%,#e5e7eb_75%,#e5e7eb_100%),linear-gradient(45deg,#e5e7eb_25%,transparent_25%,transparent_75%,#e5e7eb_75%,#e5e7eb_100%)] bg-[length:10px_10px] bg-[position:0_0,5px_5px] shadow-sm"
+        ref={trackRef}
+        className="relative h-3 w-full cursor-pointer rounded-full border border-gray-300 shadow-sm"
         onClick={handleClick}
+        onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart}
       >
         <div className="absolute inset-0 rounded-full" style={gradient} />
         <div
-          className="absolute top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border border-white shadow-sm"
+          className="absolute top-1/2 h-4 w-4 rounded-full border-2 border-white shadow-sm"
           style={{
             left: `${opacity * 100}%`,
             transform: "translate(-50%, -50%)",
+            backgroundColor: `rgba(${baseRgb.r}, ${baseRgb.g}, ${baseRgb.b}, ${opacity})`,
           }}
         />
       </div>
