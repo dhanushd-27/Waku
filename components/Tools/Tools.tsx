@@ -222,15 +222,6 @@ export const Tools: React.FC = () => {
   return (
     <BasePanel title="Tools">
       <div className="space-y-4 text-sm text-slate-900">
-        {aspectNote && (
-          <p className="text-xs text-slate-500">
-            <span className="font-medium">
-              {platformLabel} {aspectRatio}
-            </span>
-            <span className="mx-1">•</span>
-            <span>Optimize your colors for this format: {aspectNote}</span>
-          </p>
-        )}
 
         <ColorSquare
           hue={hue}

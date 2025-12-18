@@ -1,32 +1,25 @@
 import React from "react";
-import Dropdown from "./Dropdown";
-import { useAppSelector } from "@/hooks/useAppSelector";
-import { useAppDispatch } from "@/hooks/useAppDispatch";
-import { setImageType } from "@/state/imageTypeSlice";
+
+const labelClass = "text-sm font-medium text-[#393E46]";
+const fieldClass =
+  "w-full rounded-lg border border-[#929AAB]/50 bg-white px-3 py-2 text-sm text-[#393E46] shadow-sm";
 
 export const ImageTypeDropdown: React.FC = () => {
-  const imageType = useAppSelector((state) => state.imageType.imageType);
-  const dispatch = useAppDispatch();
-
-  const options = [
-    { value: "blur", label: "Blur effect" },
-    { value: "colour-bar", label: "Colour bar" },
-    { value: "auto-pick", label: "Auto pick from image" },
-  ];
-
   return (
-    <Dropdown
-      label="Background style"
-      helperText="How to fill the extra space"
-      value={imageType}
-      onChange={(value) =>
-        dispatch(setImageType(value as "blur" | "colour-bar" | "auto-pick"))
-      }
-      options={options}
-      placeholder="Pick an effect"
-    />
+    <label className="space-y-1">
+      <span className={labelClass}>Effect</span>
+      <p className="text-xs text-[#6B7280]">Add Effects</p>
+      <button
+        type="button"
+        className={`flex items-center gap-2 rounded-full border border-[#929AAB]/50 bg-white px-4 py-2 text-xs text-[#6B7280] shadow-sm cursor-default`}
+        disabled
+        aria-disabled="true"
+      >
+        <span className="inline-block h-2 w-2 rounded-full bg-[#9CA3AF] mr-1"></span>
+        <span className="text-[#9CA3AF]">Coming soon</span>
+      </button>
+    </label>
   );
 };
 
 export default ImageTypeDropdown;
-
