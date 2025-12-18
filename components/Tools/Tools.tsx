@@ -1,6 +1,12 @@
 import React, { useCallback, useMemo, useState } from "react";
 import BasePanel from "../BasePanel";
-import { clamp, hslToRgb, rgbToHex, hexToRgb, rgbToHsl } from "../../utils/color";
+import {
+  clamp,
+  hslToRgb,
+  rgbToHex,
+  hexToRgb,
+  rgbToHsl,
+} from "../../utils/color";
 import { ColorSquare } from "./ColorSquare";
 import { HueBar } from "./HueBar";
 import { OpacityBar } from "./OpacityBar";
@@ -17,6 +23,11 @@ import {
   setLightness,
   type ColorMode,
 } from "@/state/colorSlice";
+import {
+  getAspectRatioNote,
+  type Platform,
+  type AspectRatioId,
+} from "@/components/DropdownControls/platformAspectConfig";
 
 const DEFAULT_COLORS = ["#000000", "#FFFFFF"];
 
@@ -26,10 +37,31 @@ export const Tools: React.FC = () => {
     (state) => state.color,
   );
   const suggestedColors = useAppSelector((state) => state.image.suggestedColors);
+  const platform = useAppSelector(
+    (state) => state.platform.platform,
+  ) as Platform;
+  const aspectRatio = useAppSelector(
+    (state) => state.aspectRatio.aspectRatio,
+  ) as AspectRatioId;
   const [copied, setCopied] = useState(false);
-  
+
   // Use extracted colors if available, otherwise use default colors
   const colorsToDisplay = suggestedColors.length > 0 ? suggestedColors : DEFAULT_COLORS;
+
+  const aspectNote = useMemo(
+    () => getAspectRatioNote(platform, aspectRatio),
+    [platform, aspectRatio],
+  );
+
+  const platformLabel = useMemo(() => {
+    const labels: Record<Platform, string> = {
+      instagram: "Instagram",
+      x: "X",
+      whatsapp: "WhatsApp",
+      linkedin: "LinkedIn",
+    };
+    return labels[platform] ?? platform;
+  }, [platform]);
 
   const baseRgb = useMemo(
     () => hslToRgb(hue, saturation, lightness),
@@ -39,7 +71,6 @@ export const Tools: React.FC = () => {
   const hex = useMemo(() => rgbToHex(baseRgb), [baseRgb]);
   const displayValue = useMemo(() => {
     if (mode === "HEX") return hex;
-    if (mode === "RGB") return `${baseRgb.r}, ${baseRgb.g}, ${baseRgb.b}`;
     if (mode === "HSL") {
       const sPercent = Math.round(saturation * 100);
       const lPercent = Math.round(lightness * 100);
@@ -77,13 +108,92 @@ export const Tools: React.FC = () => {
   };
 
   const handleInputChange = (value: string) => {
+    if (mode === "HEX") {
+      // Sanitize HEX input: allow leading "#", max 6 hex digits
+      const hasHashPrefix = value.trim().startsWith("#");
+      const hexBody = value.replace("#", "").replace(/[^0-9a-fA-F]/g, "").slice(0, 6);
+      const normalized = (hasHashPrefix ? "#" : "#") + hexBody;
+
+      // Update displayed value (never more than 6 hex digits)
+      dispatch(setInputValue(normalized));
+
+      // Only attempt to update color when we have exactly 6 digits
+      if (hexBody.length !== 6) return;
+
+      const rgb = hexToRgb(normalized);
+      if (rgb) {
+        const { h, s, l } = rgbToHsl(rgb);
+        dispatch(setHue(h));
+        dispatch(setSaturation(s));
+        dispatch(setLightness(l));
+      }
+      return;
+    }
+
+    // Non-HEX modes: keep raw value in state
     dispatch(setInputValue(value));
 
-    if (mode === "HEX") {
-      const rgb = hexToRgb(value);
-      if (rgb) {
-        // future: sync sliders from HEX
+    const trimmed = value.trim();
+
+    if (!trimmed) return;
+
+    if (mode === "HSL") {
+      // Accept "120, 50%, 60%" or "120, 50, 60"
+      const hslMatch = trimmed.match(
+        /^(-?\d+)\s*,\s*(\d+)%?\s*,\s*(\d+)%?$/i,
+      );
+      if (!hslMatch) return;
+      const [, hStr, sStr, lStr] = hslMatch;
+      let h = Number(hStr);
+      let s = Number(sStr);
+      let l = Number(lStr);
+      if ([h, s, l].some((v) => Number.isNaN(v))) return;
+
+      // Normalize
+      h = ((h % 360) + 360) % 360;
+      s = clamp(s / 100, 0, 1);
+      l = clamp(l / 100, 0, 1);
+
+      dispatch(setHue(h));
+      dispatch(setSaturation(s));
+      dispatch(setLightness(l));
+      return;
+    }
+
+    if (mode === "RGBA") {
+      // Accept "rgba(255, 0, 128, 0.5)" or "255, 0, 128, 0.5"
+      let rgbaPart = trimmed;
+      const funcMatch = trimmed.match(
+        /^rgba?\s*\((.+)\)$/i,
+      );
+      if (funcMatch) {
+        rgbaPart = funcMatch[1];
       }
+      const parts = rgbaPart.split(/[\s,]+/).filter(Boolean);
+      if (parts.length !== 4) return;
+      const [rStr, gStr, bStr, aStr] = parts;
+      const r = Number(rStr);
+      const g = Number(gStr);
+      const b = Number(bStr);
+      let a = Number(aStr);
+      if ([r, g, b, a].some((v) => Number.isNaN(v))) return;
+
+      const rgb = {
+        r: clamp(r, 0, 255),
+        g: clamp(g, 0, 255),
+        b: clamp(b, 0, 255),
+      };
+      a = clamp(a, 0, 1);
+
+      // Normalize input so it doesn't grow arbitrarily long
+      const normalized = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${a.toFixed(2)})`;
+      dispatch(setInputValue(normalized));
+
+      const { h, s, l } = rgbToHsl(rgb);
+      dispatch(setHue(h));
+      dispatch(setSaturation(s));
+      dispatch(setLightness(l));
+      dispatch(setOpacity(a));
     }
   };
 
@@ -112,6 +222,16 @@ export const Tools: React.FC = () => {
   return (
     <BasePanel title="Tools">
       <div className="space-y-4 text-sm text-slate-900">
+        {aspectNote && (
+          <p className="text-xs text-slate-500">
+            <span className="font-medium">
+              {platformLabel} {aspectRatio}
+            </span>
+            <span className="mx-1">•</span>
+            <span>Optimize your colors for this format: {aspectNote}</span>
+          </p>
+        )}
+
         <ColorSquare
           hue={hue}
           saturation={saturation}

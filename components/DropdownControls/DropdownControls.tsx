@@ -4,6 +4,7 @@ import PlatformDropdown from "./PlatformDropdown";
 import AspectRatioDropdown from "./AspectRatioDropdown";
 import ImageTypeDropdown from "./ImageTypeDropdown";
 import ResultImagePreview from "../ResultImagePreview";
+import ResultImageNote from "../ResultImagePreview/ResultImageNote";
 
 export const DropdownControls: React.FC = () => {
   return (
@@ -14,7 +15,10 @@ export const DropdownControls: React.FC = () => {
           <AspectRatioDropdown />
           <ImageTypeDropdown />
         </div>
-        <ResultImagePreview />
+        <div className="mt-4 space-y-2">
+          <ResultImageNote />
+          <ResultImagePreview />
+        </div>
       </BasePanel>
     </>
   );

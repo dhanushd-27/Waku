@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type Platform = "x" | "whatsapp" | "instagram"
+import type { Platform } from "@/components/DropdownControls/platformAspectConfig";
 
 type PlatformState = {
   platform: Platform

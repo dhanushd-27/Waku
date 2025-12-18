@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-export type ColorMode = "HEX" | "RGB" | "HSL" | "RGBA";
+export type ColorMode = "HEX" | "HSL" | "RGBA";
 
 export type ColorState = {
   hue: number; // 0–360

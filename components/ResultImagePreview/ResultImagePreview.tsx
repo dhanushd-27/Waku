@@ -6,31 +6,18 @@ import { hslToRgb } from "@/utils/color";
 const BASE_CANVAS_WIDTH = 512;
 
 const getCanvasDimensions = (aspectRatio: AspectRatioId) => {
-  switch (aspectRatio) {
-    case "4:5":
-      return {
-        width: BASE_CANVAS_WIDTH,
-        height: Math.round((BASE_CANVAS_WIDTH * 5) / 4),
-      };
-    case "16:9":
-      return {
-        width: BASE_CANVAS_WIDTH,
-        height: Math.round((BASE_CANVAS_WIDTH * 9) / 16),
-      };
-    case "9:16":
-      return {
-        width: BASE_CANVAS_WIDTH,
-        height: Math.round((BASE_CANVAS_WIDTH * 16) / 9),
-      };
-    case "1.91:1":
-      return {
-        width: BASE_CANVAS_WIDTH,
-        height: Math.round(BASE_CANVAS_WIDTH / 1.91),
-      };
-    case "1:1":
-    default:
-      return { width: BASE_CANVAS_WIDTH, height: BASE_CANVAS_WIDTH };
+  const [rawW, rawH] = aspectRatio.split(":");
+  const w = parseFloat(rawW);
+  const h = parseFloat(rawH);
+
+  if (!Number.isFinite(w) || !Number.isFinite(h) || w <= 0 || h <= 0) {
+    return { width: BASE_CANVAS_WIDTH, height: BASE_CANVAS_WIDTH };
   }
+
+  // width is fixed; height derived from ratio
+  const height = Math.round((BASE_CANVAS_WIDTH * h) / w);
+
+  return { width: BASE_CANVAS_WIDTH, height };
 };
 
 export const ResultImagePreview: React.FC = () => {

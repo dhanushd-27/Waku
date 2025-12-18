@@ -19,20 +19,24 @@ export const ColorSquare: React.FC<ColorSquareProps> = ({
     const track = trackRef.current;
     if (!track) return;
 
+    // Allow interaction even slightly outside the square (24px margin)
+    const OUTSIDE_MARGIN = 24;
+
     const rect = track.getBoundingClientRect();
 
-    // Ignore movements that are completely outside the square
+    // Ignore movements that are *far* outside the square (beyond the margin)
     if (
-      clientX < rect.left ||
-      clientX > rect.right ||
-      clientY < rect.top ||
-      clientY > rect.bottom
+      clientX < rect.left - OUTSIDE_MARGIN ||
+      clientX > rect.right + OUTSIDE_MARGIN ||
+      clientY < rect.top - OUTSIDE_MARGIN ||
+      clientY > rect.bottom + OUTSIDE_MARGIN
     ) {
       return;
     }
 
-    const x = clientX - rect.left;
-    const y = clientY - rect.top;
+    // Clamp to the square so values stay on the edges when slightly outside
+    const x = Math.min(rect.width, Math.max(0, clientX - rect.left));
+    const y = Math.min(rect.height, Math.max(0, clientY - rect.top));
 
     const ratioX = Math.min(1, Math.max(0, x / rect.width));
     const ratioY = Math.min(1, Math.max(0, y / rect.height));

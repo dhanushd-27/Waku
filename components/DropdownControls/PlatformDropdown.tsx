@@ -10,8 +10,9 @@ export const PlatformDropdown: React.FC = () => {
 
   const options = [
     { value: "instagram", label: "Instagram" },
+    { value: "linkedin", label: "LinkedIn" },
     { value: "x", label: "X" },
-    { value: "whatsapp", label: "Whatsapp" },
+    { value: "whatsapp", label: "WhatsApp" },
   ];
 
   return (
@@ -19,7 +20,9 @@ export const PlatformDropdown: React.FC = () => {
       label="Target platform"
       helperText="Where you’ll post the image"
       value={platform}
-      onChange={(value) => dispatch(setPlatform(value as "x" | "whatsapp" | "instagram"))}
+      onChange={(value) =>
+        dispatch(setPlatform(value as "x" | "whatsapp" | "instagram" | "linkedin"))
+      }
       options={options}
       placeholder="Choose platform"
     />

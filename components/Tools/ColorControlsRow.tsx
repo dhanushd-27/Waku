@@ -1,6 +1,6 @@
 import React from "react";
 
-type ColorMode = "HEX" | "RGB" | "HSL" | "RGBA";
+type ColorMode = "HEX" | "HSL" | "RGBA";
 
 interface ColorControlsRowProps {
   mode: ColorMode;
@@ -30,7 +30,6 @@ export const ColorControlsRow: React.FC<ColorControlsRowProps> = ({
           className="h-9 rounded-md border border-slate-200 bg-white px-2 text-xs shadow-sm outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
         >
           <option value="HEX">HEX</option>
-          <option value="RGB">RGB</option>
           <option value="HSL">HSL</option>
           <option value="RGBA">RGBA</option>
         </select>
