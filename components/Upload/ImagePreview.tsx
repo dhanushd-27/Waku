@@ -14,7 +14,7 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({
 }) => {
   return (
     <div className="mt-4 w-full flex justify-center">
-      <div className="group relative flex h-36 w-36 items-center justify-center overflow rounded-lg border border-[#929AAB]/30 bg-white">
+      <div className="group relative flex h-42 w-42 items-center justify-center overflow rounded-lg border border-[#929AAB]/30 bg-white">
         {onClear && !isPlaceholder && (
           <button
             type="button"

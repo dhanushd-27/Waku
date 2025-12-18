@@ -9,6 +9,7 @@ import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import { clearImage, setImagePreview, setSuggestedColors } from "@/state/imageSlice";
 import { extractColorsFromImage } from "@/utils/color";
+import { CreatorBadge } from "@/components/CreatorBadge";
 
 export const Upload: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -75,28 +76,36 @@ export const Upload: React.FC = () => {
 
   return (
     <div className="h-full rounded-xl border border-[#929AAB]/30 bg-[#F9FAFB] p-4 shadow-sm">
-      <div className="space-y-3">
-        <UploadArea
-          isDragging={isDragging}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-        >
-          <FileInput inputRef={fileInputRef} onChange={handleFileChange} />
-          <UploadButton onClick={handleButtonClick} />
-          <UploadInstructions />
-          {!previewUrl ? (
-            <div className="mt-4 w-full flex justify-center">
-              <div className="flex h-36 w-36 items-center justify-center rounded-lg border border-[#929AAB]/30 bg-gray-200" />
-            </div>
-          ) : (
-            <ImagePreview
-              previewUrl={previewUrl}
-              isPlaceholder={false}
-              onClear={handleClearImage}
-            />
-          )}
-        </UploadArea>
+      <div className="flex h-full flex-col gap-3">
+        {/* Make the upload area occupy most of the panel height */}
+        <div className="flex-1">
+          <UploadArea
+            isDragging={isDragging}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+          >
+            <FileInput inputRef={fileInputRef} onChange={handleFileChange} />
+            <UploadButton onClick={handleButtonClick} />
+            <UploadInstructions />
+            {!previewUrl ? (
+              <div className="mt-4 flex w-full justify-center">
+                <div className="flex h-36 w-36 items-center justify-center rounded-lg border border-[#929AAB]/30 bg-gray-200" />
+              </div>
+            ) : (
+              <ImagePreview
+                previewUrl={previewUrl}
+                isPlaceholder={false}
+                onClear={handleClearImage}
+              />
+            )}
+          </UploadArea>
+        </div>
+
+        {/* Keep the creator badge compact at the bottom */}
+        <div className="pt-1">
+          <CreatorBadge />
+        </div>
       </div>
     </div>
   );

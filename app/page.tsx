@@ -1,4 +1,4 @@
- "use client";
+"use client";
 import { Tools } from "../components/Tools";
 import { DropdownControls } from "../components/DropdownControls";
 import { Upload } from "../components/Upload";
@@ -15,7 +15,7 @@ export default function Home() {
         </header>
 
         <section
-          className="grid auto-rows-[minmax(140px,auto)] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          className="grid auto-rows-[minmax(140px,auto)] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
           role="presentation"
         >
           <div className="lg:col-span-1">
