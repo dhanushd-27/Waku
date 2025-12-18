@@ -86,8 +86,6 @@ export const Upload: React.FC = () => {
             onDrop={handleDrop}
           >
             <FileInput inputRef={fileInputRef} onChange={handleFileChange} />
-            <UploadButton onClick={handleButtonClick} />
-            <UploadInstructions />
             {!previewUrl ? (
               <div className="mt-4 flex w-full justify-center">
                 <div className="flex h-36 w-36 items-center justify-center rounded-lg border border-[#929AAB]/30 bg-gray-200" />
@@ -99,6 +97,8 @@ export const Upload: React.FC = () => {
                 onClear={handleClearImage}
               />
             )}
+            <UploadInstructions />
+            <UploadButton onClick={handleButtonClick} />
           </UploadArea>
         </div>
 
