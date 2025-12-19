@@ -1,8 +1,8 @@
 "use client";
-import { Tools } from "../components/tools";
 import { DropdownControls } from "../components/dropdown-controls";
-import { Upload } from "../components/upload";
 import { AppHeader } from "../components/app-header";
+import Upload from "@/components/upload";
+import Tools from "@/components/tools";
 
 export default function Home() {
   return (
