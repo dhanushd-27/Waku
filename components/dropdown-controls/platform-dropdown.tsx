@@ -1,8 +1,8 @@
 import React from "react";
-import Dropdown from "./Dropdown";
+import Dropdown from "./dropdown";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
-import { setPlatform } from "@/state/platformSlice";
+import { setPlatform } from "@/state/platform-slice";
 
 export const PlatformDropdown: React.FC = () => {
   const platform = useAppSelector((state) => state.platform.platform);

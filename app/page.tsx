@@ -1,7 +1,7 @@
 "use client";
-import { Tools } from "../components/Tools";
-import { DropdownControls } from "../components/DropdownControls";
-import { Upload } from "../components/Upload";
+import { Tools } from "../components/tools";
+import { DropdownControls } from "../components/dropdown-controls";
+import { Upload } from "../components/upload";
 
 export default function Home() {
   return (

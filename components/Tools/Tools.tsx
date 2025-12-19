@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
-import BasePanel from "../BasePanel";
+import BasePanel from "../base-panel";
 import {
   clamp,
   hslToRgb,
@@ -7,11 +7,11 @@ import {
   hexToRgb,
   rgbToHsl,
 } from "../../utils/color";
-import { ColorSquare } from "./ColorSquare";
-import { HueBar } from "./HueBar";
-import { OpacityBar } from "./OpacityBar";
-import { ColorControlsRow } from "./ColorControlsRow";
-import { SuggestedColors } from "./AutoPickedColors";
+import { ColorSquare } from "./color-square";
+import { HueBar } from "./hue-bar";
+import { OpacityBar } from "./opacity-bar";
+import { ColorControlsRow } from "./color-controls-row";
+import { SuggestedColors } from "./auto-picked-colors";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import {
@@ -23,12 +23,6 @@ import {
   setLightness,
   type ColorMode,
 } from "@/state/colorSlice";
-import {
-  getAspectRatioNote,
-  type Platform,
-  type AspectRatioId,
-} from "@/components/DropdownControls/platformAspectConfig";
-
 const DEFAULT_COLORS = ["#000000", "#FFFFFF"];
 
 export const Tools: React.FC = () => {
@@ -37,31 +31,10 @@ export const Tools: React.FC = () => {
     (state) => state.color,
   );
   const suggestedColors = useAppSelector((state) => state.image.suggestedColors);
-  const platform = useAppSelector(
-    (state) => state.platform.platform,
-  ) as Platform;
-  const aspectRatio = useAppSelector(
-    (state) => state.aspectRatio.aspectRatio,
-  ) as AspectRatioId;
   const [copied, setCopied] = useState(false);
 
   // Use extracted colors if available, otherwise use default colors
   const colorsToDisplay = suggestedColors.length > 0 ? suggestedColors : DEFAULT_COLORS;
-
-  const aspectNote = useMemo(
-    () => getAspectRatioNote(platform, aspectRatio),
-    [platform, aspectRatio],
-  );
-
-  const platformLabel = useMemo(() => {
-    const labels: Record<Platform, string> = {
-      instagram: "Instagram",
-      x: "X",
-      whatsapp: "WhatsApp",
-      linkedin: "LinkedIn",
-    };
-    return labels[platform] ?? platform;
-  }, [platform]);
 
   const baseRgb = useMemo(
     () => hslToRgb(hue, saturation, lightness),

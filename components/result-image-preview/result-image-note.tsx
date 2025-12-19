@@ -3,8 +3,8 @@ import { useAppSelector } from "@/hooks/useAppSelector";
 import type {
   Platform,
   AspectRatioId,
-} from "@/components/DropdownControls/platformAspectConfig";
-import { getAspectRatioNote } from "@/components/DropdownControls/platformAspectConfig";
+} from "@/components/dropdown-controls/platform-aspect-config";
+import { getAspectRatioNote } from "@/components/dropdown-controls/platform-aspect-config";
 
 const PLATFORM_LABELS: Record<Platform, string> = {
   instagram: "Instagram",

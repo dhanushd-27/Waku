@@ -1,7 +1,7 @@
 import React from "react";
 import { hslToRgb } from "@/utils/color";
-import type { AspectRatioId } from "@/components/DropdownControls/platformAspectConfig";
-import { getCanvasDimensions } from "./canvasUtils";
+import type { AspectRatioId } from "@/components/dropdown-controls/platform-aspect-config";
+import { getCanvasDimensions } from "./canvas-utils";
 
 type ResultCanvasProps = {
   previewUrl: string | null;

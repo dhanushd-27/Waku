@@ -1,4 +1,4 @@
-import type { AspectRatioId } from "@/components/DropdownControls/platformAspectConfig";
+import type { AspectRatioId } from "@/components/dropdown-controls/platform-aspect-config";
 
 // Higher base width so downloaded images have more detail.
 // The canvas is scaled down visually by CSS, but exports keep this resolution.

@@ -1,12 +1,12 @@
 import React from "react";
-import Dropdown from "./Dropdown";
+import Dropdown from "./dropdown";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
-import { setAspectRatio } from "@/state/aspectRatioSlice";
+import { setAspectRatio } from "@/state/aspect-ratio-slice";
 import {
   PLATFORM_ASPECT_OPTIONS,
   type AspectRatioId,
-} from "./platformAspectConfig";
+} from "./platform-aspect-config";
 
 export const AspectRatioDropdown: React.FC = () => {
   const aspectRatio = useAppSelector((state) => state.aspectRatio.aspectRatio);

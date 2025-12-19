@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
-import { prepareImageUpload } from "../../services/uploadService";
-import { UploadButton } from "./UploadButton";
-import { UploadInstructions } from "./UploadInstructions";
-import { ImagePreview } from "./ImagePreview";
-import { FileInput } from "./FileInput";
-import { UploadArea } from "./UploadArea";
+import { prepareImageUpload } from "../../services/upload-service";
+import { UploadButton } from "./upload-button";
+import { UploadInstructions } from "./upload-instructions";
+import { ImagePreview } from "./image-preview";
+import { FileInput } from "./file-input";
+import { UploadArea } from "./upload-area";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import { clearImage, setImagePreview, setSuggestedColors } from "@/state/imageSlice";
 import { extractColorsFromImage } from "@/utils/color";
-import { CreatorBadge } from "@/components/CreatorBadge";
+import { CreatorBadge } from "@/components/creator-badge";
 
 export const Upload: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);

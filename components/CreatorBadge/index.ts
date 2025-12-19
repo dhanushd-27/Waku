@@ -1,3 +1,0 @@
-export { CreatorBadge } from "./CreatorBadge";
-
-

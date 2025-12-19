@@ -1,11 +1,11 @@
 import React from "react";
-import BasePanel from "../BasePanel";
-import PlatformDropdown from "./PlatformDropdown";
-import AspectRatioDropdown from "./AspectRatioDropdown";
-import ImageTypeDropdown from "./ImageTypeDropdown";
-import ResultImagePreview from "../ResultImagePreview";
-import ResultImageNote from "../ResultImagePreview/ResultImageNote";
-import Dropdown from "./Dropdown";
+import BasePanel from "../base-panel";
+import PlatformDropdown from "./platform-dropdown";
+import AspectRatioDropdown from "./aspect-ratio-dropdown";
+import ImageTypeDropdown from "./image-type-dropdown";
+import ResultImagePreview from "../result-image-preview";
+import ResultImageNote from "../result-image-preview/result-image-note";
+import Dropdown from "./dropdown";
 
 export const DropdownControls: React.FC = () => {
   const [downloadQuality, setDownloadQuality] = React.useState("0.92");

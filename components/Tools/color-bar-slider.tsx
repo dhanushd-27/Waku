@@ -1,5 +1,5 @@
 import React from "react";
-import { gradientStops } from "./utils";
+import { gradientStops } from "./color-utils";
 
 type ColorBarSliderProps = {
   hue: number;

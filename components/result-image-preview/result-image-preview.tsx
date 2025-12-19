@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppSelector } from "@/hooks/useAppSelector";
-import type { AspectRatioId } from "@/components/DropdownControls/platformAspectConfig";
-import ResultCanvas from "./ResultCanvas";
+import type { AspectRatioId } from "@/components/dropdown-controls/platform-aspect-config";
+import ResultCanvas from "./result-canvas";
 
 export const ResultImagePreview: React.FC = () => {
   const previewUrl = useAppSelector((state) => state.image.previewUrl);

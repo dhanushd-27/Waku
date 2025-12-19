@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import uiReducer from "./uiSlice";
-import platformReducer from "./platformSlice";
-import aspectRatioReducer from "./aspectRatioSlice";
+import platformReducer from "./platform-slice";
+import aspectRatioReducer from "./aspect-ratio-slice";
 import imageTypeReducer from "./imageTypeSlice";
 import imageReducer from "./imageSlice";
 import colorReducer from "./colorSlice";

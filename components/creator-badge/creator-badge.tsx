@@ -1,8 +1,8 @@
 import React from "react";
-import { CreatorHeader } from "./CreatorHeader";
-import { CreatorAvatar } from "./CreatorAvatar";
-import { CreatorProfileInfo } from "./CreatorProfileInfo";
-import { CreatorSocialLinks } from "./CreatorSocialLinks";
+import { CreatorHeader } from "./creator-header";
+import { CreatorAvatar } from "./creator-avatar";
+import { CreatorProfileInfo } from "./creator-profile-info";
+import { CreatorSocialLinks } from "./creator-social-links";
 
 export const CreatorBadge: React.FC = () => {
   return (

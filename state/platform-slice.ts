@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { Platform } from "@/components/DropdownControls/platformAspectConfig";
+import type { Platform } from "@/components/dropdown-controls/platform-aspect-config";
 
 type PlatformState = {
   platform: Platform

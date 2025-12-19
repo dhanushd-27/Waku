@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { AspectRatioId } from "@/components/DropdownControls/platformAspectConfig";
+import type { AspectRatioId } from "@/components/dropdown-controls/platform-aspect-config";
 
 type AspectRatio = AspectRatioId;
 
