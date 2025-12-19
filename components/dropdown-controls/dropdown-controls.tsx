@@ -6,9 +6,12 @@ import ImageTypeDropdown from "./image-type-dropdown";
 import ResultImagePreview from "../result-image-preview";
 import ResultImageNote from "../result-image-preview/result-image-note";
 import Dropdown from "./dropdown";
+import { useAppSelector } from "@/hooks/useAppSelector";
 
 export const DropdownControls: React.FC = () => {
   const [downloadQuality, setDownloadQuality] = React.useState("0.92");
+  const previewUrl = useAppSelector((state) => state.image.previewUrl);
+  const isImageUploaded = previewUrl !== null;
 
   const handleDownload = () => {
     if (typeof document === "undefined") return;
@@ -82,10 +85,11 @@ export const DropdownControls: React.FC = () => {
             <button
               type="button"
               onClick={handleDownload}
-              className="relative bg-gray-900 text-white px-4 py-2 rounded-full text-xs flex text-center items-center justify-center overflow-clip group"
+              disabled={!isImageUploaded}
+              className="relative bg-gray-900 text-white px-4 py-2 rounded-full text-xs flex text-center items-center justify-center overflow-clip group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:opacity-50"
             >
               <span
-                className="absolute left-1/2 -translate-x-1/2 -bottom-10 bg-white rounded-full w-[70%] h-full blur-lg group-hover:-bottom-7 transition-all duration-300 pointer-events-none"
+                className="absolute left-1/2 -translate-x-1/2 -bottom-10 bg-white rounded-full w-[70%] h-full blur-lg group-hover:-bottom-7 transition-all duration-300 pointer-events-none disabled:group-hover:-bottom-10"
               ></span>
               Download image
             </button>
