@@ -82,8 +82,11 @@ export const DropdownControls: React.FC = () => {
             <button
               type="button"
               onClick={handleDownload}
-              className="inline-flex items-center justify-center rounded-lg bg-[#393E46] px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-[#222831] focus:outline-none focus:ring-2 focus:ring-[#929AAB]/40 focus:ring-offset-1 disabled:cursor-not-allowed disabled:bg-[#9CA3AF]"
+              className="relative bg-gray-900 text-white px-4 py-2 rounded-full text-xs flex text-center items-center justify-center overflow-clip group"
             >
+              <span
+                className="absolute left-1/2 -translate-x-1/2 -bottom-10 bg-white rounded-full w-[70%] h-full blur-lg group-hover:-bottom-7 transition-all duration-300 pointer-events-none"
+              ></span>
               Download image
             </button>
           </div>
