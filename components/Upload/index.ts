@@ -1,2 +1,3 @@
-export { Upload, default } from "./upload";
+export { Upload } from "./upload";
+export { default } from "./upload";
 
