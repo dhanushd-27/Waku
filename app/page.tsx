@@ -2,8 +2,8 @@
 
 import { DropdownControls } from "@/components/dropdown-controls";
 import { AppHeader } from "@/components/app-header";
-import Upload from "@/components/upload";
-import Tools from "@/components/tools";
+import { Upload } from "@/components/upload";
+import { Tools } from "@/components/tools";
 
 export default function Home() {
   return (
