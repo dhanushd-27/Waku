@@ -27,7 +27,7 @@ export const ColorControlsRow: React.FC<ColorControlsRowProps> = ({
           id="color-type"
           value={mode}
           onChange={(e) => onModeChange(e.target.value as ColorMode)}
-          className="h-9 rounded-md border border-slate-200 bg-white px-2 text-xs shadow-sm outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-200"
+          className="h-9 rounded-md border border-accent-200 bg-white px-2 text-xs shadow-sm outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
         >
           <option value="HEX">HEX</option>
           <option value="HSL">HSL</option>
@@ -41,14 +41,14 @@ export const ColorControlsRow: React.FC<ColorControlsRowProps> = ({
           <input
             value={inputValue}
             onChange={(e) => onInputChange(e.target.value)}
-            className="h-9 w-full rounded-md border border-slate-200 bg-slate-50 px-3 pr-9 text-xs font-mono text-slate-900 shadow-inner outline-none focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-200"
+            className="h-9 w-full rounded-md border border-accent-200 bg-accent-900 px-3 pr-9 text-xs font-mono text-background-dark shadow-inner outline-none focus:border-accent-500 focus:bg-white focus:ring-2 focus:ring-accent-500/20"
             aria-label="Color code"
             spellCheck={false}
           />
           <button
             type="button"
             onClick={onCopy}
-            className="absolute inset-y-0 right-2 my-auto inline-flex h-5 w-5 items-center justify-center rounded text-slate-500 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100 focus:outline-none"
+            className="absolute inset-y-0 right-2 my-auto inline-flex h-5 w-5 items-center justify-center rounded text-accent-200 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100 focus:outline-none"
             aria-label={copied ? "Copied color value" : "Copy color value"}
           >
             {copied ? (

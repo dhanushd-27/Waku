@@ -4,18 +4,18 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-[#393E46] text-white py-12">
+    <footer className="bg-background-dark text-white py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <h3 className="text-2xl font-bold mb-4">Waku</h3>
-            <p className="text-gray-400">
+            <p className="text-accent-200">
               Resize and preview your images for all social media platforms.
             </p>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Product</h4>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-accent-200">
               <li>
                 <Link href="#features" className="hover:text-white transition-colors">
                   Features
@@ -30,10 +30,10 @@ export function Footer() {
           </div>
           <div>
             <h4 className="font-semibold mb-4">Company</h4>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-accent-200">
               <li>
-                <Link href="#contact" className="hover:text-white transition-colors">
-                  Contact
+                <Link href="#faq" className="hover:text-white transition-colors">
+                  FAQ
                 </Link>
               </li>
               <li>
@@ -45,7 +45,7 @@ export function Footer() {
           </div>
           <div>
             <h4 className="font-semibold mb-4">Legal</h4>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-accent-200">
               <li>
                 <Link href="#" className="hover:text-white transition-colors">
                   Privacy Policy
@@ -59,7 +59,7 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
+        <div className="border-t border-accent-300 pt-8 text-center text-accent-200">
           <p>&copy; {new Date().getFullYear()} Waku. All rights reserved.</p>
         </div>
       </div>

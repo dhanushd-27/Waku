@@ -77,10 +77,10 @@ export function FeaturesSection() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#393E46] mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-background-dark mb-4">
             Powerful Features
           </h2>
-          <p className="text-xl text-[#6b7280] max-w-2xl mx-auto">
+          <p className="text-xl text-accent-300 max-w-2xl mx-auto">
             Everything you need to optimize your images for social media
             platforms
           </p>
@@ -89,13 +89,13 @@ export function FeaturesSection() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="p-8 bg-[#EEEEEE] rounded-xl hover:shadow-lg transition-shadow"
+              className="p-8 bg-accent-900 rounded-xl hover:shadow-lg transition-shadow"
             >
-              <div className="text-[#6366f1] mb-4">{feature.icon}</div>
-              <h3 className="text-2xl font-bold text-[#393E46] mb-3">
+              <div className="text-accent-500 mb-4">{feature.icon}</div>
+              <h3 className="text-2xl font-bold text-background-dark mb-3">
                 {feature.title}
               </h3>
-              <p className="text-[#6b7280] leading-relaxed">
+              <p className="text-accent-300 leading-relaxed">
                 {feature.description}
               </p>
             </div>

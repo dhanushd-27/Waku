@@ -30,7 +30,7 @@ export const ResultImageNote: React.FC = () => {
   const platformLabel = PLATFORM_LABELS[platform] ?? platform;
 
   return (
-    <p className="mb-2 text-xs text-slate-500">
+    <p className="mb-2 text-xs text-accent-200">
       <span className="font-medium">
         {platformLabel} {aspectRatio}
       </span>

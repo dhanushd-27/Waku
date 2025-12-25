@@ -75,7 +75,7 @@ export const Upload: React.FC = () => {
   };
 
   return (
-    <div className="h-full rounded-xl border border-[#929AAB]/30 bg-[#F9FAFB] p-4 shadow-sm">
+    <div className="h-full rounded-xl border border-accent-200/30 bg-white p-4 shadow-sm">
       <div className="flex h-full flex-col gap-3">
         {/* Make the upload area occupy most of the panel height */}
         <div className="flex-1">
@@ -88,7 +88,7 @@ export const Upload: React.FC = () => {
             <FileInput inputRef={fileInputRef} onChange={handleFileChange} />
             {!previewUrl ? (
               <div className="mt-4 flex w-full justify-center">
-                <div className="flex h-36 w-36 items-center justify-center rounded-lg border border-[#929AAB]/30 bg-gray-200" />
+                <div className="flex h-36 w-36 items-center justify-center rounded-lg border border-accent-200/30 bg-accent-200" />
               </div>
             ) : (
               <ImagePreview

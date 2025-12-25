@@ -14,12 +14,12 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({
 }) => {
   return (
     <div className="mt-4 w-full flex justify-center">
-      <div className="group relative flex h-42 w-42 items-center justify-center overflow rounded-lg border border-[#929AAB]/30 bg-white">
+      <div className="group relative flex h-42 w-42 items-center justify-center overflow rounded-lg border border-accent-200/30 bg-white">
         {onClear && !isPlaceholder && (
           <button
             type="button"
             onClick={onClear}
-            className="absolute top-0 right-0 flex h-4 w-4 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white opacity-0 shadow-md transition-opacity hover:bg-red-500 group-hover:opacity-100 hover:text-white duration-300"
+            className="absolute top-0 right-0 flex h-4 w-4 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white opacity-0 shadow-md transition-opacity hover:bg-accent-400 group-hover:opacity-100 hover:text-white duration-300"
             aria-label="Remove uploaded image"
           >
             <svg

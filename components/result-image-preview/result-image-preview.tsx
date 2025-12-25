@@ -13,7 +13,7 @@ export const ResultImagePreview: React.FC = () => {
   );
 
   return (
-    <div className="flex h-64 w-full items-center justify-center rounded-lg border border-dashed border-[#929AAB]/50 bg-white text-[#929AAB]">
+    <div className="flex h-64 w-full items-center justify-center rounded-lg border border-dashed border-accent-200/50 bg-white text-accent-200">
       <ResultCanvas
         previewUrl={previewUrl}
         aspectRatio={aspectRatio}

@@ -71,12 +71,12 @@ export const OpacityBar: React.FC<OpacityBarProps> = ({ opacity, baseRgb, onChan
 
   return (
     <div>
-      <div className="mb-2 text-xs font-medium uppercase tracking-wide text-slate-500">
+      <div className="mb-2 text-xs font-medium uppercase tracking-wide text-accent-200">
         Opacity
       </div>
       <div
         ref={trackRef}
-        className="relative h-3 w-full cursor-pointer rounded-full border border-gray-300 shadow-sm"
+        className="relative h-3 w-full cursor-pointer rounded-full border border-accent-200 shadow-sm"
         onClick={handleClick}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}

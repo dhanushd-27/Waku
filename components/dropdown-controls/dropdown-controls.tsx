@@ -86,7 +86,7 @@ export const DropdownControls: React.FC = () => {
               type="button"
               onClick={handleDownload}
               disabled={!isImageUploaded}
-              className="relative bg-gray-900 text-white px-4 py-2 rounded-full text-xs flex text-center items-center justify-center overflow-clip group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:opacity-50"
+              className="relative bg-background-dark text-white px-4 py-2 rounded-full text-xs flex text-center items-center justify-center overflow-clip group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:opacity-50"
             >
               <span
                 className="absolute left-1/2 -translate-x-1/2 -bottom-10 bg-white rounded-full w-[70%] h-full blur-lg group-hover:-bottom-7 transition-all duration-300 pointer-events-none disabled:group-hover:-bottom-10"

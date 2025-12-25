@@ -1,35 +1,54 @@
 @import "tailwindcss";
 
+/* Custom color palette - only specified colors */
+@theme {
+  /* Background colors */
+  --color-background-dark: #03071e;
+  --color-white: #ffffff;
+  
+  /* Reddish orange */
+  --color-reddish-orange: #370617;
+  
+  /* Color scale from dark to light */
+  --color-accent-100: #370617;
+  --color-accent-200: #6a040f;
+  --color-accent-300: #9d0208;
+  --color-accent-400: #d00000;
+  --color-accent-500: #dc2f02;
+  --color-accent-600: #e85d04;
+  --color-accent-700: #f48c06;
+  --color-accent-800: #faa307;
+  --color-accent-900: #ffba08;
+}
+
 :root {
-  /* Modern, non-neon color palette */
-  --color-primary: #6366f1; /* Soft indigo */
-  --color-primary-dark: #4f46e5;
-  --color-primary-light: #818cf8;
-  --color-secondary: #8b5cf6; /* Soft purple */
-  --color-accent: #06b6d4; /* Soft cyan */
-  --color-background: #fafafa;
-  --color-surface: #ffffff;
-  --color-text: #1f2937;
-  --color-text-light: #6b7280;
-  --color-border: #e5e7eb;
-  --color-success: #10b981; /* Soft green */
-  --color-error: #ef4444; /* Soft red */
+  /* Light mode (default) */
+  --color-background: #ffffff;
+  --color-text: #03071e;
+  --color-text-muted: #6a040f;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: #111827;
-    --color-surface: #1f2937;
-    --color-text: #f9fafb;
-    --color-text-light: #9ca3af;
-    --color-border: #374151;
+    /* Dark mode */
+    --color-background: #03071e;
+    --color-text: #ffffff;
+    --color-text-muted: #f48c06;
   }
+}
+
+/* Class-based dark mode support (for manual toggle) */
+.dark {
+  --color-background: #03071e;
+  --color-text: #ffffff;
+  --color-text-muted: #f48c06;
 }
 
 body {
   background-color: var(--color-background);
   color: var(--color-text);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Color bar slider styling */

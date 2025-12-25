@@ -127,7 +127,7 @@ export const ColorSquare: React.FC<ColorSquareProps> = ({
   return (
     <div
       ref={trackRef}
-      className="relative w-full rounded-xl border border-gray-300 shadow-sm overflow-hidden cursor-pointer"
+      className="relative w-full rounded-xl border border-accent-200 shadow-sm overflow-hidden cursor-pointer"
       style={{ aspectRatio: "1 / 1" }}
       onClick={handleClick}
       onMouseDown={handleMouseDown}

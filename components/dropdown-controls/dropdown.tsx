@@ -1,8 +1,8 @@
 import React from "react";
 
-const labelClass = "text-sm font-medium text-[#393E46]";
+const labelClass = "text-sm font-medium text-background-dark";
 const selectClass =
-  "w-full rounded-full border border-[#929AAB]/50 bg-white pl-4 pr-8 py-2 text-sm text-[#393E46] shadow-sm focus:border-[#393E46] focus:outline-none focus:ring-2 focus:ring-[#929AAB]/30";
+  "w-full rounded-full border border-accent-200/50 bg-white pl-4 pr-8 py-2 text-sm text-background-dark shadow-sm focus:border-background-dark focus:outline-none focus:ring-2 focus:ring-accent-200/30";
 
 type DropdownOption = {
   value: string;
@@ -30,7 +30,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
     <label className="space-y-1">
       <span className={labelClass}>{label}</span>
       {helperText && (
-        <p className="text-xs text-[#6B7280]">{helperText}</p>
+        <p className="text-xs text-accent-300">{helperText}</p>
       )}
       <div className="relative">
         <select
@@ -49,7 +49,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
         </select>
         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
           <svg
-            className="h-4 w-4 text-[#393E46]"
+            className="h-4 w-4 text-background-dark"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

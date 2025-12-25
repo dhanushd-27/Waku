@@ -194,7 +194,7 @@ export const Tools: React.FC = () => {
 
   return (
     <BasePanel title="Tools">
-      <div className="space-y-4 text-sm text-slate-900">
+      <div className="space-y-4 text-sm text-background-dark">
 
         <ColorSquare
           hue={hue}

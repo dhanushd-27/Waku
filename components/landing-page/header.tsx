@@ -4,42 +4,42 @@ import Link from "next/link";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-sm border-b border-[#E5E7EB]">
+    <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-sm border-b border-accent-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold text-[#393E46]">
+            <Link href="/" className="text-2xl font-bold text-background-dark">
               Waku
             </Link>
           </div>
           <nav className="hidden md:flex items-center space-x-8">
             <Link
               href="#home"
-              className="text-[#393E46] hover:text-[#6366f1] transition-colors"
+              className="text-background-dark hover:text-accent-500 transition-colors"
             >
               Home
             </Link>
             <Link
               href="#features"
-              className="text-[#393E46] hover:text-[#6366f1] transition-colors"
+              className="text-background-dark hover:text-accent-500 transition-colors"
             >
               Features
             </Link>
             <Link
-              href="#contact"
-              className="text-[#393E46] hover:text-[#6366f1] transition-colors"
+              href="#faq"
+              className="text-background-dark hover:text-accent-500 transition-colors"
             >
-              Contact
+              FAQ
             </Link>
             <Link
               href="/dashboard"
-              className="px-4 py-2 bg-[#6366f1] text-white rounded-lg hover:bg-[#4f46e5] transition-colors"
+              className="px-4 py-2 bg-accent-500 text-white rounded-lg hover:bg-accent-600 transition-colors"
             >
               Get Started
             </Link>
           </nav>
           <div className="md:hidden">
-            <button className="text-[#393E46] hover:text-[#6366f1]">
+            <button className="text-background-dark hover:text-accent-500">
               <svg
                 className="h-6 w-6"
                 fill="none"

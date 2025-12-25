@@ -17,8 +17,8 @@ export const UploadArea: React.FC<UploadAreaProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col items-center justify-center space-y-4 rounded-lg border border-dashed border-[#929AAB]/40 bg-[#F3F4F6] p-6 text-[#929AAB] ${
-        isDragging ? "border-[#929AAB] bg-gray-50" : ""
+      className={`flex flex-col items-center justify-center space-y-4 rounded-lg border border-dashed border-accent-200/40 bg-accent-900 p-6 text-accent-200 ${
+        isDragging ? "border-accent-200 bg-accent-800" : ""
       }`}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}

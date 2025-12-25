@@ -2,17 +2,17 @@ import {
   Header,
   HomeSection,
   FeaturesSection,
-  ContactSection,
+  FAQSection,
   Footer,
 } from "@/components/landing-page";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#EEEEEE] text-[#393E46]">
+    <main className="min-h-screen bg-white text-background-dark">
       <Header />
       <HomeSection />
       <FeaturesSection />
-      <ContactSection />
+      <FAQSection />
       <Footer />
     </main>
   );

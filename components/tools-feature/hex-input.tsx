@@ -23,11 +23,11 @@ export const HexInput: React.FC<HexInputProps> = ({
 
   return (
     <div className="flex flex-1 flex-col gap-1">
-      <label htmlFor="hexColor" className="text-sm font-medium text-[#393E46]">
+      <label htmlFor="hexColor" className="text-sm font-medium text-background-dark">
         Hex color
       </label>
       <div className="flex items-center gap-2">
-        <p className="text-sm font-medium text-[#393E46]">#</p>
+        <p className="text-sm font-medium text-background-dark">#</p>
         <input
           id="hexColor"
           type="text"
@@ -35,7 +35,7 @@ export const HexInput: React.FC<HexInputProps> = ({
           value={displayValue}
           onChange={(event) => handleChange(event.target.value)}
           aria-label="Hex color value"
-          className="h-10 w-full rounded-lg border border-[#929AAB]/40 bg-white px-3 text-sm text-[#393E46] shadow-inner focus:border-[#393E46] focus:outline-none"
+          className="h-10 w-full rounded-lg border border-accent-200/40 bg-white px-3 text-sm text-background-dark shadow-inner focus:border-background-dark focus:outline-none"
         />
       </div>
     </div>

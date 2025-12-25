@@ -1,22 +1,22 @@
 import React from "react";
 
-const labelClass = "text-sm font-medium text-[#393E46]";
+const labelClass = "text-sm font-medium text-background-dark";
 const fieldClass =
-  "w-full rounded-lg border border-[#929AAB]/50 bg-white px-3 py-2 text-sm text-[#393E46] shadow-sm";
+  "w-full rounded-lg border border-accent-200/50 bg-white px-3 py-2 text-sm text-background-dark shadow-sm";
 
 export const ImageTypeDropdown: React.FC = () => {
   return (
     <label className="space-y-1">
       <span className={labelClass}>Effect</span>
-      <p className="text-xs text-[#6B7280]">Add Effects</p>
+      <p className="text-xs text-accent-300">Add Effects</p>
       <button
         type="button"
-        className={`flex items-center gap-2 rounded-full border border-[#929AAB]/50 bg-white px-4 py-2 text-xs text-[#6B7280] shadow-sm cursor-default`}
+        className={`flex items-center gap-2 rounded-full border border-accent-200/50 bg-white px-4 py-2 text-xs text-accent-300 shadow-sm cursor-default`}
         disabled
         aria-disabled="true"
       >
-        <span className="inline-block h-2 w-2 rounded-full bg-[#9CA3AF] mr-1"></span>
-        <span className="text-[#9CA3AF]">Coming soon</span>
+        <span className="inline-block h-2 w-2 rounded-full bg-accent-200 mr-1"></span>
+        <span className="text-accent-200">Coming soon</span>
       </button>
     </label>
   );

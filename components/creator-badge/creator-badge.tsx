@@ -6,7 +6,7 @@ import { CreatorSocialLinks } from "./creator-social-links";
 
 export const CreatorBadge: React.FC = () => {
   return (
-    <div className="flex w-full flex-col rounded-2xl border border-[#E5E7EB] bg-white/95 overflow-hidden text-sm shadow-md shadow-black/10">
+    <div className="flex w-full flex-col rounded-2xl border border-accent-200 bg-white/95 overflow-hidden text-sm shadow-md shadow-black/10">
       {/* Header with background image */}
       <div className="relative mx-4 mt-4">
         <CreatorHeader />
