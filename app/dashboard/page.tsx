@@ -1,9 +1,9 @@
 "use client";
 
 import { DropdownControls } from "@/components/dropdown-controls";
-import { AppHeader } from "@/components/app-header";
-import { Upload } from "@/components/upload-feature";
-import { Tools } from "@/components/tools-feature";
+import { AppHeader } from "@/components/AppHeader";
+import { UploadFeature } from "@/components/upload-feature";
+import { ToolsFeature } from "@/components/tools-feature";
 
 export default function Dashboard() {
   return (
@@ -15,7 +15,7 @@ export default function Dashboard() {
           role="presentation"
         >
           <div className="lg:col-span-1">
-            <Upload />
+            <UploadFeature />
           </div>
 
           <div className="lg:col-span-2">
@@ -23,7 +23,7 @@ export default function Dashboard() {
           </div>
 
           <div className="lg:col-span-1">
-            <Tools />
+            <ToolsFeature />
           </div>
         </section>
       </div>

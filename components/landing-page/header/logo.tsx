@@ -1,8 +1,6 @@
-import React from 'react'
+import React from "react";
 
-export default function Logo() {
-  return (
-    <div>logo</div>
-  )
-}
+export const Logo: React.FC = () => {
+  return <div>logo</div>;
+};
 

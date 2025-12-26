@@ -1,6 +1,7 @@
-import ResultImagePreview from "./result-image-preview";
-
-export default ResultImagePreview;
-export { ResultImagePreview };
-export * from "./result-image-preview";
+export { ResultImagePreview } from "./ResultImagePreview";
+export { ResultImageNote } from "./ResultImageNote";
+export { ResultCanvas } from "./ResultCanvas";
+export * from "./ResultImagePreview";
+export * from "./ResultImageNote";
+export * from "./ResultCanvas";
 

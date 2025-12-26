@@ -1,0 +1,277 @@
+---
+alwaysApply: true
+---
+
+# Frontend Planning & Execution Rules
+
+## Mandatory Behavior
+
+### 1. Always Start With an Execution Plan
+
+**REQUIRED:** Before writing any code, output a clear bulleted list titled "Execution Plan"
+
+**Format:**
+```
+Execution Plan
+--------------
+1. [What] - [Why]
+2. [What] - [Why]
+3. [What] - [Why]
+```
+
+**Requirements:**
+- Steps must be logical and ordered
+- Steps must be minimal (only essential actions)
+- Each step must state WHAT and WHY
+- **DO NOT write code before the plan is approved**
+
+**Example:**
+```
+Execution Plan
+--------------
+1. Create UploadButton component - Required for file selection trigger
+2. Add drag-and-drop handlers to UploadArea - Enable drag-and-drop functionality
+3. Integrate file validation logic - Ensure only valid image files are accepted
+4. Add loading state UI - Provide user feedback during file processing
+```
+
+### 2. Frontend-Specific Rules
+
+**Responsive Design is Default:**
+- **MUST** assume UI must be responsive by default
+- **MUST** consider all breakpoints:
+  - Mobile (< 640px)
+  - Tablet (640px - 1024px)
+  - Desktop (> 1024px)
+
+**Implementation:**
+- Use Tailwind responsive classes: `sm:`, `md:`, `lg:`, `xl:`
+- Test layout at different viewport sizes
+- Consider touch targets on mobile (min 44x44px)
+
+**Example:**
+```typescript
+// ✅ CORRECT - Responsive by default
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+  {/* content */}
+</div>
+
+// ❌ WRONG - Fixed layout
+<div className="grid grid-cols-4 gap-4">
+  {/* content */}
+</div>
+```
+
+### 3. UI State Awareness (Required)
+
+**MANDATORY:** Before implementing any UI component, ask the user about:
+
+1. **Loading State**
+   - How should loading be indicated?
+   - Skeleton loader? Spinner? Progress bar?
+   - Where should it appear?
+
+2. **Empty State**
+   - What should display when no data/content?
+   - Should there be a call-to-action?
+   - What message should be shown?
+
+3. **Error State**
+   - How should errors be displayed?
+   - Inline errors? Toast? Modal?
+   - Should there be retry functionality?
+
+4. **Success State**
+   - How should success be indicated?
+   - Toast notification? Checkmark animation?
+   - How long should it be visible?
+
+5. **Disabled / Inactive State**
+   - When should the component be disabled?
+   - What visual indication for disabled state?
+   - Should disabled state show a tooltip?
+
+**DO NOT assume:**
+- Visual appearance of states
+- Behavior of states
+- Animation timing or style
+- Error message content
+
+**Example Questions:**
+```
+Before implementing the upload component, I need to clarify:
+
+1. Loading State: Should we show a spinner overlay, progress bar, or skeleton loader during file upload?
+2. Empty State: What should display when no image is uploaded? Should there be placeholder text or an icon?
+3. Error State: How should upload errors be displayed? Toast notification, inline error message, or modal?
+4. Success State: Should successful uploads show a checkmark animation or just update the preview?
+5. Disabled State: When should the upload button be disabled? Should it show a tooltip explaining why?
+```
+
+### 4. Ask Clarifying Questions When Needed
+
+**When to Ask:**
+- UI behavior is unclear
+- Animations are not specified
+- Layout requirements are ambiguous
+- Interaction patterns are undefined
+- Data flow is unclear
+
+**How to Ask:**
+- Ask concise, targeted questions
+- One question per concern
+- Provide options when helpful
+- Wait for confirmation before coding
+
+**DO NOT:**
+- Make assumptions about unclear requirements
+- Implement multiple possible solutions
+- Guess at user preferences
+
+**Example:**
+```
+I need clarification on the color picker interaction:
+
+1. Should clicking the color square update the hue bar position, or should they be independent?
+2. Should the input field update in real-time as the user drags, or only on mouse release?
+3. Should there be keyboard shortcuts for common color values (e.g., Ctrl+0 for black)?
+```
+
+### 5. No Guessing Rule
+
+**STRICT:** Do NOT invent UI/UX decisions
+
+**DO NOT assume:**
+- Animations (timing, easing, type)
+- Spacing (margins, padding, gaps)
+- Colors (beyond existing design system)
+- Breakpoints (beyond standard Tailwind)
+- Interaction patterns
+- Visual hierarchy
+- Typography choices
+
+**DO:**
+- Ask for specifications
+- Reference existing patterns in codebase
+- Use design system tokens when available
+- Confirm before implementing
+
+**Example Violations:**
+```typescript
+// ❌ WRONG - Assuming animation
+<motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.3 }}  // Assumed timing
+>
+
+// ✅ CORRECT - Asked first, then implemented
+// After confirming: "Use fade-in animation with 0.3s duration"
+<motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.3 }}
+>
+```
+
+### 6. Transparency
+
+**Every execution step must state:**
+- **What** is being done
+- **Why** it is needed
+
+**Format:**
+```
+Step 1: [What] - [Why]
+Step 2: [What] - [Why]
+```
+
+**Example:**
+```
+Execution Plan
+--------------
+1. Create useFileUpload hook - Extract file handling logic from component for reusability
+2. Add drag-and-drop event handlers - Enable drag-and-drop file upload functionality
+3. Implement file validation - Ensure only image files are accepted before processing
+4. Add error boundary - Prevent upload errors from crashing the entire application
+5. Create loading spinner component - Provide visual feedback during file processing
+```
+
+## Workflow
+
+### Step 1: Understand Requirements
+- Read the user's request carefully
+- Identify what needs to be built
+- Note any ambiguities
+
+### Step 2: Ask Clarifying Questions
+- UI states (loading, empty, error, success, disabled)
+- Animations and interactions
+- Layout and responsive behavior
+- Any unclear requirements
+
+### Step 3: Create Execution Plan
+- List logical, ordered steps
+- State WHAT and WHY for each step
+- Keep steps minimal and essential
+
+### Step 4: Wait for Approval
+- **DO NOT** start coding until plan is approved
+- **DO NOT** assume approval - wait for confirmation
+
+### Step 5: Execute with Transparency
+- Implement each step as planned
+- Explain what and why during execution
+- Reference the plan in code comments if helpful
+
+## Example Interaction
+
+**User:** "Add a file upload feature"
+
+**AI Response:**
+```
+Before creating the file upload feature, I need to clarify a few things:
+
+1. **Loading State**: How should we indicate file upload progress? Spinner, progress bar, or percentage?
+2. **Empty State**: What should display initially? Placeholder text, icon, or instructions?
+3. **Error State**: How should upload errors be shown? Toast, inline message, or modal?
+4. **Success State**: Should successful uploads show a notification or just update the preview?
+5. **File Types**: Which file types should be accepted? Images only, or other formats?
+6. **File Size Limit**: Is there a maximum file size? What should happen if exceeded?
+
+Once confirmed, I'll create an execution plan.
+```
+
+**After User Confirms:**
+```
+Execution Plan
+--------------
+1. Create UploadButton component - Trigger file input dialog for user file selection
+2. Create UploadArea component with drag-and-drop - Enable drag-and-drop file upload
+3. Add file validation utility - Validate file type and size before processing
+4. Create useFileUpload hook - Extract file handling logic for reusability
+5. Add loading spinner component - Show upload progress to user
+6. Implement error toast notification - Display upload errors to user
+7. Integrate with existing image preview - Connect upload to preview display
+```
+
+## Enforcement
+
+**Before any code is written:**
+- [ ] Execution plan created
+- [ ] UI states clarified
+- [ ] Unclear requirements addressed
+- [ ] Plan approved by user
+
+**During implementation:**
+- [ ] Each step explains WHAT and WHY
+- [ ] No assumptions made about UI/UX
+- [ ] Responsive design considered
+- [ ] All states handled (loading, empty, error, success, disabled)
+
+## Notes
+
+- **Planning saves time** - Better to ask upfront than refactor later
+- **User knows their needs** - Don't guess what they want
+- **Transparency builds trust** - Clear communication prevents misunderstandings
+- **Responsive is not optional** - Mobile-first is the default

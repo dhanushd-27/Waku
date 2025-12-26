@@ -1,3 +1,3 @@
-export { Upload } from "./upload-feature";
-export { default } from "./upload-feature";
+export { UploadFeature } from "./UploadFeature";
+export * from "./UploadFeature";
 

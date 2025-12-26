@@ -2,7 +2,7 @@ import {
   Header,
   HomeSection,
   FeaturesSection,
-  FAQSection,
+  FaqSection,
   Footer,
 } from "@/components/landing-page";
 
@@ -12,7 +12,7 @@ export default function Home() {
       <Header />
       <HomeSection />
       <FeaturesSection />
-      <FAQSection />
+      <FaqSection />
       <Footer />
     </main>
   );

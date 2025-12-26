@@ -1,3 +1,3 @@
-export { Tools } from "./tools-feature";
-export { default } from "./tools-feature";
+export { ToolsFeature } from "./ToolsFeature";
+export * from "./ToolsFeature";
 

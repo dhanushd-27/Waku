@@ -1,3 +1,4 @@
-export { CreatorBadge } from "./creator-badge";
+export { CreatorBadge } from "./CreatorBadge";
+export * from "./CreatorBadge";
 
 

@@ -1,3 +1,3 @@
-export { DropdownControls } from "./dropdown-controls";
-export { default } from "./dropdown-controls";
+export { DropdownControls } from "./DropdownControls";
+export * from "./DropdownControls";
 

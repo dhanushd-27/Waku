@@ -1,6 +1,8 @@
-export { default as Header } from "./header/header";
-export { default as HomeSection } from "./home-section";
-export { default as FeaturesSection } from "./features-section";
-export { default as FAQSection } from "./faq-section";
-export { default as Footer } from "./footer";
+export { Header } from "./header/Header";
+export { HomeSection } from "./HomeSection";
+export { FeaturesSection } from "./FeaturesSection";
+export { FaqSection } from "./FaqSection";
+export * from "./FaqSection";
+export { Footer } from "./Footer";
+export * from "./header";
 
