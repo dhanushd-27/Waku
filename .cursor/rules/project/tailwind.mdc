@@ -2,7 +2,71 @@
 alwaysApply: true
 ---
 
-# Tailwind CSS Rules
+# Tailwind CSS and Styling Rules
+
+## Core Principles
+
+- Tailwind CSS v4 is mandatory
+- Long utility chains are NOT allowed in JSX
+- Reusable styles must live in global.css
+- Styling must be semantic, not visual-only
+
+## Global.css Rules
+
+- Use `@layer base, components, utilities`
+- Define:
+  • Colors
+  • Surfaces
+  • Typography
+  • Common layouts
+- Add comments for each section
+
+### Example
+
+```css
+@layer components {
+  /* Cards */
+  .card-surface {
+    @apply rounded-xl bg-surface p-4 shadow-sm;
+  }
+}
+```
+
+## JSX Styling Rules
+
+- JSX should use:
+  • Semantic class names
+  • Minimal utilities
+- If className exceeds ~6 utilities:
+  → Extract to global.css
+
+### Bad Example
+
+```typescript
+<div className="flex items-center justify-between rounded-xl bg-white px-4 py-3 shadow-sm">
+```
+
+### Good Example
+
+```typescript
+<div className="card-surface card-row">
+```
+
+## Responsiveness
+
+- Mobile-first by default
+- Use Tailwind breakpoints intentionally
+- Avoid hardcoded widths/heights unless required
+
+## Enforcement
+
+- If reusable styling is detected → extract it
+- If global.css is missing styles → suggest additions
+- Do NOT invent colors or spacing
+- Always reference existing design tokens
+
+If unsure, request:
+- `[styles/global.css]` or `[app/globals.css]`
 
 ## Class Extraction Rules
 
@@ -17,16 +81,18 @@ Extract class patterns to `globals.css` if:
 
 ```css
 /* In globals.css */
-.card-surface {
-  @apply rounded-xl border border-accent-200/30 bg-white p-4 shadow-sm;
-}
+@layer components {
+  .card-surface {
+    @apply rounded-xl border border-accent-200/30 bg-white p-4 shadow-sm;
+  }
 
-.text-muted {
-  @apply text-accent-200;
-}
+  .text-muted {
+    @apply text-accent-200;
+  }
 
-.button-primary {
-  @apply inline-flex items-center justify-center rounded-full border border-accent-200/60 bg-white text-background-dark transition hover:border-background-dark hover:bg-accent-900;
+  .button-primary {
+    @apply inline-flex items-center justify-center rounded-full border border-accent-200/60 bg-white text-background-dark transition hover:border-background-dark hover:bg-accent-900;
+  }
 }
 ```
 
@@ -57,50 +123,58 @@ Extract class patterns to `globals.css` if:
 
 ### Card/Panel Pattern
 ```css
-.card-surface {
-  @apply rounded-xl border border-accent-200/30 bg-white p-4 shadow-sm;
+@layer components {
+  .card-surface {
+    @apply rounded-xl border border-accent-200/30 bg-white p-4 shadow-sm;
+  }
 }
 ```
 
 ### Button Pattern
 ```css
-.button-icon {
-  @apply inline-flex items-center justify-center w-8 h-8 rounded-full border border-accent-200/60 bg-white text-background-dark transition hover:border-background-dark hover:bg-accent-900;
+@layer components {
+  .button-icon {
+    @apply inline-flex items-center justify-center w-8 h-8 rounded-full border border-accent-200/60 bg-white text-background-dark transition hover:border-background-dark hover:bg-accent-900;
+  }
 }
 ```
 
 ### Text Patterns
 ```css
-.text-muted {
-  @apply text-accent-200;
-}
+@layer components {
+  .text-muted {
+    @apply text-accent-200;
+  }
 
-.text-heading {
-  @apply text-base font-semibold text-background-dark;
+  .text-heading {
+    @apply text-base font-semibold text-background-dark;
+  }
 }
 ```
 
 ### Layout Patterns
 ```css
-.flex-center {
-  @apply flex items-center justify-center;
-}
+@layer components {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
 
-.flex-between {
-  @apply flex items-center justify-between;
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
 }
 ```
 
 ## Inline Class Limits
 
-### Acceptable Inline (≤5 classes)
+### Acceptable Inline (≤6 classes)
 ```typescript
 // ✅ OK - short, specific
 <div className="flex items-center gap-2">
 <div className="text-xl font-semibold">
 ```
 
-### Must Extract (>5 classes or repeated)
+### Must Extract (>6 classes or repeated)
 ```typescript
 // ❌ TOO LONG - extract to globals.css
 <header className="w-full flex items-center justify-between rounded-full border border-accent-200/30 bg-white px-10 py-3 shadow-sm">
