@@ -1,14 +1,8 @@
-"use client";
+import React from 'react'
 
-import Link from "next/link";
-
-export function Logo() {
+export default function Logo() {
   return (
-    <div className="flex items-center">
-      <Link href="/" className="text-2xl font-bold text-background-dark dark:text-white">
-        Waku
-      </Link>
-    </div>
-  );
+    <div>logo</div>
+  )
 }
 
