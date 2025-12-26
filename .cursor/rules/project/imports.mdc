@@ -1,4 +1,6 @@
 ---
+description: Import ordering, style, and organization rules
+globs: ["**/*.{ts,tsx}"]
 alwaysApply: true
 ---
 

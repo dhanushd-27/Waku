@@ -1,3 +1,9 @@
+---
+description: File templates and structure standards for components, hooks, utilities, and types
+globs: ["**/*.{ts,tsx}"]
+alwaysApply: true
+---
+
 # File Template Rules
 
 ## General Rules

@@ -1,0 +1,84 @@
+---
+description: React component structure, exports, and naming conventions
+globs: ["components/**/*.tsx", "app/**/*.tsx"]
+alwaysApply: true
+---
+
+# React Component Rules
+
+## Component File Structure
+
+### Required Pattern
+```typescript
+import React from "react";
+
+type ComponentNameProps = {
+  // props here
+};
+
+export const ComponentName: React.FC<ComponentNameProps> = ({
+  // destructured props
+}) => {
+  // component logic
+  return (
+    // JSX
+  );
+};
+```
+
+### Key Requirements
+1. **Named export only** - `export const ComponentName`
+2. **TypeScript types** - Use `React.FC<PropsType>` or explicit return type
+3. **Props interface** - Name as `ComponentNameProps`
+4. **No default export** - Remove `export default`
+
+## Component Naming Checklist
+
+- [ ] File name is PascalCase: `ComponentName.tsx`
+- [ ] Component name matches file name exactly
+- [ ] Uses named export: `export const ComponentName`
+- [ ] No default export present
+- [ ] Props type named `ComponentNameProps`
+- [ ] Uses `React.FC<ComponentNameProps>` or explicit typing
+
+## Common Violations to Fix
+
+### Violation: Default Export
+```typescript
+// ❌ WRONG
+export default function ComponentName() { ... }
+
+// ✅ CORRECT
+export const ComponentName: React.FC = () => { ... };
+```
+
+### Violation: Name Mismatch
+```typescript
+// ❌ WRONG - file: Header.tsx, component: AppHeader
+export const AppHeader = () => { ... };
+
+// ✅ CORRECT - file: AppHeader.tsx, component: AppHeader
+export const AppHeader = () => { ... };
+```
+
+### Violation: Both Named and Default
+```typescript
+// ❌ WRONG
+export const ComponentName = () => { ... };
+export default ComponentName;
+
+// ✅ CORRECT
+export const ComponentName = () => { ... };
+```
+
+## Index File Pattern
+
+If using `index.ts` for re-exports:
+```typescript
+// ✅ CORRECT
+export { ComponentName } from "./component-name";
+export * from "./component-name";
+
+// ❌ WRONG
+export default ComponentName;
+```

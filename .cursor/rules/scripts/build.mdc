@@ -1,0 +1,35 @@
+---
+description: Build and deployment related rules and guidelines
+globs: ["**/*"]
+alwaysApply: false
+---
+
+# Build Rules
+
+## Build Process
+
+- Follow Next.js build best practices
+- Ensure all TypeScript errors are resolved before building
+- Run type checking: `npm run type-check` or equivalent
+- Run linting: `npm run lint` or equivalent
+
+## Pre-Build Checklist
+
+- [ ] All TypeScript errors resolved
+- [ ] All linting errors resolved
+- [ ] All tests passing (if applicable)
+- [ ] Environment variables configured
+- [ ] No console errors in development
+
+## Build Commands
+
+- Development: `npm run dev` or `bun dev`
+- Production build: `npm run build` or `bun build`
+- Type check: `npm run type-check` or `tsc --noEmit`
+- Lint: `npm run lint` or `eslint .`
+
+## Notes
+
+- Never commit broken builds
+- Always test production build locally before deploying
+- Ensure build output is optimized

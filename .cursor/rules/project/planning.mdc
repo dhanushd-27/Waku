@@ -1,4 +1,6 @@
 ---
+description: Frontend planning and execution workflow rules
+globs: ["**/*.{ts,tsx}"]
 alwaysApply: true
 ---
 

@@ -1,4 +1,6 @@
 ---
+description: Naming conventions for components, folders, hooks, utilities, and imports
+globs: ["**/*.{ts,tsx}"]
 alwaysApply: true
 ---
 
