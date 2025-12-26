@@ -3,6 +3,13 @@ import { hslToRgb } from "@/utils/color";
 import type { AspectRatioId } from "@/components/dropdown-controls/platform-aspect-config";
 import { getCanvasDimensions } from "./canvas-utils";
 
+/**
+ * ResultCanvas
+ * ----------------
+ * Renders a canvas preview of the processed image with color overlay
+ * applied. Handles aspect ratio constraints, image loading, and canvas
+ * painting with background color and image composition.
+ */
 type ResultCanvasProps = {
   previewUrl: string | null;
   aspectRatio: AspectRatioId;

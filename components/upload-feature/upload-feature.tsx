@@ -11,6 +11,17 @@ import { clearImage, setImagePreview, setSuggestedColors } from "@/state/imageSl
 import { extractColorsFromImage } from "@/utils/color";
 import { CreatorBadge } from "@/components/creator-badge";
 
+/**
+ * Upload
+ * ----------------
+ * Manages the image upload workflow including drag-and-drop handling,
+ * file processing, preview display, and color extraction from uploaded images.
+ * Coordinates upload area, file input, and image preview components.
+ * 
+ * Side effects:
+ * - Dispatches Redux actions for image preview and suggested colors
+ * - Extracts dominant colors from uploaded images via canvas analysis
+ */
 export const Upload: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
@@ -22,7 +33,7 @@ export const Upload: React.FC = () => {
   };
 
   const handleClearImage = () => {
-    dispatch(clearImage()); // This also clears suggestedColors
+    dispatch(clearImage());
   };
 
   const processFile = async (file: File) => {
@@ -30,7 +41,6 @@ export const Upload: React.FC = () => {
       const { previewUrl: url } = await prepareImageUpload(file);
       dispatch(setImagePreview(url));
       
-      // Extract colors from the image
       try {
         const colors = await extractColorsFromImage(url, 8);
         dispatch(setSuggestedColors(colors));
@@ -50,7 +60,6 @@ export const Upload: React.FC = () => {
     if (!file) return;
 
     await processFile(file);
-    // Allow selecting the same file again if needed.
     event.target.value = "";
   };
 
@@ -77,7 +86,6 @@ export const Upload: React.FC = () => {
   return (
     <div className="h-full rounded-xl border border-accent-200/30 bg-white p-4 shadow-sm">
       <div className="flex h-full flex-col gap-3">
-        {/* Make the upload area occupy most of the panel height */}
         <div className="flex-1">
           <UploadArea
             isDragging={isDragging}
@@ -102,7 +110,6 @@ export const Upload: React.FC = () => {
           </UploadArea>
         </div>
 
-        {/* Keep the creator badge compact at the bottom */}
         <div className="pt-1">
           <CreatorBadge />
         </div>

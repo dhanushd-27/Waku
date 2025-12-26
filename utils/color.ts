@@ -89,8 +89,16 @@ export const rgbToHsl = ({ r, g, b }: RGB): { h: number; s: number; l: number } 
 };
 
 /**
- * Extract dominant colors from an image by analyzing pixel data.
- * Returns up to maxColors colors ordered by frequency.
+ * extractColorsFromImage
+ * ----------------
+ * Analyzes image pixel data to extract dominant colors by quantizing
+ * color values and counting frequencies. Returns up to maxColors colors
+ * ordered by frequency.
+ * 
+ * Side effects:
+ * - Creates temporary canvas element for image analysis
+ * - Loads image via Image API with CORS handling
+ * - Scales down image to 200px max dimension for performance
  */
 export async function extractColorsFromImage(
   imageUrl: string,
@@ -109,7 +117,6 @@ export async function extractColorsFromImage(
           return;
         }
 
-        // Scale down image for performance (max 200px on longest side)
         const maxDimension = 200;
         let width = img.width;
         let height = img.height;
@@ -132,7 +139,6 @@ export async function extractColorsFromImage(
         const imageData = ctx.getImageData(0, 0, width, height);
         const data = imageData.data;
 
-        // Count color frequencies (quantize to reduce similar colors)
         const colorMap = new Map<string, number>();
         const quantize = (value: number) => Math.round(value / 10) * 10;
 
@@ -142,14 +148,12 @@ export async function extractColorsFromImage(
           const b = quantize(data[i + 2]);
           const a = data[i + 3];
 
-          // Skip transparent pixels
           if (a < 128) continue;
 
           const hex = rgbToHex({ r, g, b });
           colorMap.set(hex, (colorMap.get(hex) || 0) + 1);
         }
 
-        // Sort by frequency and take top colors
         const sortedColors = Array.from(colorMap.entries())
           .sort((a, b) => b[1] - a[1])
           .slice(0, maxColors)

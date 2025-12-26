@@ -8,6 +8,17 @@ import ResultImageNote from "../result-image-preview/result-image-note";
 import Dropdown from "./dropdown";
 import { useAppSelector } from "@/hooks/useAppSelector";
 
+/**
+ * DropdownControls
+ * ----------------
+ * Manages platform selection, aspect ratio, image type, and download
+ * quality controls. Handles canvas-based image download with quality
+ * settings and coordinates preview display.
+ * 
+ * Side effects:
+ * - Triggers canvas-to-blob conversion for image download
+ * - Creates temporary download links for file saving
+ */
 export const DropdownControls: React.FC = () => {
   const [downloadQuality, setDownloadQuality] = React.useState("0.92");
   const previewUrl = useAppSelector((state) => state.image.previewUrl);

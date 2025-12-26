@@ -1,5 +1,12 @@
 import React from "react";
 
+/**
+ * BasePanel
+ * ----------------
+ * Reusable panel container component that provides consistent
+ * styling and layout for feature sections. Supports optional
+ * title, footer, and custom className merging.
+ */
 type BasePanelProps = {
   title?: string;
   children: React.ReactNode;

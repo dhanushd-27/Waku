@@ -1,5 +1,11 @@
 import React from "react";
 
+/**
+ * AppHeader
+ * ----------------
+ * Renders the application header with branding, GitHub link,
+ * and information tooltip. Provides navigation and external links.
+ */
 export const AppHeader: React.FC = () => {
   return (
     <header className="w-full flex items-center justify-between rounded-full border border-accent-200/30 bg-white px-10 py-3 shadow-sm">

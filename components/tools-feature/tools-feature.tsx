@@ -23,8 +23,21 @@ import {
   setLightness,
   type ColorMode,
 } from "@/state/colorSlice";
+
 const DEFAULT_COLORS = ["#000000", "#FFFFFF"];
 
+/**
+ * Tools
+ * ----------------
+ * Provides color manipulation tools including HSL color picker,
+ * opacity control, and color format conversion (HEX, HSL, RGBA).
+ * Manages color state, input parsing, and clipboard operations.
+ * 
+ * Side effects:
+ * - Dispatches Redux actions for color state updates
+ * - Syncs input value with display value via useEffect
+ * - Uses clipboard API for color value copying
+ */
 export const Tools: React.FC = () => {
   const dispatch = useAppDispatch();
   const { hue, saturation, lightness, opacity, mode, inputValue } = useAppSelector(
@@ -33,7 +46,6 @@ export const Tools: React.FC = () => {
   const suggestedColors = useAppSelector((state) => state.image.suggestedColors);
   const [copied, setCopied] = useState(false);
 
-  // Use extracted colors if available, otherwise use default colors
   const colorsToDisplay = suggestedColors.length > 0 ? suggestedColors : DEFAULT_COLORS;
 
   const baseRgb = useMemo(
@@ -53,7 +65,6 @@ export const Tools: React.FC = () => {
     return `rgba(${baseRgb.r}, ${baseRgb.g}, ${baseRgb.b}, ${opacity.toFixed(2)})`;
   }, [mode, hex, baseRgb, hue, saturation, lightness, opacity]);
 
-  // sync input when color changes (unless user is actively typing)
   React.useEffect(() => {
     dispatch(setInputValue(displayValue));
   }, [dispatch, displayValue]);
@@ -82,15 +93,12 @@ export const Tools: React.FC = () => {
 
   const handleInputChange = (value: string) => {
     if (mode === "HEX") {
-      // Sanitize HEX input: allow leading "#", max 6 hex digits
       const hasHashPrefix = value.trim().startsWith("#");
       const hexBody = value.replace("#", "").replace(/[^0-9a-fA-F]/g, "").slice(0, 6);
       const normalized = (hasHashPrefix ? "#" : "#") + hexBody;
 
-      // Update displayed value (never more than 6 hex digits)
       dispatch(setInputValue(normalized));
 
-      // Only attempt to update color when we have exactly 6 digits
       if (hexBody.length !== 6) return;
 
       const rgb = hexToRgb(normalized);
@@ -103,7 +111,6 @@ export const Tools: React.FC = () => {
       return;
     }
 
-    // Non-HEX modes: keep raw value in state
     dispatch(setInputValue(value));
 
     const trimmed = value.trim();
@@ -111,7 +118,6 @@ export const Tools: React.FC = () => {
     if (!trimmed) return;
 
     if (mode === "HSL") {
-      // Accept "120, 50%, 60%" or "120, 50, 60"
       const hslMatch = trimmed.match(
         /^(-?\d+)\s*,\s*(\d+)%?\s*,\s*(\d+)%?$/i,
       );
@@ -122,7 +128,6 @@ export const Tools: React.FC = () => {
       let l = Number(lStr);
       if ([h, s, l].some((v) => Number.isNaN(v))) return;
 
-      // Normalize
       h = ((h % 360) + 360) % 360;
       s = clamp(s / 100, 0, 1);
       l = clamp(l / 100, 0, 1);
@@ -134,7 +139,6 @@ export const Tools: React.FC = () => {
     }
 
     if (mode === "RGBA") {
-      // Accept "rgba(255, 0, 128, 0.5)" or "255, 0, 128, 0.5"
       let rgbaPart = trimmed;
       const funcMatch = trimmed.match(
         /^rgba?\s*\((.+)\)$/i,
@@ -158,7 +162,6 @@ export const Tools: React.FC = () => {
       };
       a = clamp(a, 0, 1);
 
-      // Normalize input so it doesn't grow arbitrarily long
       const normalized = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${a.toFixed(2)})`;
       dispatch(setInputValue(normalized));
 
@@ -176,7 +179,6 @@ export const Tools: React.FC = () => {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1100);
     } catch {
-      // ignore clipboard failures
     }
   };
 
