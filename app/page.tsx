@@ -8,7 +8,7 @@ import {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white text-background-dark">
+    <main className="min-h-screen bg-white dark:bg-background-dark text-background-dark dark:text-white">
       <Header />
       <HomeSection />
       <FeaturesSection />

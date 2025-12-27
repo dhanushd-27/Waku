@@ -1,4 +1,6 @@
 ---
+description: Tracking document for component modularization violations requiring refactoring
+globs: ["components/**/*.tsx"]
 alwaysApply: false
 ---
 

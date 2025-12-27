@@ -2,48 +2,110 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Custom color palette - only specified colors */
 @theme {
   /* Background colors */
-  --color-background-dark: #03071e;
+  --color-background-light: #ffffff;
+  --color-background-dark: #050315;
   --color-white: #ffffff;
-  
-  /* Reddish orange */
-  --color-reddish-orange: #370617;
-  
-  /* Color scale from dark to light */
-  --color-accent-100: #370617;
-  --color-accent-200: #6a040f;
-  --color-accent-300: #9d0208;
-  --color-accent-400: #d00000;
+
+  /* Text colors */
+  --color-text-light: #03071e;
+  --color-text-dark: #ffffff;
+  --color-text-muted-light: #6a040f;
+  --color-text-muted-dark: #f48c06;
+
+  /* Accent colors scale */
   --color-accent-500: #dc2f02;
-  --color-accent-600: #e85d04;
   --color-accent-700: #f48c06;
-  --color-accent-800: #faa307;
   --color-accent-900: #ffba08;
 }
 
+/* Custom color palette - only specified colors */
 :root {
+  /* Base theme colors */
+  --color-background-light: #ffffff;
+  --color-background-dark: #0C0C0C;
+  --color-white: #ffffff;
+  --color-text-light: #03071e;
+  --color-text-dark: #ffffff;
+  --color-text-muted-light: #6a040f;
+  --color-text-muted-dark: #f48c06;
+
+  /* Accent colors scale */
+  --color-accent-500: #dc2f02; /* 1 */
+  --color-accent-700: #f48c06; /* 3 */
+  --color-accent-900: #ffba08; /* 2 */
+
+
+  /* Font */
+  --font-alrobold: var(--font-alrobold);
+
   /* Light mode (default) */
-  --color-background: #ffffff;
-  --color-text: #03071e;
-  --color-text-muted: #6a040f;
+  --color-background: var(--color-background-light);
+  --color-text: var(--color-text-light);
+  --color-text-muted: var(--color-text-muted-light);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Dark mode */
-    --color-background: #000002;
-    --color-text: #ffffff;
-    --color-text-muted: #f48c06;
+    /* Dark mode via system */
+    --color-background: var(--color-background-dark);
+    --color-text: var(--color-text-dark);
+    --color-text-muted: var(--color-text-muted-dark);
   }
 }
 
 /* Class-based dark mode support (for manual toggle) */
 .dark {
-  --color-background: #03071e;
-  --color-text: #ffffff;
-  --color-text-muted: #f48c06;
+  --color-background: var(--color-background-dark);
+  --color-text: var(--color-text-dark);
+  --color-text-muted: var(--color-text-muted-dark);
+}
+
+@layer utilities {
+  .font-alrobold {
+    font-family: var(--font-alrobold);
+  }
+}
+
+@layer components {
+  /* Landing page sections */
+  .landing-section {
+    @apply w-full py-16 px-4 sm:px-6 lg:px-8;
+  }
+
+  .landing-container {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .landing-heading {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold text-background-dark dark:text-white mb-4;
+  }
+
+  .landing-subheading {
+    @apply text-lg sm:text-xl text-text-muted-light dark:text-text-muted-dark mb-8;
+  }
+
+  .landing-text {
+    @apply text-base text-background-dark dark:text-white;
+  }
+
+  /* Header styles */
+  .header-capsule {
+    @apply w-full flex items-center justify-between rounded-full border border-accent-500/30 dark:border-gray-700/30 bg-white dark:bg-background-dark px-10 py-3 shadow-sm;
+  }
+
+  .nav-link {
+    @apply text-sm font-normal text-background-dark dark:text-white transition hover:text-accent-700 dark:hover:text-accent-700;
+  }
+
+  .button-primary {
+    @apply px-4 py-2 text-sm font-normal text-background-dark dark:text-white bg-white dark:bg-background-dark rounded-full border border-accent-500/60 dark:border-gray-700/60 transition hover:border-background-dark dark:hover:border-white hover:bg-accent-900 dark:hover:bg-gray-800;
+  }
+
+  .button-icon {
+    @apply inline-flex items-center justify-center w-8 h-8 rounded-full border border-accent-500/60 dark:border-gray-700/60 bg-white dark:bg-background-dark text-background-dark dark:text-white transition hover:border-background-dark dark:hover:border-white hover:bg-accent-900 dark:hover:bg-gray-800;
+  }
 }
 
 body {

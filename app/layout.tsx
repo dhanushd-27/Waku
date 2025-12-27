@@ -20,6 +20,12 @@ const roboto = localFont({
   display: "swap",
 });
 
+const alrobold = localFont({
+  src: "../fonts/alro-bold.ttf",
+  variable: "--font-alrobold",
+  display: "swap"
+})
+
 export const metadata: Metadata = {
   title: "Waku",
   description: "Waku application",
@@ -31,12 +37,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={roboto.className}>
+    <html lang="en" suppressHydrationWarning className="dark">
+      <body className={`${roboto.className} ${alrobold.variable}`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Providers>{children}</Providers>

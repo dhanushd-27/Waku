@@ -1,8 +1,23 @@
-import React from 'react'
+import React from "react";
 
-export const NavLink: React.FC = () => {
+type NavLinkProps = {
+  href: string;
+  children: React.ReactNode;
+};
+
+/**
+ * NavLink
+ * ----
+ * Navigation link component with hover effects for header navigation.
+ */
+export const NavLink: React.FC<NavLinkProps> = ({ href, children }) => {
   return (
-    <div>navlink</div>
+    <a
+      href={href}
+      className="nav-link"
+    >
+      {children}
+    </a>
   );
 };
 

@@ -1,4 +1,6 @@
 ---
+description: Summary of codebase violations for naming, exports, imports, and styling
+globs: ["**/*.{ts,tsx}"]
 alwaysApply: false
 ---
 
