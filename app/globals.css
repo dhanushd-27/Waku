@@ -5,7 +5,7 @@
 @theme {
   /* Background colors */
   --color-background-light: #ffffff;
-  --color-background-dark: #050315;
+  --color-background-dark: #0C0C0C;
   --color-white: #ffffff;
 
   /* Text colors */
@@ -92,7 +92,15 @@
 
   /* Header styles */
   .header-capsule {
-    @apply w-full flex items-center justify-between rounded-full border border-accent-500/30 dark:border-gray-700/30 bg-white dark:bg-background-dark px-10 py-3 shadow-sm;
+    @apply fixed top-4 left-1/2 -translate-x-1/2 w-[70%] max-w-7xl flex items-center justify-between rounded-full px-10 py-3 transition-all duration-300 z-50;
+  }
+
+  .header-capsule-initial {
+    @apply border border-transparent bg-white/80 dark:bg-background-dark/80 backdrop-blur-sm shadow-none;
+  }
+
+  .header-capsule-scrolled {
+    @apply border border-accent-500/30 dark:border-gray-700/30 bg-white dark:bg-background-dark shadow-sm;
   }
 
   .nav-link {
@@ -100,11 +108,11 @@
   }
 
   .button-primary {
-    @apply px-4 py-2 text-sm font-normal text-background-dark dark:text-white bg-white dark:bg-background-dark rounded-full border border-accent-500/60 dark:border-gray-700/60 transition hover:border-background-dark dark:hover:border-white hover:bg-accent-900 dark:hover:bg-gray-800;
+    @apply px-4 py-2 text-sm font-normal text-background-dark bg-white rounded-full border border-gray-300;
   }
 
   .button-icon {
-    @apply inline-flex items-center justify-center w-8 h-8 rounded-full border border-accent-500/60 dark:border-gray-700/60 bg-white dark:bg-background-dark text-background-dark dark:text-white transition hover:border-background-dark dark:hover:border-white hover:bg-accent-900 dark:hover:bg-gray-800;
+    @apply inline-flex items-center justify-center w-8 h-8 rounded-full border border-accent-500/60 dark:border-gray-700/60 bg-white dark:bg-background-dark text-background-dark dark:text-white;
   }
 }
 

@@ -10,10 +10,12 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white dark:bg-background-dark text-background-dark dark:text-white">
       <Header />
-      <HomeSection />
-      <FeaturesSection />
-      <FaqSection />
-      <Footer />
+      <div className="pt-24">
+        <HomeSection />
+        <FeaturesSection />
+        <FaqSection />
+        <Footer />
+      </div>
     </main>
   );
 }
