@@ -71,19 +71,19 @@ export const OpacityBar: React.FC<OpacityBarProps> = ({ opacity, baseRgb, onChan
 
   return (
     <div>
-      <div className="mb-2 text-xs font-medium uppercase tracking-wide text-accent-200">
+      <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted">
         Opacity
       </div>
       <div
         ref={trackRef}
-        className="relative h-3 w-full cursor-pointer rounded-full border border-accent-200 shadow-sm"
+        className="relative h-3 w-full cursor-pointer rounded-full border shadow-sm border-[color:rgba(167,167,167,0.5)]"
         onClick={handleClick}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
       >
         <div className="absolute inset-0 rounded-full" style={gradient} />
         <div
-          className="absolute top-1/2 h-4 w-4 rounded-full border-2 border-white shadow-sm"
+          className="absolute top-1/2 h-4 w-4 rounded-full border-2 shadow-sm border-[color:var(--color-primary-white)]"
           style={{
             left: `${opacity * 100}%`,
             transform: "translate(-50%, -50%)",

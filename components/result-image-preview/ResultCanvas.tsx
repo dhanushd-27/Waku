@@ -128,17 +128,17 @@ export const ResultCanvas: React.FC<ResultCanvasProps> = ({
   }, [hue, saturation, lightness, opacity, width, height]);
 
   return (
-    <div className="relative flex h-[85%] w-[85%] items-center justify-center overflow-hidden rounded-lg bg-accent-900">
+    <div className="relative flex h-[85%] w-[85%] items-center justify-center overflow-hidden rounded-lg bg-surface">
       {/* Inner dynamic layer: canvas sized by aspect ratio, constrained by outer */}
       <div className="flex h-full w-full items-center justify-center">
         <canvas
           ref={canvasRef}
           id="result-preview-canvas"
-          className="max-h-full max-w-full bg-white shadow-sm"
+          className="max-h-full max-w-full bg-[color:var(--color-primary-white)] shadow-sm"
         />
       </div>
       {!previewUrl && (
-        <span className="pointer-events-none absolute text-xs text-accent-200 text-wrap w-42 text-center">
+        <span className="pointer-events-none absolute text-xs text-muted text-wrap w-42 text-center">
           Image Preview
         </span>
       )}

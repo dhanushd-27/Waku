@@ -11,7 +11,7 @@ export const AutoPickedColors: React.FC<AutoPickedColorsProps> = ({
 }) => {
   return (
     <div className="space-y-2">
-      <div className="text-xs font-medium uppercase tracking-wide text-accent-200">
+      <div className="text-xs font-medium uppercase tracking-wide text-muted">
         Suggested Colors
       </div>
       <div className="flex gap-2">
@@ -20,7 +20,7 @@ export const AutoPickedColors: React.FC<AutoPickedColorsProps> = ({
             key={color}
             type="button"
             onClick={() => onSelect(color)}
-            className="h-5 w-5 rounded-full border border-accent-200 shadow-sm transition hover:-translate-y-0.5 hover:shadow shrink-0"
+            className="h-5 w-5 rounded-full border shadow-sm transition hover:-translate-y-0.5 hover:shadow shrink-0 border-[color:rgba(167,167,167,0.5)]"
             style={{ backgroundColor: color }}
             aria-label={`Use color ${color}`}
           />

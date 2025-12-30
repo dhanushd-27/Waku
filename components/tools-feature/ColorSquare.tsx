@@ -105,7 +105,7 @@ export const ColorSquare: React.FC<ColorSquareProps> = ({
   const backgroundStyle = {
     backgroundImage: `
       linear-gradient(to top, rgba(0,0,0,1), transparent),
-      linear-gradient(to right, #ffffff, hsl(${hue}deg, 100%, 50%))
+      linear-gradient(to right, var(--color-primary-white), hsl(${hue}deg, 100%, 50%))
     `,
   };
 
@@ -127,7 +127,7 @@ export const ColorSquare: React.FC<ColorSquareProps> = ({
   return (
     <div
       ref={trackRef}
-      className="relative w-full rounded-xl border border-accent-200 shadow-sm overflow-hidden cursor-pointer"
+      className="relative w-full rounded-xl border shadow-sm overflow-hidden cursor-pointer border-[color:rgba(167,167,167,0.5)]"
       style={{ aspectRatio: "1 / 1" }}
       onClick={handleClick}
       onMouseDown={handleMouseDown}
@@ -135,7 +135,7 @@ export const ColorSquare: React.FC<ColorSquareProps> = ({
     >
       <div className="absolute inset-0" style={backgroundStyle} />
       <div
-        className="absolute h-3 w-3 rounded-full border border-white shadow-sm"
+        className="absolute h-3 w-3 rounded-full border shadow-sm border-[color:var(--color-primary-white)]"
         style={pointerStyle}
       />
     </div>

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 import { Providers } from "./providers";
-import { ThemeProvider } from "@/components/ThemeProvider"
 import "./globals.css";
 
 const roboto = localFont({
@@ -23,8 +24,8 @@ const roboto = localFont({
 const alrobold = localFont({
   src: "../fonts/alro-bold.ttf",
   variable: "--font-alrobold",
-  display: "swap"
-})
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Waku",
@@ -37,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${roboto.className} ${alrobold.variable}`}>
         <ThemeProvider
           attribute="class"

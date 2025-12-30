@@ -13,21 +13,21 @@ const SOCIAL_LINKS: SocialLink[] = [
     label: "Dhanush on Twitter",
     text: "Twitter",
     className:
-      "text-[10px] text-accent-200 transition hover:text-background-dark",
+      "text-[10px] text-muted transition hover:text-primary",
   },
   {
     href: "https://www.linkedin.com/in/dhanushd-27",
     label: "Dhanush on LinkedIn",
     text: "LinkedIn",
     className:
-      "text-[10px] text-accent-200 transition hover:text-accent-500",
+      "text-[10px] text-muted transition hover:text-[color:var(--color-brand-orange)]",
   },
   {
     href: "https://dhanushd.me",
     label: "Dhanush portfolio website",
     text: "Portfolio",
     className:
-      "text-[10px] text-accent-200 transition hover:text-accent-600",
+      "text-[10px] text-muted transition hover:text-[color:var(--color-brand-orange)]",
   },
 ];
 

@@ -9,7 +9,7 @@ type ColorBarSliderProps = {
 export const ColorBarSlider: React.FC<ColorBarSliderProps> = ({ hue, onChange }) => {
   return (
     <div className="flex flex-col gap-2">
-      <label className="text-sm font-medium text-background-dark">Color bar</label>
+      <label className="text-sm font-medium text-primary">Color bar</label>
       <input
         type="range"
         min={0}
@@ -17,7 +17,7 @@ export const ColorBarSlider: React.FC<ColorBarSliderProps> = ({ hue, onChange })
         value={hue}
         onChange={(event) => onChange(Number(event.target.value))}
         aria-label="Select background color"
-        className="color-bar-range h-2 w-full cursor-pointer appearance-none rounded-full border border-accent-200/40"
+        className="color-bar-range h-2 w-full cursor-pointer appearance-none rounded-full border border-[color:rgba(167,167,167,0.4)]"
         style={{ background: gradientStops }}
       />
     </div>

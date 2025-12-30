@@ -7,7 +7,7 @@ import React from "react";
  */
 export const Logo: React.FC = () => {
   return (
-    <h1 className="text-xl font-alrobold text-accent-700 dark:text-white">
+    <h1 className="text-xl font-alrobold text-[color:var(--color-brand-orange)]">
       waku
     </h1>
   );

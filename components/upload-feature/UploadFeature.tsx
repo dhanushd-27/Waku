@@ -84,7 +84,7 @@ export const UploadFeature: React.FC = () => {
   };
 
   return (
-    <div className="h-full rounded-xl border border-accent-200/30 bg-white p-4 shadow-sm">
+    <div className="panel-surface h-full">
       <div className="flex h-full flex-col gap-3">
         <div className="flex-1">
           <UploadArea
@@ -96,7 +96,7 @@ export const UploadFeature: React.FC = () => {
             <FileInput inputRef={fileInputRef} onChange={handleFileChange} />
             {!previewUrl ? (
               <div className="mt-4 flex w-full justify-center">
-                <div className="flex h-36 w-36 items-center justify-center rounded-lg border border-accent-200/30 bg-accent-200" />
+                <div className="flex h-36 w-36 items-center justify-center rounded-lg border border-[color:rgba(167,167,167,0.25)] bg-[color:var(--color-neutral-light)]" />
               </div>
             ) : (
               <ImagePreview

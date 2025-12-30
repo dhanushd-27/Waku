@@ -196,7 +196,7 @@ export const ToolsFeature: React.FC = () => {
 
   return (
     <BasePanel title="Tools">
-      <div className="space-y-4 text-sm text-background-dark">
+      <div className="space-y-4 text-sm text-primary">
 
         <ColorSquare
           hue={hue}

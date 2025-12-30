@@ -20,19 +20,18 @@ export const BasePanel: React.FC<BasePanelProps> = ({
   className,
   footer,
 }) => {
-  const baseClasses =
-    "h-full rounded-xl border border-accent-200/30 bg-white p-4 shadow-sm";
+  const baseClasses = "panel-surface";
   const mergedClasses = className ? `${baseClasses} ${className}` : baseClasses;
 
   return (
     <div className={mergedClasses}>
       {title ? (
         <div className="mb-3 flex items-center justify-between gap-3">
-          <h2 className="text-base font-semibold text-background-dark">{title}</h2>
+          <h2 className="text-base font-semibold text-primary">{title}</h2>
         </div>
       ) : null}
       <div className="space-y-3">{children}</div>
-      {footer ? <div className="mt-4 text-sm text-accent-200">{footer}</div> : null}
+      {footer ? <div className="mt-4 text-sm text-muted">{footer}</div> : null}
     </div>
   );
 };
