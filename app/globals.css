@@ -169,12 +169,17 @@
   /* Header styles */
   .header-capsule {
     @apply fixed top-4 left-1/2 -translate-x-1/2 w-[92%] sm:w-[85%] lg:w-[70%] max-w-7xl flex items-center justify-between rounded-full px-4 sm:px-6 lg:px-10 py-3 transition-all duration-300 z-50;
+    transition-delay: 0ms;
+  }
+
+  .header-capsule:hover {
+    background-color: var(--bg-secondary);
+    transition-delay: 300ms;
   }
 
   .header-capsule-initial {
-    @apply border backdrop-blur-sm shadow-none;
+    @apply border-0 backdrop-blur-sm shadow-none;
     background-color: rgba(249, 249, 249, 0.8);
-    border-color: var(--color-border-muted);
   }
 
   .header-capsule-scrolled {
@@ -186,18 +191,24 @@
   .nav-link {
     @apply text-xs sm:text-sm font-normal transition;
     color: var(--text-primary);
+    transition-duration: 200ms;
+    transition-delay: 0ms;
   }
 
   .nav-link:hover {
-    color: color-mix(in srgb, var(--brand) 70%, var(--text-primary));
+    opacity: 0.7;
+    transition-delay: 300ms;
   }
 
   .nav-link-active {
     color: var(--brand);
+    opacity: 1;
   }
 
   .nav-link-active:hover {
     color: var(--brand);
+    opacity: 1;
+    transition-delay: 0ms;
   }
 
   .button-primary {
@@ -205,15 +216,20 @@
     background: var(--btn-primary-bg);
     color: var(--btn-primary-text);
     border: none;
-    transition: background 0.3s ease, transform 0.05s ease;
+    transition:
+      background-color 200ms ease,
+      opacity 200ms ease,
+      transform 50ms ease;
+    transition-delay: 0ms;
   }
 
   .button-primary:hover {
-    background: var(--color-brand-gradient);
+    background-color: color-mix(in srgb, var(--btn-primary-bg) 70%, transparent);
+    transition-delay: 300ms;
   }
 
   .button-primary:active {
-    background: #C10801;
+    background: var(--btn-primary-bg);
     transform: scale(0.98);
   }
 
@@ -230,10 +246,12 @@
     border: 1.5px solid var(--brand);
     color: var(--brand);
     transition: background 0.3s ease, transform 0.05s ease;
+    transition-delay: 0ms;
   }
 
   .button-icon:hover {
     background: rgba(232, 80, 2, 0.1);
+    transition-delay: 300ms;
   }
 
   .button-icon:active {
@@ -249,6 +267,28 @@
     color: var(--btn-disabled-bg);
     cursor: not-allowed;
     opacity: 0.6;
+  }
+
+  .theme-toggle-button {
+    @apply inline-flex items-center justify-center w-12 h-12 rounded-full;
+    background-color: color-mix(in srgb, var(--black) 4%, transparent);
+    border: 1.5px solid var(--color-border-muted);
+    color: var(--text-primary);
+    transition:
+      background-color 200ms ease,
+      opacity 200ms ease,
+      transform 50ms ease;
+    transition-delay: 0ms;
+  }
+
+  .theme-toggle-button:hover {
+    opacity: 0.7;
+    transition-delay: 300ms;
+  }
+
+  .theme-toggle-button:active {
+    opacity: 1;
+    transform: scale(0.98);
   }
 
   .button-primary:focus-visible,
@@ -271,10 +311,12 @@
     border: 1.5px solid var(--brand);
     color: var(--brand);
     transition: all 0.3s ease, transform 0.05s ease;
+    transition-delay: 0ms;
   }
 
   .button-outlined:hover {
     background: rgba(232, 80, 2, 0.1);
+    transition-delay: 300ms;
   }
 
   .button-outlined:active {
@@ -306,6 +348,12 @@
 
 .dark .header-capsule-initial {
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dark .theme-toggle-button {
+  background-color: color-mix(in srgb, var(--white) 12%, transparent);
+  border-color: var(--white);
+  color: var(--white);
 }
 
 /* Color bar slider styling */

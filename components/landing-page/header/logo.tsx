@@ -4,13 +4,22 @@ import React from "react";
 /**
  * Logo
  * ----
- * Renders the Waku logo image and links to the Home section.
+ * Renders the Waku logo image and scrolls to the Home section.
  */
-export const Logo: React.FC = () => {
+type LogoProps = {
+  onClick?: () => void;
+};
+
+export const Logo: React.FC<LogoProps> = ({ onClick }) => {
   return (
-    <a href="#home" className="flex items-center gap-2" aria-label="Go to Home">
+    <button
+      type="button"
+      className="flex items-center gap-2"
+      aria-label="Go to Home"
+      onClick={onClick}
+    >
       <Image src="/waku.png" alt="Waku" width={32} height={32} priority />
-    </a>
+    </button>
   );
 };
 

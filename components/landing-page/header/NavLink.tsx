@@ -1,7 +1,6 @@
 import React from "react";
 
 type NavLinkProps = {
-  href: string;
   isActive: boolean;
   onClick?: () => void;
   children: React.ReactNode;
@@ -13,19 +12,19 @@ type NavLinkProps = {
  * Renders a navigation link with active + hover styling.
  */
 export const NavLink: React.FC<NavLinkProps> = ({
-  href,
   isActive,
   onClick,
   children,
 }) => {
   return (
-    <a
-      href={href}
+    <button
+      type="button"
       className={`nav-link ${isActive ? "nav-link-active" : ""}`}
       onClick={onClick}
+      aria-current={isActive ? "page" : undefined}
     >
       {children}
-    </a>
+    </button>
   );
 };
 

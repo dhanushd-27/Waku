@@ -29,7 +29,6 @@ export const Navigation: React.FC<NavigationProps> = ({
         {links.map((link) => (
           <li key={link.id}>
             <NavLink
-              href={`#${link.id}`}
               isActive={activeSectionId === link.id}
               onClick={() => onNavigate(link.id)}
             >

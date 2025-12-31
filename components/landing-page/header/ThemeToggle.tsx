@@ -12,17 +12,32 @@ import React from "react";
  */
 export const ThemeToggle: React.FC = () => {
   const { resolvedTheme, setTheme } = useTheme();
+  const [isMounted, setIsMounted] = React.useState(false);
 
   const isDark = resolvedTheme === "dark";
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleToggle = () => {
     setTheme(isDark ? "light" : "dark");
   };
 
+  if (!isMounted) {
+    return (
+      <button
+        type="button"
+        className="theme-toggle-button"
+        aria-label="Toggle theme"
+      />
+    );
+  }
+
   return (
     <button
       type="button"
-      className="button-icon w-12 h-12"
+      className="theme-toggle-button"
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       onClick={handleToggle}
     >

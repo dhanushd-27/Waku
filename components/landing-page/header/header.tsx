@@ -19,6 +19,14 @@ export const Header: React.FC = () => {
   const [activeSectionId, setActiveSectionId] = React.useState("home");
   const [isScrolled, setIsScrolled] = React.useState(false);
 
+  const scrollToSection = React.useCallback((sectionId: string) => {
+    const el = document.getElementById(sectionId);
+    if (!el) return;
+
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    setActiveSectionId(sectionId);
+  }, []);
+
   React.useEffect(() => {
     const getActiveSectionId = () => {
       const offset = 120;
@@ -48,25 +56,15 @@ export const Header: React.FC = () => {
       });
     };
 
-    const onHashChange = () => {
-      const hash = window.location.hash.replace("#", "");
-      if (hash && SECTION_IDS.includes(hash as (typeof SECTION_IDS)[number])) {
-        setActiveSectionId(hash);
-      }
-    };
-
     onScroll();
-    onHashChange();
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
-    window.addEventListener("hashchange", onHashChange);
 
     return () => {
       if (rafId !== null) window.cancelAnimationFrame(rafId);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
-      window.removeEventListener("hashchange", onHashChange);
     };
   }, []);
 
@@ -77,12 +75,12 @@ export const Header: React.FC = () => {
       }`}
     >
       <div className="grid grid-cols-[auto_1fr_auto] items-center w-full gap-3">
-        <Logo />
+        <Logo onClick={() => scrollToSection("home")} />
 
         <div className="hidden sm:flex justify-center">
           <Navigation
             activeSectionId={activeSectionId}
-            onNavigate={setActiveSectionId}
+            onNavigate={scrollToSection}
           />
         </div>
 
