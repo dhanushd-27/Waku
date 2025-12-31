@@ -20,7 +20,7 @@ export const OpacityControl: React.FC<OpacityControlProps> = ({ opacity, onChang
             value={opacity}
             onChange={(event) => onChange(Number(event.target.value))}
             aria-label="Opacity percent"
-            className="h-10 w-16 rounded-lg border bg-[color:var(--color-primary-white)] px-2 text-sm text-primary shadow-inner focus:outline-none border-[color:rgba(167,167,167,0.4)] focus:border-[color:var(--color-brand-orange)]"
+            className="h-10 w-16 rounded-lg border bg-[color:var(--color-field-bg)] px-2 text-sm text-primary shadow-inner focus:outline-none border-[color:var(--color-border-muted)] focus:border-[color:var(--color-brand-orange)]"
           />
           <span className="text-sm text-primary">%</span>
         </div>

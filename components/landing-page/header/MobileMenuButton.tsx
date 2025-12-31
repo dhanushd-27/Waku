@@ -1,8 +1,11 @@
-import React from 'react'
+import React from "react";
 
+/**
+ * MobileMenuButton
+ * ----
+ * Placeholder for the landing page restart.
+ */
 export const MobileMenuButton: React.FC = () => {
-  return (
-    <div>mobilemenubutton</div>
-  );
+  return null;
 };
 

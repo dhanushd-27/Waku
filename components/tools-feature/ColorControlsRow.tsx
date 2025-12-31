@@ -27,7 +27,7 @@ export const ColorControlsRow: React.FC<ColorControlsRowProps> = ({
           id="color-type"
           value={mode}
           onChange={(e) => onModeChange(e.target.value as ColorMode)}
-          className="h-9 rounded-md border bg-[color:var(--color-primary-white)] px-2 text-xs shadow-sm outline-none border-[color:rgba(167,167,167,0.5)] focus:border-[color:var(--color-brand-orange)] focus:ring-2 focus:ring-[color:rgba(232,80,2,0.15)]"
+          className="h-9 rounded-md border bg-[color:var(--color-field-bg)] px-2 text-xs shadow-sm outline-none border-[color:var(--color-border-muted)] focus:border-[color:var(--color-brand-orange)] focus:ring-2 focus:ring-[color:var(--color-focus-ring)]"
         >
           <option value="HEX">HEX</option>
           <option value="HSL">HSL</option>
@@ -41,7 +41,7 @@ export const ColorControlsRow: React.FC<ColorControlsRowProps> = ({
           <input
             value={inputValue}
             onChange={(e) => onInputChange(e.target.value)}
-            className="h-9 w-full rounded-md border bg-[color:var(--color-primary-white)] px-3 pr-9 text-xs font-mono text-primary shadow-inner outline-none border-[color:rgba(167,167,167,0.5)] focus:border-[color:var(--color-brand-orange)] focus:ring-2 focus:ring-[color:rgba(232,80,2,0.15)]"
+            className="h-9 w-full rounded-md border bg-[color:var(--color-field-bg)] px-3 pr-9 text-xs font-mono text-primary shadow-inner outline-none border-[color:var(--color-border-muted)] focus:border-[color:var(--color-brand-orange)] focus:ring-2 focus:ring-[color:var(--color-focus-ring)]"
             aria-label="Color code"
             spellCheck={false}
           />

@@ -42,8 +42,8 @@ export default function RootLayout({
       <body className={`${roboto.className} ${alrobold.variable}`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
+          defaultTheme="system"
+          enableSystem
           disableTransitionOnChange
         >
           <Providers>{children}</Providers>

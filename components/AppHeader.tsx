@@ -8,7 +8,7 @@ import React from "react";
  */
 export const AppHeader: React.FC = () => {
   return (
-    <header className="w-full flex items-center justify-between rounded-full border px-10 py-3 shadow-sm bg-[color:var(--color-primary-white)] border-[color:rgba(167,167,167,0.25)]">
+    <header className="w-full flex items-center justify-between rounded-full border px-10 py-3 shadow-sm bg-[color:var(--color-panel-bg)] border-[color:var(--color-border-muted)]">
       <h1 className="text-xl font-semibold text-primary">Waku</h1>
       <div className="flex items-center gap-2">
         <div className="relative group">

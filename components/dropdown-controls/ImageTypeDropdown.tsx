@@ -9,7 +9,7 @@ export const ImageTypeDropdown: React.FC = () => {
       <p className="text-xs text-muted">Add Effects</p>
       <button
         type="button"
-        className="flex items-center gap-2 rounded-full border bg-[color:var(--color-primary-white)] px-4 py-2 text-xs text-muted shadow-sm cursor-default border-[color:rgba(167,167,167,0.5)]"
+        className="flex items-center gap-2 rounded-full border bg-[color:var(--color-field-bg)] px-4 py-2 text-xs text-muted shadow-sm cursor-default border-[color:var(--color-border-muted)]"
         disabled
         aria-disabled="true"
       >

@@ -13,7 +13,7 @@ import { CreatorSocialLinks } from "./CreatorSocialLinks";
  */
 export const CreatorBadge: React.FC = () => {
   return (
-    <div className="flex w-full flex-col rounded-2xl border overflow-hidden text-sm shadow-md shadow-black/10 bg-[color:var(--color-primary-white)] border-[color:rgba(167,167,167,0.25)]">
+    <div className="flex w-full flex-col rounded-2xl border overflow-hidden text-sm shadow-md shadow-black/10 bg-[color:var(--color-panel-bg)] border-[color:var(--color-border-muted)]">
       <div className="relative mx-4 mt-4">
         <CreatorHeader />
         <CreatorAvatar />

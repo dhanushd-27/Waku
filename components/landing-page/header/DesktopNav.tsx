@@ -1,7 +1,10 @@
-import React from 'react'
+import React from "react";
 
+/**
+ * DesktopNav
+ * ----
+ * Placeholder for the landing page restart.
+ */
 export const DesktopNav: React.FC = () => {
-  return (
-    <div>desktopnav</div>
-  );
+  return null;
 };

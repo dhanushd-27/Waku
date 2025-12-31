@@ -35,7 +35,7 @@ export const HexInput: React.FC<HexInputProps> = ({
           value={displayValue}
           onChange={(event) => handleChange(event.target.value)}
           aria-label="Hex color value"
-          className="h-10 w-full rounded-lg border bg-[color:var(--color-primary-white)] px-3 text-sm text-primary shadow-inner focus:outline-none border-[color:rgba(167,167,167,0.4)] focus:border-[color:var(--color-brand-orange)]"
+          className="h-10 w-full rounded-lg border bg-[color:var(--color-field-bg)] px-3 text-sm text-primary shadow-inner focus:outline-none border-[color:var(--color-border-muted)] focus:border-[color:var(--color-brand-orange)]"
         />
       </div>
     </div>

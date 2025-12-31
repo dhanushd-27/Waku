@@ -8,7 +8,7 @@ import {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white dark:bg-background-dark text-background-dark dark:text-white">
+    <main className="min-h-screen">
       <Header />
       <div className="pt-18">
         <HomeSection />

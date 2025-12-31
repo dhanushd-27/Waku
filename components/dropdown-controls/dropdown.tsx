@@ -2,7 +2,7 @@ import React from "react";
 
 const labelClass = "text-sm font-medium text-primary";
 const selectClass =
-  "w-full rounded-full border bg-[color:var(--color-primary-white)] pl-4 pr-8 py-2 text-sm text-primary shadow-sm focus:outline-none focus:ring-2 border-[color:rgba(167,167,167,0.5)] focus:ring-[color:rgba(232,80,2,0.15)] focus:border-[color:var(--color-brand-orange)]";
+  "w-full rounded-full border bg-[color:var(--color-field-bg)] pl-4 pr-8 py-2 text-sm text-primary shadow-sm focus:outline-none focus:ring-2 border-[color:var(--color-border-muted)] focus:ring-[color:var(--color-focus-ring)] focus:border-[color:var(--color-brand-orange)]";
 
 type DropdownOption = {
   value: string;

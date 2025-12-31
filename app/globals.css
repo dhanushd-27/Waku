@@ -1,81 +1,118 @@
+/* --------------------------------------------------
+   Tailwind Base Imports
+-------------------------------------------------- */
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
-  /* Background colors */
-  --color-background-light: #F9F9F9;
-  --color-background-dark: #000000;
-  --color-white: #F9F9F9;
-
-  /* Text colors */
-  --color-text-light: #000000;
-  --color-text-dark: #F9F9F9;
-  --color-text-muted-light: #646464;
-  --color-text-muted-dark: #646464;
-
-  /* Accent colors scale */
-  --color-accent-500: #E85002;
-  --color-accent-700: #F16001;
-  --color-accent-900: #C10801;
-}
-
-/* Custom color palette - only specified colors */
-:root {
-  /* Design-system CSS vars (design-system/colors.json → colors.cssVars) */
-  --color-brand-gradient: linear-gradient(90deg, #000000 0%, #C10801 25%, #F16001 50%, #D9C3AB 100%);
-  --color-brand-orange: #E85002;
-  --color-neutral-dark: #333333;
-  --color-neutral-gray: #646464;
-  --color-neutral-light: #A7A7A7;
-  --color-primary-black: #000000;
-  --color-primary-white: #F9F9F9;
-
-  /* Base theme colors */
-  --color-background-light: #F9F9F9;
-  --color-background-dark: #000000;
-  --color-white: #F9F9F9;
-  --color-text-light: #000000;
-  --color-text-dark: #F9F9F9;
-  --color-text-muted-light: #646464;
-  --color-text-muted-dark: #646464;
-
-  /* Semantic tokens (design-system/colors.json → colors.modes.*) */
-  --color-surface-light: var(--color-neutral-light);
-  --color-surface-dark: var(--color-neutral-dark);
-
-  /* Accent colors scale */
-  --color-accent-500: #E85002;
-  --color-accent-700: #F16001;
-  --color-accent-900: #C10801;
-
-
-  /* Font */
-  --font-alrobold: var(--font-alrobold);
-
-  /* Light mode (default) */
-  --color-background: var(--color-background-light);
-  --color-text: var(--color-text-light);
-  --color-text-muted: var(--color-text-muted-light);
-  --color-surface: var(--color-surface-light);
-}
-
-@media (prefers-color-scheme: dark) {
+/* --------------------------------------------------
+   Design Tokens (CSS Variables)
+-------------------------------------------------- */
+@layer base {
   :root {
-    /* Dark mode via system */
-    --color-background: var(--color-background-dark);
-    --color-text: var(--color-text-dark);
-    --color-text-muted: var(--color-text-muted-dark);
-    --color-surface: var(--color-surface-dark);
+    /* ---------- Brand ---------- */
+    --brand: #e85002;
+
+    /* ---------- Neutrals ---------- */
+    --black: #000000;
+    --white: #f9f9f9;
+    --gray: #646464;
+    --gray-light: #a7a7a7;
+    --gray-dark: #333333;
+
+    /* ---------- Backgrounds ---------- */
+    --bg-primary: var(--white);
+    --bg-secondary: #ffffff;
+
+    /* ---------- Text ---------- */
+    --text-primary: var(--black);
+    --text-secondary: var(--gray-dark);
+    --text-muted: var(--gray-light);
+
+    /* ---------- Buttons ---------- */
+    --btn-primary-bg: var(--brand);
+    --btn-primary-text: #ffffff;
+    --btn-disabled-bg: var(--gray-light);
+    --btn-disabled-text: var(--gray);
+
+    /* ---------- Alerts ---------- */
+    --alert-info: #5b93ff;
+    --alert-error: #ff5555;
+    --alert-success: #51cc56;
+
+    /* ---------- Legacy aliases (keeps existing components working) ---------- */
+    --color-brand-orange: var(--brand);
+    --color-brand-gradient: linear-gradient(
+      90deg,
+      var(--black) 0%,
+      #c10801 25%,
+      #f16001 50%,
+      #d9c3ab 100%
+    );
+
+    --color-neutral-dark: var(--gray-dark);
+    --color-neutral-gray: var(--gray);
+    --color-neutral-light: var(--gray-light);
+
+    --color-primary-black: var(--black);
+    --color-primary-white: var(--white);
+
+    --color-background: var(--bg-primary);
+    --color-text: var(--text-primary);
+    --color-text-muted: var(--text-muted);
+    --color-surface: var(--bg-secondary);
+
+    /* Used throughout components via CSS vars */
+    --color-border-muted: color-mix(in srgb, var(--gray-light) 25%, transparent);
+    --color-panel-bg: var(--bg-secondary);
+    --color-field-bg: var(--bg-secondary);
+    --color-focus-ring: color-mix(in srgb, var(--brand) 15%, transparent);
+    --color-interactive-hover-bg: color-mix(
+      in srgb,
+      var(--brand) 10%,
+      transparent
+    );
+
+    --color-accent-500: var(--brand);
+    --color-accent-700: #f16001;
+    --color-accent-900: #c10801;
+  }
+
+  /* 🌙 Dark Theme */
+  .dark {
+    --bg-primary: #000000;
+    --bg-secondary: #111111;
+
+    --text-primary: #f9f9f9;
+    --text-secondary: #a7a7a7;
+    --text-muted: #646464;
+
+    /* Legacy aliases */
+    --color-border-muted: color-mix(in srgb, var(--gray-light) 18%, transparent);
   }
 }
 
-/* Class-based dark mode support (for manual toggle) */
-.dark {
-  --color-background: var(--color-background-dark);
-  --color-text: var(--color-text-dark);
-  --color-text-muted: var(--color-text-muted-dark);
-  --color-surface: var(--color-surface-dark);
+/* --------------------------------------------------
+   Base Styles
+-------------------------------------------------- */
+@layer base {
+  body {
+    @apply bg-(--bg-primary) text-(--text-primary) antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      "Oxygen", "Ubuntu", "Cantarell", sans-serif;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-semibold text-(--text-primary);
+  }
+
+  p {
+    @apply text-(--text-secondary);
+  }
 }
 
 @layer utilities {
@@ -84,15 +121,23 @@
   }
 
   .text-primary {
-    color: var(--color-text);
+    color: var(--text-primary);
   }
 
   .text-muted {
-    color: var(--color-text-muted);
+    color: var(--text-muted);
   }
 
   .bg-surface {
-    background-color: var(--color-surface);
+    background-color: var(--bg-secondary);
+  }
+
+  .text-brand {
+    color: var(--brand);
+  }
+
+  .is-disabled {
+    @apply pointer-events-none opacity-60;
   }
 }
 
@@ -108,44 +153,57 @@
 
   .landing-heading {
     @apply text-3xl sm:text-4xl lg:text-5xl font-bold mb-4;
-    color: var(--color-text);
+    color: var(--text-primary);
   }
 
   .landing-subheading {
     @apply text-lg sm:text-xl mb-8;
-    color: var(--color-text-muted);
+    color: var(--text-muted);
   }
 
   .landing-text {
     @apply text-base;
-    color: var(--color-text);
+    color: var(--text-primary);
   }
 
   /* Header styles */
   .header-capsule {
-    @apply fixed top-4 left-1/2 -translate-x-1/2 w-[70%] max-w-7xl flex items-center justify-between rounded-full px-10 py-3 transition-all duration-300 z-50;
+    @apply fixed top-4 left-1/2 -translate-x-1/2 w-[92%] sm:w-[85%] lg:w-[70%] max-w-7xl flex items-center justify-between rounded-full px-4 sm:px-6 lg:px-10 py-3 transition-all duration-300 z-50;
   }
 
   .header-capsule-initial {
-    @apply border border-transparent backdrop-blur-sm shadow-none;
+    @apply border backdrop-blur-sm shadow-none;
     background-color: rgba(249, 249, 249, 0.8);
+    border-color: var(--color-border-muted);
   }
 
   .header-capsule-scrolled {
     @apply border shadow-sm;
-    background-color: var(--color-background);
-    border-color: rgba(167, 167, 167, 0.35);
+    background-color: var(--bg-primary);
+    border-color: var(--color-border-muted);
   }
 
   .nav-link {
-    @apply text-sm font-normal transition;
-    color: var(--color-text);
+    @apply text-xs sm:text-sm font-normal transition;
+    color: var(--text-primary);
+  }
+
+  .nav-link:hover {
+    color: color-mix(in srgb, var(--brand) 70%, var(--text-primary));
+  }
+
+  .nav-link-active {
+    color: var(--brand);
+  }
+
+  .nav-link-active:hover {
+    color: var(--brand);
   }
 
   .button-primary {
     @apply inline-flex items-center justify-center h-12 px-[30px] text-sm font-normal rounded-[30px];
-    background: var(--color-brand-orange);
-    color: var(--color-primary-white);
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
     border: none;
     transition: background 0.3s ease, transform 0.05s ease;
   }
@@ -161,7 +219,7 @@
 
   .button-primary:disabled,
   .button-primary[aria-disabled="true"] {
-    background: var(--color-neutral-light);
+    background: var(--btn-disabled-bg);
     cursor: not-allowed;
     opacity: 0.6;
   }
@@ -169,8 +227,8 @@
   .button-icon {
     @apply inline-flex items-center justify-center w-12 h-12 rounded-full;
     background: transparent;
-    border: 1.5px solid var(--color-brand-orange);
-    color: var(--color-brand-orange);
+    border: 1.5px solid var(--brand);
+    color: var(--brand);
     transition: background 0.3s ease, transform 0.05s ease;
   }
 
@@ -187,22 +245,22 @@
 
   .button-icon:disabled,
   .button-icon[aria-disabled="true"] {
-    border-color: var(--color-neutral-light);
-    color: var(--color-neutral-light);
+    border-color: var(--btn-disabled-bg);
+    color: var(--btn-disabled-bg);
     cursor: not-allowed;
     opacity: 0.6;
   }
 
   .button-primary:focus-visible,
   .button-icon:focus-visible {
-    outline: 2px solid var(--color-brand-orange);
+    outline: 2px solid var(--brand);
     outline-offset: 2px;
   }
 
   .panel-surface {
     @apply h-full rounded-xl border p-4 shadow-sm;
-    background-color: var(--color-primary-white);
-    border-color: rgba(167, 167, 167, 0.25);
+    background-color: var(--bg-secondary);
+    border-color: var(--color-border-muted);
   }
 
   .button-outlined {
@@ -210,8 +268,8 @@
     padding: 0 24px;
     column-gap: 4px;
     background: transparent;
-    border: 1.5px solid var(--color-brand-orange);
-    color: var(--color-brand-orange);
+    border: 1.5px solid var(--brand);
+    color: var(--brand);
     transition: all 0.3s ease, transform 0.05s ease;
   }
 
@@ -228,33 +286,26 @@
 
   .button-outlined:disabled,
   .button-outlined[aria-disabled="true"] {
-    border-color: var(--color-neutral-light);
-    color: var(--color-neutral-light);
+    border-color: var(--btn-disabled-bg);
+    color: var(--btn-disabled-bg);
     cursor: not-allowed;
     opacity: 0.6;
   }
 
   .button-outlined:focus-visible {
-    outline: 2px solid var(--color-brand-orange);
+    outline: 2px solid var(--brand);
     outline-offset: 2px;
   }
 
   .tooltip-surface {
     @apply rounded-lg shadow-lg text-xs;
-    background-color: var(--color-primary-black);
-    color: var(--color-primary-white);
+    background-color: var(--black);
+    color: var(--white);
   }
 }
 
 .dark .header-capsule-initial {
   background-color: rgba(0, 0, 0, 0.8);
-}
-
-body {
-  background-color: var(--color-background);
-  color: var(--color-text);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Color bar slider styling */
@@ -291,4 +342,19 @@ body {
   background: #ffffff;
   border: 1px solid #929aab;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* --------------------------------------------------
+   Gradients
+-------------------------------------------------- */
+@layer utilities {
+  .gradient-brand {
+    background: linear-gradient(
+      135deg,
+      #d9c3ab 0%,
+      #f16001 40%,
+      #c10801 70%,
+      #000000 100%
+    );
+  }
 }
