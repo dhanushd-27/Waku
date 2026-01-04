@@ -10,85 +10,55 @@
 -------------------------------------------------- */
 @layer base {
   :root {
+    /* ---------- Colors ---------- */
+    --color-trinidad-50: #fff7ec;
+    --color-trinidad-100: #ffedd3;
+    --color-trinidad-200: #ffd7a6;
+    --color-trinidad-300: #ffba6e;
+    --color-trinidad-400: #ff9033;
+    --color-trinidad-500: #ff700c;
+    --color-trinidad-600: #e85002;
+    --color-trinidad-700: #ca3d04;
+    --color-trinidad-800: #a0310c;
+    --color-trinidad-900: #812b0d;
+    --color-trinidad-950: #461204;
+
     /* ---------- Brand ---------- */
     --brand: #e85002;
 
+    /* Brand Gradient Colors */
+    --gradient-start: #d9c3ab;
+    --gradient-via-1: #f16001;
+    --gradient-via-2: #c10801;
+    --gradient-end: #000000;
+
     /* ---------- Neutrals ---------- */
     --black: #000000;
-    --white: #f9f9f9;
-    --gray: #646464;
-    --gray-light: #a7a7a7;
-    --gray-dark: #333333;
+    --surface: #f9f9f9;
+    --surface-elevated: #ffffff;
 
-    /* ---------- Backgrounds ---------- */
-    --bg-primary: var(--white);
-    --bg-secondary: #ffffff;
+    --text-primary: #000000;
+    --text-muted: #a7a7a7;
+    --text-secondary: #333333;
 
-    /* ---------- Text ---------- */
-    --text-primary: var(--black);
-    --text-secondary: var(--gray-dark);
-    --text-muted: var(--gray-light);
-
-    /* ---------- Buttons ---------- */
-    --btn-primary-bg: var(--brand);
-    --btn-primary-text: #ffffff;
-    --btn-disabled-bg: var(--gray-light);
-    --btn-disabled-text: var(--gray);
+    --disabled-bg: #a7a7a7;
+    --disabled-text: #646464;
 
     /* ---------- Alerts ---------- */
     --alert-info: #5b93ff;
     --alert-error: #ff5555;
     --alert-success: #51cc56;
 
-    /* ---------- Legacy aliases (keeps existing components working) ---------- */
-    --color-brand-orange: var(--brand);
-    --color-brand-gradient: linear-gradient(
-      90deg,
-      var(--black) 0%,
-      #c10801 25%,
-      #f16001 50%,
-      #d9c3ab 100%
-    );
-
-    --color-neutral-dark: var(--gray-dark);
-    --color-neutral-gray: var(--gray);
-    --color-neutral-light: var(--gray-light);
-
-    --color-primary-black: var(--black);
-    --color-primary-white: var(--white);
-
-    --color-background: var(--bg-primary);
-    --color-text: var(--text-primary);
-    --color-text-muted: var(--text-muted);
-    --color-surface: var(--bg-secondary);
-
-    /* Used throughout components via CSS vars */
-    --color-border-muted: color-mix(in srgb, var(--gray-light) 25%, transparent);
-    --color-panel-bg: var(--bg-secondary);
-    --color-field-bg: var(--bg-secondary);
-    --color-focus-ring: color-mix(in srgb, var(--brand) 15%, transparent);
-    --color-interactive-hover-bg: color-mix(
-      in srgb,
-      var(--brand) 10%,
-      transparent
-    );
-
-    --color-accent-500: var(--brand);
-    --color-accent-700: #f16001;
-    --color-accent-900: #c10801;
   }
 
   /* 🌙 Dark Theme */
   .dark {
-    --bg-primary: #000000;
-    --bg-secondary: #111111;
-
+    --surface: #000000;
+    --surface-elevated: #111111;
+    
     --text-primary: #f9f9f9;
     --text-secondary: #a7a7a7;
     --text-muted: #646464;
-
-    /* Legacy aliases */
-    --color-border-muted: color-mix(in srgb, var(--gray-light) 18%, transparent);
   }
 }
 
@@ -152,18 +122,15 @@
   }
 
   .landing-heading {
-    @apply text-3xl sm:text-4xl lg:text-5xl font-bold mb-4;
-    color: var(--text-primary);
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-text-primary;
   }
 
   .landing-subheading {
-    @apply text-lg sm:text-xl mb-8;
-    color: var(--text-muted);
+    @apply text-lg sm:text-xl mb-8 text-text-muted;
   }
 
   .landing-text {
-    @apply text-base;
-    color: var(--text-primary);
+    @apply text-base text-text-primary;
   }
 
   /* Header styles */
@@ -178,19 +145,15 @@
   }
 
   .header-capsule-initial {
-    @apply border-0 backdrop-blur-sm shadow-none;
-    background-color: rgba(249, 249, 249, 0.8);
+    @apply border-0 backdrop-blur-sm shadow-none bg-[rgba(249,249,249,0.8)];
   }
 
   .header-capsule-scrolled {
-    @apply border shadow-sm;
-    background-color: var(--bg-primary);
-    border-color: var(--color-border-muted);
+    @apply border shadow-sm bg-bg-primary border-color-border-muted;
   }
 
   .nav-link {
-    @apply text-xs sm:text-sm font-normal transition;
-    color: var(--text-primary);
+    @apply text-xs sm:text-sm font-normal transition text-text-primary;
     transition-duration: 200ms;
     transition-delay: 0ms;
   }
@@ -201,21 +164,18 @@
   }
 
   .nav-link-active {
-    color: var(--brand);
+    @apply text-brand;
     opacity: 1;
   }
 
   .nav-link-active:hover {
-    color: var(--brand);
+    @apply text-brand;
     opacity: 1;
     transition-delay: 0ms;
   }
 
   .button-primary {
-    @apply inline-flex items-center justify-center h-12 px-[30px] text-sm font-normal rounded-[30px];
-    background: var(--btn-primary-bg);
-    color: var(--btn-primary-text);
-    border: none;
+    @apply inline-flex items-center justify-center h-12 px-[30px] text-sm font-normal rounded-[30px] bg-btn-primary-bg text-btn-primary-text border-0;
     transition:
       background-color 200ms ease,
       opacity 200ms ease,
@@ -235,16 +195,13 @@
 
   .button-primary:disabled,
   .button-primary[aria-disabled="true"] {
-    background: var(--btn-disabled-bg);
+    @apply bg-btn-disabled-bg;
     cursor: not-allowed;
     opacity: 0.6;
   }
 
   .button-icon {
-    @apply inline-flex items-center justify-center w-12 h-12 rounded-full;
-    background: transparent;
-    border: 1.5px solid var(--brand);
-    color: var(--brand);
+    @apply inline-flex items-center justify-center w-12 h-12 rounded-full border border-brand text-brand bg-transparent;
     transition: background 0.3s ease, transform 0.05s ease;
     transition-delay: 0ms;
   }
@@ -270,10 +227,8 @@
   }
 
   .theme-toggle-button {
-    @apply inline-flex items-center justify-center w-12 h-12 rounded-full;
-    background-color: color-mix(in srgb, var(--black) 4%, transparent);
-    border: 1.5px solid var(--color-border-muted);
-    color: var(--text-primary);
+    @apply inline-flex items-center justify-center w-12 h-12 rounded-full border border-color-border-muted text-text-primary;
+    bg-[color-mix(in_srgb,var(--black)_4%,transparent)];
     transition:
       background-color 200ms ease,
       opacity 200ms ease,
@@ -298,18 +253,13 @@
   }
 
   .panel-surface {
-    @apply h-full rounded-xl border p-4 shadow-sm;
-    background-color: var(--bg-secondary);
-    border-color: var(--color-border-muted);
+    @apply h-full rounded-xl border p-4 shadow-sm bg-bg-secondary border-color-border-muted;
   }
 
   .button-outlined {
-    @apply inline-flex items-center justify-center h-12 rounded-[30px] text-sm font-normal;
+    @apply inline-flex items-center justify-center h-12 rounded-[30px] text-sm font-normal bg-transparent border border-brand text-brand;
     padding: 0 24px;
     column-gap: 4px;
-    background: transparent;
-    border: 1.5px solid var(--brand);
-    color: var(--brand);
     transition: all 0.3s ease, transform 0.05s ease;
     transition-delay: 0ms;
   }
@@ -340,9 +290,7 @@
   }
 
   .tooltip-surface {
-    @apply rounded-lg shadow-lg text-xs;
-    background-color: var(--black);
-    color: var(--white);
+    @apply rounded-lg shadow-lg text-xs bg-black text-text-white;
   }
 }
 
@@ -396,13 +344,13 @@
    Gradients
 -------------------------------------------------- */
 @layer utilities {
-  .gradient-brand {
+  .linear-gradient-brand {
     background: linear-gradient(
       135deg,
-      #d9c3ab 0%,
-      #f16001 40%,
-      #c10801 70%,
-      #000000 100%
+      var(--gradient-start) 0%,
+      var(--gradient-via-1) 40%,
+      var(--gradient-via-2) 70%,
+      var(--gradient-end) 100%
     );
   }
 }
