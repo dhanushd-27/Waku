@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import ThemeProvider from "@/components/ThemeProvider";
+import { Header } from "@/components/header";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 import { Providers } from "./providers";
 import "./globals.css";
@@ -42,11 +43,15 @@ export default function RootLayout({
       <body className={`${roboto.className} ${alrobold.variable}`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
+          storageKey="waku-theme"
         >
-          <Providers>{children}</Providers>
+          <Providers>
+            <Header />
+            {children}
+          </Providers>
         </ThemeProvider>
       </body>
     </html>

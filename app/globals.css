@@ -36,6 +36,7 @@
     --black: #000000;
     --surface: #f9f9f9;
     --surface-elevated: #ffffff;
+    --background: #f9f9f9;
 
     --text-primary: #000000;
     --text-muted: #a7a7a7;
@@ -54,6 +55,7 @@
   .dark {
     --surface: #000000;
     --surface-elevated: #111111;
+    --background: #000000;
     
     --text-primary: #f9f9f9;
     --text-secondary: #a7a7a7;
@@ -66,6 +68,14 @@
 -------------------------------------------------- */
 @layer base {
   /* CSS Applies on direct HTML elements */
+  html {
+    scroll-padding-top: var(--header-offset, 96px);
+  }
+
+  body {
+    background: var(--background);
+    color: var(--text-primary);
+  }
 }
 
 @layer utilities {
@@ -75,6 +85,64 @@
 
 @layer components {
   /* CSS Applies on components */
+
+  /* Buttons */
+  .button-base {
+    @apply inline-flex h-12 items-center justify-center gap-1 rounded-2xl px-[30px] py-3 text-sm font-normal transition-colors;
+  }
+
+  .button-text {
+    @apply bg-transparent text-(--text-primary) hover:text-(--color-trinidad-400) active:text-(--gradient-via-1);
+  }
+
+  .button-contained {
+    @apply bg-(--color-trinidad-600) text-(--surface) hover:bg-(--color-trinidad-400) active:bg-(--gradient-via-1);
+  }
+
+  /* Header */
+  .header-shell {
+    @apply sticky top-0 z-50 w-full pt-4;
+  }
+
+  .header-pill {
+    @apply mx-auto flex w-full max-w-6xl items-center justify-around rounded-full border border-transparent bg-(--background) px-8 py-3;
+  }
+
+  .header-pill-scrolled {
+    border-color: color-mix(in srgb, var(--border) 70%, transparent);
+  }
+
+  .header-nav {
+    @apply hidden items-center gap-6 md:flex;
+  }
+
+  .header-nav-link {
+    @apply text-sm font-normal text-(--text-primary) transition-colors hover:text-(--color-trinidad-400) active:text-(--gradient-via-1);
+  }
+
+  .header-nav-link[data-active="true"] {
+    @apply text-(--color-trinidad-600);
+  }
+
+  .header-actions {
+    @apply flex items-center gap-2;
+  }
+
+  .header-mobile-menu {
+    @apply relative md:hidden;
+  }
+
+  .header-mobile-dropdown {
+    @apply absolute right-0 top-[calc(100%+8px)] w-56 rounded-2xl bg-(--surface-elevated) p-2 shadow-sm;
+  }
+
+  .header-mobile-dropdown-link {
+    @apply block w-full rounded-xl px-3 py-2 text-left text-sm font-medium text-(--text-primary) transition-colors hover:text-(--color-trinidad-400) active:text-(--gradient-via-1);
+  }
+
+  .header-mobile-dropdown-link[data-active="true"] {
+    @apply text-(--color-trinidad-600);
+  }
 
 }
 

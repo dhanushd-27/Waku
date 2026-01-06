@@ -1,11 +1,16 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { ThemeProvider as NextThemesProvider } from "next-themes"
+import React from "react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 
-export default function ThemeProvider({
-  children,
-  ...props
-}: React.ComponentProps<typeof NextThemesProvider>) {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
-}
+type ThemeProviderProps = React.ComponentProps<typeof NextThemesProvider>;
+
+/**
+ * ThemeProvider
+ * ----
+ * Provides app-wide theme state (light/dark) using `next-themes`,
+ * persisting the user's choice to localStorage.
+ */
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, ...props }) => {
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+};
