@@ -37,6 +37,10 @@
     --surface: #f9f9f9;
     --surface-elevated: #ffffff;
     --background: #f9f9f9;
+    --background-rgb: 249, 249, 249;
+    --on-secondary: #f9f9f9;
+    --border: 167, 167, 167;
+    --header-glass-alpha: 0.45;
 
     --text-primary: #000000;
     --text-muted: #a7a7a7;
@@ -56,6 +60,10 @@
     --surface: #000000;
     --surface-elevated: #111111;
     --background: #000000;
+    --background-rgb: 0, 0, 0;
+    --on-secondary: #f9f9f9;
+    --border: 167, 167, 167;
+    --header-glass-alpha: 0.72;
     
     --text-primary: #f9f9f9;
     --text-secondary: #a7a7a7;
@@ -96,7 +104,16 @@
   }
 
   .button-contained {
-    @apply bg-(--color-trinidad-600) text-(--surface) hover:bg-(--color-trinidad-400) active:bg-(--gradient-via-1);
+    background-color: var(--color-trinidad-600);
+    color: var(--on-secondary);
+  }
+
+  .button-contained:hover {
+    background-color: var(--color-trinidad-400);
+  }
+
+  .button-contained:active {
+    background-color: var(--gradient-via-1);
   }
 
   /* Header */
@@ -105,12 +122,15 @@
   }
 
   .header-pill {
-    @apply mx-auto flex w-full max-w-6xl items-center justify-around rounded-full border border-transparent bg-(--background) px-8 py-3;
+    @apply mx-auto flex w-full max-w-6xl items-center justify-between rounded-full border border-transparent bg-(--background) px-14 py-3;
   }
 
   .header-pill-scrolled {
-    border-color: color-mix(in srgb, var(--border) 70%, transparent);
+    @apply backdrop-blur-md backdrop-saturate-150 shadow-lg;
+    border-color: rgba(var(--border), 0.7);
+    background-color: rgba(var(--background-rgb), var(--header-glass-alpha)); /* glass tint */
   }
+
 
   .header-nav {
     @apply hidden items-center gap-6 md:flex;
