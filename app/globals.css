@@ -164,6 +164,12 @@
     @apply text-(--color-trinidad-600);
   }
 
+  /* Section Label Pill */
+  .section-label-pill {
+    @apply inline-flex items-center px-4 py-1 rounded-full text-[0.6875rem] text-(--text-secondary);
+    border: 1.5px solid rgba(var(--border), 0.5);
+  }
+
 }
 
 /* --------------------------------------------------

@@ -1,5 +1,7 @@
 import React from "react";
 
+import { SectionLabel } from "@/components/ui/section-label";
+
 import { FaqQuestion } from "./FaqQuestion";
 
 type FaqSectionProps = {
@@ -22,8 +24,9 @@ export const FaqSection: React.FC<FaqSectionProps> = ({
   subheading,
 }) => {
   return (
-    <section className="min-h-screen px-6 py-12" id="faq">
-      <h2 className="text-xl font-semibold">{heading}</h2>
+    <section className="flex flex-col items-center text-center min-h-screen px-6 py-12" id="faq">
+      <SectionLabel label="FAQ" />
+      <h2 className="mt-4 text-xl font-semibold">{heading}</h2>
       <p className="mt-2 text-base">{subheading}</p>
 
       {questions && questions.length > 0 ? (
