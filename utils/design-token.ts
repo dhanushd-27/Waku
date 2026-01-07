@@ -110,7 +110,7 @@ const designTokens = {
    * ===================== */
   typography: {
     fontFamily: {
-      base: "'Roboto', Arial, sans-serif",
+      base: "'Figtree', Arial, sans-serif",
       brand: "'alro-bold', sans-serif"
     },
     fontWeight: {

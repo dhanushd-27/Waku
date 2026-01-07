@@ -12,7 +12,14 @@ import Image from "next/image";
 export const HeaderLogo = () => {
   return (
     <Link className="inline-flex items-center" href="/">
-      <Image alt="Waku Logo" className="h-8 w-auto" height={32} src="/waku.png" width={128} />
+      <Image
+        alt="Waku Logo"
+        className="h-8 w-auto"
+        height={32}
+        src="/waku.png"
+        width={128}
+        priority
+      />
     </Link>
   );
 };

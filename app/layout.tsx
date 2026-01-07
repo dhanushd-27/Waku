@@ -1,22 +1,21 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Header } from "@/components/header";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 import { Providers } from "./providers";
 import "./globals.css";
 
-const roboto = localFont({
+const figtree = localFont({
   src: [
     {
-      path: "../fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf",
+      path: "../fonts/Figtree/Figtree-VariableFont_wght.ttf",
       style: "normal",
-      weight: "100 900",
+      weight: "300 900",
     },
     {
-      path: "../fonts/Roboto/Roboto-Italic-VariableFont_wdth,wght.ttf",
+      path: "../fonts/Figtree/Figtree-Italic-VariableFont_wght.ttf",
       style: "italic",
-      weight: "100 900",
+      weight: "300 900",
     },
   ],
   display: "swap",
@@ -40,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${roboto.className} ${alrobold.variable}`}>
+      <body className={`${figtree.className} ${alrobold.variable}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -48,10 +47,7 @@ export default function RootLayout({
           disableTransitionOnChange
           storageKey="waku-theme"
         >
-          <Providers>
-            <Header />
-            {children}
-          </Providers>
+          <Providers>{children}</Providers>
         </ThemeProvider>
       </body>
     </html>

@@ -6,7 +6,6 @@ import { useActiveHash, useHeaderOffsetCssVar, useIsScrolled } from "./hooks";
 import {
   HeaderGetStartedButton,
   HeaderLogo,
-  HeaderMobileMenu,
   HeaderNav,
   HeaderThemeToggleButton,
 } from "./subcomponents";
@@ -38,7 +37,6 @@ export const Header: React.FC<HeaderProps> = () => {
         <div className="header-actions">
           <HeaderThemeToggleButton />
           <HeaderGetStartedButton />
-          <HeaderMobileMenu activeHash={activeHash} onNavigate={setActiveHash} />
         </div>
       </div>
     </header>
