@@ -1,23 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { Platform } from "@/components/dropdown-controls/platform-aspect-config";
+
+export type Platform = "instagram" | "whatsapp" | "x" | "linkedin" | "threads" | "custom";
 
 type PlatformState = {
-  platform: Platform
-}
+  platform: Platform;
+};
 
 const initialState: PlatformState = {
-  platform: "instagram"
-}
+  platform: "instagram",
+};
 
-const PlatformSlice = createSlice({
+const platformSlice = createSlice({
   name: "platform",
   initialState,
   reducers: {
     setPlatform(state, action: PayloadAction<Platform>) {
       state.platform = action.payload;
-    }
-  }
-})
+    },
+  },
+});
 
-export const { setPlatform } = PlatformSlice.actions
-export default PlatformSlice.reducer; 
+export const { setPlatform } = platformSlice.actions;
+export default platformSlice.reducer;
