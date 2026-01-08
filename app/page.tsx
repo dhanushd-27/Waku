@@ -4,7 +4,7 @@ import { FaqSection } from "@/components/home/faq-section";
 import { FeaturesSection } from "@/components/home/features-section";
 import { HomeSection } from "@/components/home/home-section";
 
-import content from "@/landing-planning/landing-page-content.json";
+import content from "@/utils/site-content.json";
 
 export default function Home() {
   return (

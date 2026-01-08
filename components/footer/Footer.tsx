@@ -2,7 +2,7 @@ import React from "react";
 
 import { Globe, Linkedin, Twitter } from "lucide-react";
 
-import content from "@/landing-planning/landing-page-content.json";
+import content from "@/utils/site-content.json";
 
 type FooterProps = {};
 

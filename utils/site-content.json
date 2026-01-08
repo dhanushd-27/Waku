@@ -1,0 +1,62 @@
+{
+  "header": {
+    "brand": {
+      "text": "waku"
+    },
+    "navLinks": [
+      { "label": "Home", "href": "#home" },
+      { "label": "Features", "href": "#features" },
+      { "label": "FAQ's", "href": "#faq" }
+    ],
+    "cta": {
+      "label": "Get Started"
+    },
+    "themeToggle": {
+      "ariaLabel": "Toggle theme"
+    }
+  },
+  "home": {
+    "heading": "From draft to post, without friction.",
+    "subheading": "Preview, resize, save drafts, and copy perfectly formatted posts for Instagram, WhatsApp, X, and more - all in seconds.",
+    "body": ""
+  },
+  "features": {
+    "heading": "Built for creators who move fast.",
+    "subheading": "Simple tools to help you create, save, and share better content.",
+    "body": ""
+  },
+  "faq": {
+    "heading": "Got questions? We've got answers.",
+    "subheading": "Everything you need to know about Waku and how it helps you create better content.",
+    "body": "",
+    "questions": [
+      {
+        "question": "What platforms does Waku support?",
+        "answer": "Waku supports formatting for Instagram, WhatsApp, X (Twitter), LinkedIn, Threads, and more. Each platform has its own quirks, and we handle them all so your posts look perfect everywhere."
+      },
+      {
+        "question": "Do I need to create an account?",
+        "answer": "No account required to start creating. You can use Waku instantly in your browser. Creating an account unlocks draft saving and syncing across devices."
+      },
+      {
+        "question": "Is Waku free to use?",
+        "answer": "Yes! The core features are completely free. Preview, resize, and format your posts without limits. Premium features like cloud drafts and templates are coming soon."
+      },
+      {
+        "question": "Can I save my drafts?",
+        "answer": "Absolutely. Save unlimited drafts locally, or sync them to the cloud with a free account. Your content is always available when inspiration strikes."
+      }
+    ]
+  },
+  "footer": {
+    "copyrightTemplate": "© {year} Waku. All rights reserved.",
+    "creator": {
+      "name": "D Dhanush",
+      "links": [
+        { "label": "X", "href": "https://x.com/orcatwt", "icon": "Twitter" },
+        { "label": "Portfolio", "href": "https://dhanush.tech/", "icon": "Globe" },
+        { "label": "LinkedIn", "href": "https://www.linkedin.com/in/dhanush27/", "icon": "Linkedin" }
+      ]
+    }
+  }
+}
