@@ -26,8 +26,8 @@ export const FaqSection: React.FC<FaqSectionProps> = ({
   return (
     <section className="flex flex-col items-center text-center min-h-screen px-6 py-12" id="faq">
       <SectionLabel label="FAQ" />
-      <h2 className="mt-4 text-xl font-semibold">{heading}</h2>
-      <p className="mt-2 text-base">{subheading}</p>
+      <h2 className="text-h2 mt-4">{heading}</h2>
+      <p className="text-subtitle mt-2 text-(--text-secondary)">{subheading}</p>
 
       {questions && questions.length > 0 ? (
         <div className="mt-6 grid gap-4">
@@ -36,7 +36,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({
           ))}
         </div>
       ) : (
-        <p className="mt-4 text-sm text-(--text-secondary)">{body}</p>
+        <p className="text-paragraph mt-4 text-(--text-muted)">{body}</p>
       )}
     </section>
   );

@@ -114,36 +114,95 @@ const designTokens = {
       brand: "'alro-bold', sans-serif"
     },
     fontWeight: {
+      light: 300,
       regular: 400,
       medium: 500,
-      bold: 700,
-      light: 300
+      semibold: 600,
+      bold: 700
     },
+
+    /* ------ Responsive Font Sizes ------ */
     fontSize: {
-      h1: "4.5rem",    // 72px
-      h2: "4rem",      // 64px
-      h3: "3rem",      // 48px
-      h4: "2rem",      // 32px
-      subtitle: "1.5rem", // 24px
-      paragraph: "0.875rem", // 14px
-      body: "0.75rem", // 12px
-      small: "0.6875rem" // 11px
+      /* Mobile-first base values (≤375px) */
+      h1: {
+        mobile: "2.5rem",     // 40px
+        tablet: "3.5rem",     // 56px
+        desktop: "4.5rem",    // 72px
+        clamp: "clamp(2.5rem, 5vw + 1rem, 4.5rem)"
+      },
+      h2: {
+        mobile: "2rem",       // 32px
+        tablet: "3rem",       // 48px
+        desktop: "4rem",      // 64px
+        clamp: "clamp(2rem, 4vw + 1rem, 4rem)"
+      },
+      h3: {
+        mobile: "1.75rem",    // 28px
+        tablet: "2.25rem",    // 36px
+        desktop: "3rem",      // 48px
+        clamp: "clamp(1.75rem, 3vw + 0.5rem, 3rem)"
+      },
+      h4: {
+        mobile: "1.5rem",     // 24px
+        tablet: "1.75rem",    // 28px
+        desktop: "2rem",      // 32px
+        clamp: "clamp(1.5rem, 2vw + 0.5rem, 2rem)"
+      },
+      subtitle: {
+        mobile: "0.875rem",   // 14px
+        tablet: "0.9375rem",  // 15px
+        desktop: "1rem",      // 16px
+        clamp: "clamp(0.875rem, 0.5vw + 0.5rem, 1rem)"
+      },
+      paragraph: {
+        mobile: "0.875rem",   // 14px
+        tablet: "0.875rem",   // 14px
+        desktop: "1rem",      // 16px
+        clamp: "clamp(0.875rem, 0.5vw + 0.75rem, 1rem)"
+      },
+      body: {
+        mobile: "0.75rem",    // 12px
+        tablet: "0.8125rem",  // 13px
+        desktop: "0.875rem",  // 14px
+        clamp: "clamp(0.75rem, 0.3vw + 0.6rem, 0.875rem)"
+      },
+      small: {
+        mobile: "0.6875rem",  // 11px
+        tablet: "0.6875rem",  // 11px
+        desktop: "0.75rem",   // 12px
+        clamp: "clamp(0.6875rem, 0.2vw + 0.6rem, 0.75rem)"
+      }
     },
+
+    /* ------ Line Heights ------ */
     lineHeight: {
-      h1: "1.2",
-      h2: "1.2",
-      h3: "1.4",
-      h4: "1.4",
-      subtitle: "1",
-      paragraph: "1.5",
-      body: "1.5",
-      small: "1.5"
+      h1: { mobile: "1.2", tablet: "1.15", desktop: "1.1" },
+      h2: { mobile: "1.25", tablet: "1.2", desktop: "1.15" },
+      h3: { mobile: "1.3", tablet: "1.25", desktop: "1.2" },
+      h4: { mobile: "1.35", tablet: "1.3", desktop: "1.25" },
+      subtitle: { mobile: "1.5", tablet: "1.5", desktop: "1.5" },
+      paragraph: { mobile: "1.6", tablet: "1.55", desktop: "1.5" },
+      body: { mobile: "1.6", tablet: "1.55", desktop: "1.5" },
+      small: { mobile: "1.5", tablet: "1.5", desktop: "1.5" }
     },
+
+    /* ------ Letter Spacing ------ */
     letterSpacing: {
       h1: "-0.02em",
       h2: "-0.02em",
-      h3: "normal",
-      h4: "normal"
+      h3: "-0.01em",
+      h4: "normal",
+      subtitle: "normal",
+      paragraph: "normal",
+      body: "normal",
+      small: "0.01em"
+    },
+
+    /* ------ Max Line Width (characters) ------ */
+    maxLineWidth: {
+      heading: "20ch",
+      paragraph: "65ch",
+      wide: "80ch"
     }
   },
 

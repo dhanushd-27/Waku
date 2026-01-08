@@ -15,7 +15,7 @@ export const Footer: React.FC<FooterProps> = () => {
 
   return (
     <footer className="px-6 py-10">
-      <p className="text-sm text-(--text-muted)">{footerText}</p>
+      <p className="text-small text-(--text-muted)">{footerText}</p>
     </footer>
   );
 };

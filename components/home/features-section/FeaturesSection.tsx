@@ -21,9 +21,9 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({
   return (
     <section className="flex flex-col items-center text-center min-h-screen px-6 py-12" id="features">
       <SectionLabel label="Features" />
-      <h2 className="mt-4 text-xl font-semibold">{heading}</h2>
-      <p className="mt-2 text-base">{subheading}</p>
-      <p className="mt-4 text-sm text-(--text-secondary)">{body}</p>
+      <h2 className="text-h2 mt-4">{heading}</h2>
+      <p className="text-subtitle mt-2 text-(--text-secondary)">{subheading}</p>
+      <p className="text-paragraph mt-4 text-(--text-muted)">{body}</p>
     </section>
   );
 };

@@ -10,6 +10,48 @@
 -------------------------------------------------- */
 @layer base {
   :root {
+    /* ---------- Typography (Responsive) ---------- */
+    /* H1: 40px → 72px */
+    --font-size-h1: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+    --line-height-h1: 1.15;
+    --letter-spacing-h1: -0.02em;
+
+    /* H2: 32px → 64px */
+    --font-size-h2: clamp(2rem, 4vw + 1rem, 4rem);
+    --line-height-h2: 1.2;
+    --letter-spacing-h2: -0.02em;
+
+    /* H3: 28px → 48px */
+    --font-size-h3: clamp(1.75rem, 3vw + 0.5rem, 3rem);
+    --line-height-h3: 1.25;
+    --letter-spacing-h3: -0.01em;
+
+    /* H4: 24px → 32px */
+    --font-size-h4: clamp(1.5rem, 2vw + 0.5rem, 2rem);
+    --line-height-h4: 1.3;
+    --letter-spacing-h4: normal;
+
+    /* Subtitle: 14px → 16px */
+    --font-size-subtitle: clamp(0.875rem, 0.5vw + 0.5rem, 1rem);
+    --line-height-subtitle: 1.5;
+
+    /* Paragraph: 14px → 16px */
+    --font-size-paragraph: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);
+    --line-height-paragraph: 1.55;
+
+    /* Body: 12px → 14px */
+    --font-size-body: clamp(0.75rem, 0.3vw + 0.6rem, 0.875rem);
+    --line-height-body: 1.55;
+
+    /* Small: 11px → 12px */
+    --font-size-small: clamp(0.6875rem, 0.2vw + 0.6rem, 0.75rem);
+    --line-height-small: 1.5;
+
+    /* Max Line Widths */
+    --max-width-heading: 20ch;
+    --max-width-paragraph: 65ch;
+    --max-width-wide: 80ch;
+
     /* ---------- Colors ---------- */
     --color-trinidad-50: #fff7ec;
     --color-trinidad-100: #ffedd3;
@@ -94,9 +136,62 @@
 @layer components {
   /* CSS Applies on components */
 
+  /* ---------- Typography Classes ---------- */
+  .text-h1 {
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-h1);
+    letter-spacing: var(--letter-spacing-h1);
+    font-weight: 700;
+  }
+
+  .text-h2 {
+    font-size: var(--font-size-h2);
+    line-height: var(--line-height-h2);
+    letter-spacing: var(--letter-spacing-h2);
+    font-weight: 700;
+  }
+
+  .text-h3 {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+    letter-spacing: var(--letter-spacing-h3);
+    font-weight: 600;
+  }
+
+  .text-h4 {
+    font-size: var(--font-size-h4);
+    line-height: var(--line-height-h4);
+    letter-spacing: var(--letter-spacing-h4);
+    font-weight: 600;
+  }
+
+  .text-subtitle {
+    font-size: var(--font-size-subtitle);
+    line-height: var(--line-height-subtitle);
+    font-weight: 400;
+  }
+
+  .text-paragraph {
+    font-size: var(--font-size-paragraph);
+    line-height: var(--line-height-paragraph);
+    font-weight: 400;
+  }
+
+  .text-body {
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+    font-weight: 400;
+  }
+
+  .text-small {
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-small);
+    font-weight: 400;
+  }
+
   /* Buttons */
   .button-base {
-    @apply inline-flex h-12 items-center justify-center gap-1 rounded-2xl px-[30px] py-3 text-sm font-normal transition-colors;
+    @apply inline-flex h-12 items-center justify-center gap-1 rounded-2xl px-[30px] py-2 text-sm font-normal transition-colors;
   }
 
   .button-text {
@@ -109,7 +204,7 @@
   }
 
   .button-contained:hover {
-    background-color: var(--color-trinidad-400);
+    background-color: var(--color-trinidad-500);
   }
 
   .button-contained:active {
@@ -133,7 +228,7 @@
 
 
   .header-nav {
-    @apply hidden items-center gap-6 md:flex;
+    @apply hidden items-center gap-6 pl-32 md:flex;
   }
 
   .header-nav-link {
