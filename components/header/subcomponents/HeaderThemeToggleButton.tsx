@@ -11,7 +11,7 @@ type HeaderThemeToggleButtonProps = {};
 /**
  * HeaderThemeToggleButton
  * ----
- * Toggles between light and dark theme using next-themes.
+ * Toggles between light and dark theme with smooth transition.
  */
 export const HeaderThemeToggleButton: React.FC<HeaderThemeToggleButtonProps> = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -24,16 +24,22 @@ export const HeaderThemeToggleButton: React.FC<HeaderThemeToggleButtonProps> = (
     setIsMounted(true);
   }, []);
 
+  const handleThemeToggle = () => {
+    // Add transition class to enable smooth color transitions
+    document.documentElement.classList.add("theme-transitioning");
+    
+    // Change theme
+    setTheme(isDark ? "light" : "dark");
+    
+    // Remove transition class after animation completes
+    setTimeout(() => {
+      document.documentElement.classList.remove("theme-transitioning");
+    }, 700);
+  };
+
   if (!isMounted) return null;
 
-  return (
-    <TextButton
-      icon={icon}
-      onClick={() => {
-        setTheme(isDark ? "light" : "dark");
-      }}
-    />
-  );
+  return <TextButton icon={icon} onClick={handleThemeToggle} />;
 };
 
 
