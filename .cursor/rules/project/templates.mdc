@@ -1,0 +1,113 @@
+---
+description: File templates and structure standards for components, hooks, utilities, and types
+globs: ["**/*.{ts,tsx}"]
+alwaysApply: true
+---
+
+# File Template Rules
+
+## General Rules
+
+- Use TypeScript everywhere
+- Prefer named exports
+- One primary responsibility per file
+- Comments must follow the commenting rules
+- Imports: external → internal → styles
+- No placeholder code unless explicitly asked
+
+If a file type does not match any template:
+- Ask before proceeding
+
+## Component Template (React / Next.js)
+
+```typescript
+/**
+ * <ComponentName>
+ * ----------------
+ * Briefly describe the responsibility of this component.
+ */
+
+type <ComponentName>Props = {};
+
+export function <ComponentName>(props: <ComponentName>Props) {
+  return (
+    <div>
+      {/* UI goes here */}
+    </div>
+  );
+}
+```
+
+## Subcomponent Template
+
+```typescript
+/**
+ * <SubComponentName>
+ * ------------------
+ * Used internally by <ParentComponent>.
+ */
+
+type <SubComponentName>Props = {};
+
+export function <SubComponentName>(props: <SubComponentName>Props) {
+  return null;
+}
+```
+
+## Hook Template
+
+```typescript
+/**
+ * use<HookName>
+ * ------------
+ * Manages a single piece of logic or side effect.
+ */
+
+export function use<HookName>() {
+  return {};
+}
+```
+
+## Utility Function Template
+
+```typescript
+/**
+ * <functionName>
+ * --------------
+ * Pure utility function with no side effects.
+ */
+
+export function functionName() {}
+```
+
+## Model / Type Template
+
+```typescript
+/**
+ * <TypeName>
+ * ----------
+ * Describes the shape of <domain concept>.
+ */
+
+export type TypeName = {};
+```
+
+## DB / Data File Template
+
+```typescript
+/**
+ * <DataLayerName>
+ * ---------------
+ * Responsible only for data access.
+ * No UI or formatting logic allowed.
+ */
+
+export async function functionName() {}
+```
+
+## Enforcement
+
+- If user asks to create a new file → apply the correct template
+- If existing file violates template → suggest alignment
+- Do NOT mix concerns
+- Ask for missing requirements before generating code

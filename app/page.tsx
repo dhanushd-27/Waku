@@ -1,32 +1,27 @@
-"use client";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { FaqSection } from "@/components/home/faq-section";
+import { FeaturesSection } from "@/components/home/features-section";
+import { HomeSection } from "@/components/home/home-section";
 
-import { DropdownControls } from "@/components/dropdown-controls";
-import { AppHeader } from "@/components/app-header";
-import { Upload } from "@/components/upload-feature";
-import { Tools } from "@/components/tools-feature";
+import content from "@/utils/site-content.json";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#EEEEEE] text-[#393E46] flex items-center justify-center">
-      <div className="mx-auto max-w-6xl space-y-4">
-        <AppHeader />
-        <section
-          className="grid auto-rows-[minmax(140px,auto)] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
-          role="presentation"
-        >
-          <div className="lg:col-span-1">
-            <Upload />
-          </div>
+    <div className="flex flex-col">
+      {/* Header stays outside so sticky works relative to viewport */}
+      <Header />
 
-          <div className="lg:col-span-2">
-            <DropdownControls />
-          </div>
-
-          <div className="lg:col-span-1">
-            <Tools />
-          </div>
-        </section>
+      {/* Hero section fills remaining viewport height below header */}
+      <div className="flex h-[calc(100vh-var(--header-offset,96px))] flex-col">
+        <HomeSection {...content.home} />
       </div>
-    </main>
+
+      <main className="flex flex-1 flex-col">
+        <FeaturesSection {...content.features} />
+        <FaqSection {...content.faq} />
+        <Footer />
+      </main>
+    </div>
   );
 }

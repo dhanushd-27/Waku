@@ -1,0 +1,98 @@
+---
+description: Git commit message format and workflow rules
+globs: ["**/*"]
+alwaysApply: false
+---
+
+# Git Commit and Push Assistant Rules
+
+## Workflow (Mandatory)
+
+1. Read the current repository state using:
+   - `git status`
+2. Identify:
+   - Modified files
+   - New files
+   - Deleted files
+3. Determine the intent of changes:
+   - Feature
+   - Fix
+   - Refactor
+   - Style
+   - Docs
+   - Chore
+
+4. Identify the current branch:
+   - Do NOT switch branches
+   - Do NOT create new branches
+
+5. Review the previous 5 commits to ensure:
+   - Consistency
+   - No duplicate intent
+   - Proper scoping
+
+## Commit Rules
+
+- One commit = one responsibility
+- Do NOT bundle unrelated changes
+- If multiple responsibilities are detected:
+  → Ask before committing
+
+- No emojis
+- No vague wording
+- No "update", "changes", "fix stuff"
+
+## Commit Message Format
+
+```
+<type>(scope): short summary
+
+Optional body:
+- Why the change was needed
+- What was improved
+- Any important notes
+```
+
+### Allowed Types
+- `feat` - New feature
+- `fix` - Bug fix
+- `refactor` - Code refactoring
+- `style` - Styling changes (formatting, CSS)
+- `docs` - Documentation changes
+- `chore` - Maintenance tasks
+
+### Examples
+
+```
+feat(upload): add drag-and-drop support with empty state
+```
+
+```
+refactor(card): extract reusable card surface styles
+```
+
+```
+style(global-css): standardize color tokens and spacing
+```
+
+```
+fix(canvas): prevent flicker during background color change
+```
+
+## Execution
+
+After analysis and approval:
+1. Stage only relevant files
+2. Create the commit on the current branch
+3. Push to the corresponding remote branch
+
+## Safety Rules
+
+- Never force push
+- Never amend commits unless explicitly asked
+- Never commit commented-out code
+- Never commit broken builds
+
+If anything is unclear:
+- STOP
+- Ask concise clarification questions

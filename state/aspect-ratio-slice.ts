@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { AspectRatioId } from "@/components/dropdown-controls/platform-aspect-config";
+
+export type AspectRatioId = "1:1" | "4:5" | "9:16" | "16:9" | "4:3" | "3:4" | "custom";
 
 type AspectRatio = AspectRatioId;
 

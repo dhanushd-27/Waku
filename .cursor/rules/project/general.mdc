@@ -1,0 +1,72 @@
+---
+description: Core project standards and general development guidelines
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# General Project Standards
+
+## Core Principles
+
+- Use TypeScript everywhere
+- Prefer named exports over default exports
+- One primary responsibility per file
+- Follow established patterns and conventions
+- Maintain consistency across the codebase
+
+## Code Quality
+
+- Write self-documenting code through clear naming
+- Keep functions and components focused and small
+- Avoid premature optimization
+- Prefer composition over inheritance
+- Follow DRY (Don't Repeat Yourself) principles
+
+## TypeScript Standards
+
+- Use strict TypeScript configuration
+- Define explicit types for function parameters and returns
+- Avoid `any` type - use `unknown` or proper types instead
+- Use type inference where it improves readability
+- Prefer interfaces for object shapes, types for unions/intersections
+
+## File Organization
+
+- Group related files by feature/domain
+- Use kebab-case for file and folder names
+- Keep related code together
+- Separate concerns (UI, logic, data)
+
+## Testing
+
+- Write tests for complex logic
+- Test user-facing functionality
+- Keep tests simple and focused
+- Use descriptive test names
+
+## Documentation
+
+- Document exported APIs (components, functions, hooks)
+- Explain non-obvious decisions and tradeoffs
+- Keep documentation up to date
+- Prefer code clarity over comments
+
+## Performance
+
+- Optimize for user experience
+- Consider bundle size
+- Use lazy loading where appropriate
+- Profile before optimizing
+
+## Security
+
+- Never commit secrets or API keys
+- Validate user input
+- Sanitize data before rendering
+- Follow security best practices
+
+## Notes
+
+- These are general guidelines - refer to specific rule files for detailed standards
+- When in doubt, follow existing patterns in the codebase
+- Ask for clarification rather than making assumptions

@@ -1,0 +1,124 @@
+---
+description: Import ordering, style, and organization rules
+globs: ["**/*.{ts,tsx}"]
+alwaysApply: true
+---
+
+# Import Rules
+
+## Import Order (Strict)
+
+Imports **MUST** be grouped in this exact order:
+
+1. **External packages** (React, Next.js, third-party)
+2. **Internal absolute imports** (`@/...`)
+3. **Relative imports** (`../`, `./`)
+4. **Style imports** (`.css`, `.scss`, etc.)
+
+### Pattern
+```typescript
+// 1. External packages
+import React from "react";
+import { useDispatch } from "react-redux";
+import type { Metadata } from "next";
+
+// 2. Internal absolute imports
+import { useAppDispatch } from "@/hooks/useAppDispatch";
+import { BasePanel } from "@/components/base-panel";
+import { setImage } from "@/state/imageSlice";
+
+// 3. Relative imports
+import { UploadButton } from "./upload-button";
+import { UploadInstructions } from "./upload-instructions";
+
+// 4. Style imports
+import "./styles.css";
+```
+
+## Import Style
+
+### Prefer Absolute Imports
+```typescript
+// ✅ CORRECT - absolute import
+import { useAppDispatch } from "@/hooks/useAppDispatch";
+import { BasePanel } from "@/components/base-panel";
+
+// ❌ WRONG - relative when absolute available
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { BasePanel } from "../base-panel/base-panel";
+```
+
+### Use Named Imports
+```typescript
+// ✅ CORRECT - named import
+import { ComponentName } from "@/components/component-name";
+
+// ❌ WRONG - default import for named export
+import ComponentName from "@/components/component-name";
+```
+
+### Type Imports
+```typescript
+// ✅ CORRECT - separate type imports
+import type { ComponentProps } from "@/types";
+import { Component } from "@/components/component";
+
+// ✅ ALSO CORRECT - inline type import
+import { Component, type ComponentProps } from "@/components/component";
+```
+
+## Import Grouping Rules
+
+### Separate Groups with Blank Lines
+```typescript
+// External
+import React from "react";
+
+// Internal absolute
+import { useAppDispatch } from "@/hooks/useAppDispatch";
+
+// Relative
+import { LocalComponent } from "./local-component";
+
+// Styles
+import "./styles.css";
+```
+
+### Sort Within Groups
+- Alphabetically within each group (optional but recommended)
+- Type imports before value imports
+
+## Common Violations
+
+### Violation: Wrong Order
+```typescript
+// ❌ WRONG
+import { BasePanel } from "@/components/base-panel";
+import React from "react";
+import "./styles.css";
+import { LocalComponent } from "./local";
+
+// ✅ CORRECT
+import React from "react";
+import { BasePanel } from "@/components/base-panel";
+import { LocalComponent } from "./local";
+import "./styles.css";
+```
+
+### Violation: Relative Instead of Absolute
+```typescript
+// ❌ WRONG
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+
+// ✅ CORRECT
+import { useAppDispatch } from "@/hooks/useAppDispatch";
+```
+
+### Violation: Default Import for Named Export
+```typescript
+// ❌ WRONG
+import BasePanel from "@/components/base-panel";
+
+// ✅ CORRECT
+import { BasePanel } from "@/components/base-panel";
+```

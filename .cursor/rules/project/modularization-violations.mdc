@@ -1,0 +1,276 @@
+---
+description: Tracking document for component modularization violations requiring refactoring
+globs: ["components/**/*.tsx"]
+alwaysApply: false
+---
+
+# Component Modularization Violations
+
+This document identifies components that violate modularization rules and require refactoring.
+
+## Critical Violations (Must Fix)
+
+### 1. `tools-feature/tools-feature.tsx` (230 lines) ⚠️ CRITICAL
+
+**Violations:**
+- Exceeds 150-line threshold by 80 lines
+- Contains mixed concerns:
+  - UI rendering (JSX)
+  - Business logic (color calculations, input parsing)
+  - State management (Redux dispatch/select)
+  - Side effects (clipboard API)
+
+**What to Extract:**
+
+1. **Color Calculation Logic → `hooks/useColorTools.ts`**
+   - `baseRgb` calculation (useMemo)
+   - `hex` calculation (useMemo)
+   - `displayValue` calculation (useMemo)
+   - HSL/RGB/HEX conversions
+
+2. **Input Parsing Logic → `hooks/useColorInput.ts`**
+   - `handleInputChange` function (88 lines!)
+   - HEX parsing logic
+   - HSL parsing logic
+   - RGBA parsing logic
+
+3. **Event Handlers → `hooks/useColorHandlers.ts`**
+   - `handleHueRatioChange`
+   - `handleOpacityRatioChange`
+   - `handleSquareChange`
+   - `handleModeChange`
+   - `handleCopy`
+   - `handleSwatchClick`
+
+4. **UI Sections → `subcomponents/`**
+   - No distinct sections to extract (already well-structured)
+   - Consider: Extract download/action button if it grows
+
+**Proposed Structure:**
+```
+tools-feature/
+  /hooks
+    useColorTools.ts          # Color calculations
+    useColorInput.ts           # Input parsing (88 lines)
+    useColorHandlers.ts        # Event handlers
+    index.ts
+  /subcomponents
+    (none needed - already modular)
+  tools-feature.tsx            # ~60 lines (orchestration only)
+  index.ts
+```
+
+**Why This Improves Maintainability:**
+- Reduces main component from 230 to ~60 lines
+- Logic is testable in isolation
+- Input parsing (complex) is separated and reusable
+- Clear separation: UI vs calculations vs handlers
+
+---
+
+### 2. `tools-feature/color-square.tsx` (147 lines) ⚠️ REVIEW
+
+**Status:** Close to threshold, review for extraction opportunities
+
+**Check:**
+- Does it contain business logic mixed with UI?
+- Can any sections be extracted to subcomponents?
+- Are there reusable calculations that should be hooks?
+
+**Action:** Review file structure and extract if needed
+
+---
+
+### 3. `result-image-preview/result-canvas.tsx` (144 lines) ⚠️ REVIEW
+
+**Status:** Close to threshold, review for extraction opportunities
+
+**Check:**
+- Does it contain canvas manipulation logic that should be extracted?
+- Are there calculations that belong in hooks?
+- Can subcomponents help organize the code?
+
+**Action:** Review file structure and extract if needed
+
+---
+
+## Structure Violations
+
+### Missing Hooks Folders
+
+**Features without `/hooks` folders:**
+- `tools-feature/` - Needs hooks for color logic
+- `upload-feature/` - May need hooks for file processing
+- `dropdown-controls/` - May need hooks for download logic
+- `creator-badge/` - Likely doesn't need hooks (simple presentation)
+
+**Action:** Create `/hooks` folders where business logic exists
+
+### Missing Subcomponents Folders
+
+**Features that may benefit from `/subcomponents`:**
+- `tools-feature/` - Review if UI sections can be extracted
+- `upload-feature/` - Already well-structured, may not need
+- `dropdown-controls/` - Review download button section
+
+**Action:** Create `/subcomponents` folders only when extraction is needed
+
+### Index File Violations
+
+**Current Issues:**
+- `tools-feature/index.ts` - Has default export (violates naming rules)
+- `upload-feature/index.ts` - Has default export (violates naming rules)
+
+**Fix Required:**
+```typescript
+// ❌ CURRENT
+export { Tools } from "./tools-feature";
+export { default } from "./tools-feature";
+
+// ✅ CORRECT
+export { Tools } from "./tools-feature";
+export * from "./tools-feature";
+// Remove default export
+```
+
+## Import Violations
+
+### Direct File Imports
+
+**Check for:**
+- Imports that bypass index files
+- Relative imports to specific files instead of feature folder
+
+**Example Violation:**
+```typescript
+// ❌ WRONG
+import { ColorSquare } from "@/components/tools-feature/color-square";
+
+// ✅ CORRECT
+import { ColorSquare } from "@/components/tools-feature";
+```
+
+## Refactoring Priority
+
+### Priority 1: Critical Size Violations
+1. **`tools-feature/tools-feature.tsx`** (230 lines)
+   - Extract color calculation logic
+   - Extract input parsing logic
+   - Extract event handlers
+   - Estimated effort: Medium
+   - Impact: High (reduces complexity significantly)
+
+### Priority 2: Structure Setup
+1. Create `/hooks` folders where needed
+2. Create `/subcomponents` folders where needed
+3. Fix index file exports
+4. Estimated effort: Low
+   - Impact: Medium (enables future modularization)
+
+### Priority 3: Review Threshold Files
+1. Review `color-square.tsx` (147 lines)
+2. Review `result-canvas.tsx` (144 lines)
+3. Extract if mixed concerns found
+4. Estimated effort: Low-Medium
+   - Impact: Low-Medium (preventive)
+
+## Refactoring Plan: tools-feature.tsx
+
+### Step 1: Extract Color Calculations
+**File:** `hooks/useColorTools.ts`
+**Extract:**
+- `baseRgb` useMemo calculation
+- `hex` useMemo calculation
+- `displayValue` useMemo calculation
+- Color conversion utilities usage
+
+**Returns:**
+```typescript
+{
+  baseRgb,
+  hex,
+  displayValue,
+  colorsToDisplay
+}
+```
+
+### Step 2: Extract Input Parsing
+**File:** `hooks/useColorInput.ts`
+**Extract:**
+- `handleInputChange` function (88 lines)
+- HEX input parsing
+- HSL input parsing
+- RGBA input parsing
+
+**Returns:**
+```typescript
+{
+  handleInputChange: (value: string) => void
+}
+```
+
+### Step 3: Extract Event Handlers
+**File:** `hooks/useColorHandlers.ts`
+**Extract:**
+- `handleHueRatioChange`
+- `handleOpacityRatioChange`
+- `handleSquareChange`
+- `handleModeChange`
+- `handleCopy`
+- `handleSwatchClick`
+
+**Returns:**
+```typescript
+{
+  handleHueRatioChange,
+  handleOpacityRatioChange,
+  handleSquareChange,
+  handleModeChange,
+  handleCopy,
+  handleSwatchClick
+}
+```
+
+### Step 4: Refactor Main Component
+**File:** `tools-feature.tsx`
+**Result:**
+- ~60 lines (down from 230)
+- Only orchestration and JSX
+- Imports hooks and uses their return values
+
+### Step 5: Update Index Files
+**File:** `hooks/index.ts`
+```typescript
+export { useColorTools } from "./use-color-tools";
+export { useColorInput } from "./use-color-input";
+export { useColorHandlers } from "./use-color-handlers";
+```
+
+**File:** `tools-feature/index.ts`
+```typescript
+export { Tools } from "./tools-feature";
+export * from "./hooks";
+```
+
+## Safety Checklist
+
+Before refactoring:
+- [ ] Identify all props and preserve API
+- [ ] List all event handlers
+- [ ] Document all side effects
+- [ ] Note all external dependencies (motion.dev, lucide)
+- [ ] Test current behavior
+- [ ] Create hooks with same functionality
+- [ ] Verify no behavior changes
+- [ ] Update imports throughout codebase
+- [ ] Update index files
+
+## Notes
+
+- **DO NOT** change component behavior
+- **DO NOT** modify props interfaces
+- **DO NOT** change Redux patterns
+- **DO NOT** alter styling approach
+- **DO** extract logic to improve maintainability
+- **DO** create clear separation of concerns
+- **DO** make code more testable

@@ -1,0 +1,338 @@
+---
+description: Component modularization rules for extracting logic, hooks, and subcomponents
+globs: ["components/**/*.tsx"]
+alwaysApply: true
+---
+
+# Component Modularization Rules
+
+## 1. Detect Non-Modular Components
+
+### Size Threshold
+- **Files longer than ~150 lines** MUST be modularized
+- Count includes:
+  - Component logic
+  - Event handlers
+  - Effects and hooks
+  - JSX/TSX markup
+  - Comments and whitespace
+
+### Mixed Concerns Detection
+A component MUST be modularized if it handles:
+- ✅ UI rendering
+- ✅ Business logic
+- ✅ Side effects (API calls, localStorage, etc.)
+- ✅ Animations
+- ✅ State management
+- ✅ Complex calculations
+
+**All in one file = Violation**
+
+### Detection Checklist
+- [ ] File exceeds 150 lines
+- [ ] Contains business logic + UI rendering
+- [ ] Has side effects mixed with presentation
+- [ ] Contains complex calculations inline
+- [ ] Has multiple responsibilities
+
+## 2. Feature-Based Structure Enforcement
+
+### Required Pattern
+```
+components/
+  feature-name/
+    /subcomponents
+      FeatureHeader.tsx
+      FeatureFooter.tsx
+      FeatureControls.tsx
+      index.ts
+    /hooks
+      useFeatureLogic.ts
+      useFeatureData.ts
+      index.ts
+    FeatureName.tsx
+    index.ts
+```
+
+### Rules
+- **Group by feature, NOT by type**
+- Do NOT create global shared folders unless reuse is proven (2+ features)
+- Each feature folder is self-contained
+- Related components stay together
+
+### ❌ WRONG - Type-Based
+```
+components/
+  buttons/
+    upload-button.tsx
+    download-button.tsx
+  inputs/
+    file-input.tsx
+    hex-input.tsx
+```
+
+### ✅ CORRECT - Feature-Based
+```
+components/
+  upload-feature/
+    upload-button.tsx
+    file-input.tsx
+    upload-feature.tsx
+  tools-feature/
+    hex-input.tsx
+    color-input.tsx
+    tools-feature.tsx
+```
+
+### When to Create Shared Folders
+- Component is used by 3+ different features
+- Component is truly generic (e.g., `BasePanel`, `ThemeProvider`)
+- Place in root `components/` or `components/shared/` if many exist
+
+## 3. Subcomponent Extraction Rules
+
+### When to Extract
+Extract UI sections into `/subcomponents` if:
+- Used ONLY by the parent component
+- Represents a distinct visual section (Header, Footer, Controls, List, Item)
+- Has its own props interface
+- Improves readability of parent
+
+### Naming Convention
+- Use clear, semantic names:
+  - ✅ `FeatureHeader`, `FeatureFooter`, `FeatureControls`
+  - ✅ `ColorList`, `ColorItem`, `UploadArea`
+  - ❌ `Section1`, `PartA`, `Component1`
+
+### Structure
+```
+feature-name/
+  /subcomponents
+    FeatureHeader.tsx      # Header section
+    FeatureFooter.tsx      # Footer section
+    FeatureControls.tsx    # Control panel
+    FeatureList.tsx        # List container
+    FeatureItem.tsx        # List item
+    index.ts              # Re-exports
+  FeatureName.tsx
+  index.ts
+```
+
+### DO NOT Over-Abstract
+- Single-use logic that's <20 lines can stay inline
+- Simple conditional rendering doesn't need extraction
+- Don't extract if it makes code harder to follow
+
+### Example: Good Extraction
+```typescript
+// ❌ BEFORE - 200 lines, mixed concerns
+export const ToolsFeature: React.FC = () => {
+  // 50 lines of state/hooks
+  // 100 lines of handlers
+  // 50 lines of JSX with Header, Controls, List sections
+};
+
+// ✅ AFTER - Modularized
+// ToolsFeature.tsx (50 lines)
+export const ToolsFeature: React.FC = () => {
+  const { colors, handlers } = useToolsLogic();
+  return (
+    <BasePanel>
+      <ToolsHeader />
+      <ToolsControls {...handlers} />
+      <ToolsColorList colors={colors} />
+    </BasePanel>
+  );
+};
+
+// subcomponents/ToolsHeader.tsx (20 lines)
+// subcomponents/ToolsControls.tsx (40 lines)
+// subcomponents/ToolsColorList.tsx (30 lines)
+// hooks/useToolsLogic.ts (60 lines)
+```
+
+## 4. Hooks & Logic Separation
+
+### Extract to `/hooks` When:
+- Non-UI logic (calculations, transformations)
+- State management logic
+- Side effects (API calls, localStorage)
+- Complex event handlers
+- Reusable logic across subcomponents
+
+### Hook Requirements
+- **MUST** start with `use` prefix
+- **MUST** be colocated with feature (in feature's `/hooks` folder)
+- **MUST** have single responsibility
+- **MUST** be one hook per file
+
+### Structure
+```
+feature-name/
+  /hooks
+    useFeatureLogic.ts      # Main business logic
+    useFeatureData.ts       # Data fetching/transformation
+    useFeatureState.ts      # Complex state management
+    index.ts               # Re-exports
+  FeatureName.tsx
+```
+
+### Example: Logic Extraction
+```typescript
+// ❌ BEFORE - Logic mixed with UI
+export const ToolsFeature: React.FC = () => {
+  const [hue, setHue] = useState(0);
+  const baseRgb = useMemo(() => hslToRgb(hue, s, l), [hue, s, l]);
+  const hex = useMemo(() => rgbToHex(baseRgb), [baseRgb]);
+  // ... 100 more lines of logic
+  return <div>...</div>;
+};
+
+// ✅ AFTER - Logic extracted
+// hooks/useColorTools.ts
+export const useColorTools = () => {
+  const [hue, setHue] = useState(0);
+  const baseRgb = useMemo(() => hslToRgb(hue, s, l), [hue, s, l]);
+  const hex = useMemo(() => rgbToHex(baseRgb), [baseRgb]);
+  // ... all logic
+  return { hue, baseRgb, hex, handlers };
+};
+
+// ToolsFeature.tsx
+export const ToolsFeature: React.FC = () => {
+  const { hue, baseRgb, hex, handlers } = useColorTools();
+  return <div>...</div>;
+};
+```
+
+## 5. Index (Barrel) Files
+
+### Requirements
+- **Every feature folder MUST have `index.ts`**
+- **Parent imports MUST come only from index files**
+- Index files export all public components/hooks
+
+### Pattern
+```typescript
+// feature-name/index.ts
+export { FeatureName } from "./feature-name";
+export * from "./subcomponents";
+export * from "./hooks";
+```
+
+```typescript
+// feature-name/subcomponents/index.ts
+export { FeatureHeader } from "./feature-header";
+export { FeatureFooter } from "./feature-footer";
+export { FeatureControls } from "./feature-controls";
+```
+
+```typescript
+// feature-name/hooks/index.ts
+export { useFeatureLogic } from "./use-feature-logic";
+export { useFeatureData } from "./use-feature-data";
+```
+
+### Import Rules
+```typescript
+// ✅ CORRECT - Import from index
+import { ToolsFeature } from "@/components/tools-feature";
+import { ToolsHeader, ToolsControls } from "@/components/tools-feature";
+import { useColorTools } from "@/components/tools-feature";
+
+// ❌ WRONG - Direct file import
+import { ToolsFeature } from "@/components/tools-feature/tools-feature";
+import { ToolsHeader } from "@/components/tools-feature/subcomponents/tools-header";
+```
+
+## 6. Explanation Requirement
+
+### Before Refactoring, Output:
+
+1. **What is being extracted:**
+   - List specific code sections
+   - Identify components, hooks, or logic
+
+2. **Why it belongs there:**
+   - Explain the placement decision
+   - Justify feature-based vs shared
+
+3. **Why this improves maintainability:**
+   - Reduced complexity
+   - Better testability
+   - Clearer separation of concerns
+   - Easier to locate code
+
+### Example Explanation
+```
+## Refactoring: tools-feature.tsx (230 lines)
+
+**What is being extracted:**
+- Color calculation logic → hooks/useColorTools.ts
+- Input parsing logic → hooks/useColorInput.ts
+- Header section → subcomponents/ToolsHeader.tsx
+- Controls section → subcomponents/ToolsControls.tsx
+
+**Why it belongs there:**
+- Logic hooks are feature-specific, so they stay in tools-feature/hooks
+- Subcomponents are only used by ToolsFeature, so they go in subcomponents
+- No shared folder needed - these are single-use
+
+**Why this improves maintainability:**
+- Reduces ToolsFeature.tsx from 230 to ~60 lines
+- Logic is testable in isolation
+- UI sections are easier to modify independently
+- Clear separation: UI vs logic vs state
+```
+
+## 7. Safety Rules
+
+### DO NOT Change Behavior
+- Preserve all existing functionality
+- Maintain exact same props API
+- Keep all event handlers working
+- Preserve animations and transitions
+
+### Preserve External Dependencies
+- **DO NOT** change motion.dev usage
+- **DO NOT** change lucide-react usage
+- **DO NOT** change Redux/state management patterns
+- **DO NOT** change styling approach (Tailwind classes)
+
+### Refactoring Checklist
+- [ ] All props interfaces preserved
+- [ ] All event handlers work identically
+- [ ] No behavior changes
+- [ ] External dependencies unchanged
+- [ ] Imports updated correctly
+- [ ] Index files export everything needed
+
+## Current Violations
+
+### Files Requiring Modularization
+
+1. **`tools-feature/tools-feature.tsx` (230 lines)**
+   - Contains: UI rendering + business logic + state management
+   - Extract: Color calculation logic to hooks
+   - Extract: Input parsing to hooks
+   - Extract: UI sections to subcomponents
+
+2. **`tools-feature/color-square.tsx` (147 lines)**
+   - Review: May need subcomponent extraction if complex
+
+3. **`result-image-preview/result-canvas.tsx` (144 lines)**
+   - Review: May need logic extraction to hooks
+
+## Modularization Checklist
+
+Before considering a component "done":
+- [ ] File is under 150 lines
+- [ ] UI rendering separated from business logic
+- [ ] Side effects extracted to hooks
+- [ ] Subcomponents extracted for distinct sections
+- [ ] Hooks are in `/hooks` folder
+- [ ] Index files export all public APIs
+- [ ] Parent imports only from index files
+- [ ] Feature-based structure maintained
+- [ ] No behavior changes
+- [ ] Props API preserved

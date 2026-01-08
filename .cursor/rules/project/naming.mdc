@@ -1,0 +1,175 @@
+---
+description: Naming conventions for components, folders, hooks, utilities, and imports
+globs: ["**/*.{ts,tsx}"]
+alwaysApply: true
+---
+
+# Naming Conventions - Strict Enforcement
+
+## 1. React Components
+
+### File Naming
+- **MUST** use PascalCase: `ComponentName.tsx`
+- File name **MUST** match component name exactly
+- Examples:
+  - ✅ `AppHeader.tsx` → component `AppHeader`
+  - ✅ `BasePanel.tsx` → component `BasePanel`
+  - ❌ `app-header.tsx` (wrong case)
+  - ❌ `Header.tsx` with component `AppHeader` (name mismatch)
+
+### Component Exports
+- **NO anonymous default exports** - always use named exports
+- Component name **MUST** match file name exactly
+- Pattern:
+```typescript
+// ✅ CORRECT
+export const ComponentName: React.FC = () => { ... };
+
+// ❌ WRONG - anonymous default export
+export default function ComponentName() { ... }
+
+// ❌ WRONG - both named and default
+export const ComponentName = () => { ... };
+export default ComponentName;
+```
+
+### Index Files
+- If using index.ts for re-exports, export named exports only
+- Pattern:
+```typescript
+// ✅ CORRECT
+export { ComponentName } from "./component-name";
+export * from "./component-name";
+
+// ❌ WRONG
+export default ComponentName;
+```
+
+## 2. Folder Structure
+
+### Naming
+- **MUST** use kebab-case for all folders
+- Examples:
+  - ✅ `base-panel/`, `upload-feature/`, `creator-badge/`
+  - ❌ `basePanel/`, `UploadFeature/`, `creator_badge/`
+
+### Organization
+- **Prefer feature-based grouping** over type-based
+- Group related components together by feature/domain
+- Examples:
+  - ✅ `components/upload-feature/` (contains all upload-related components)
+  - ✅ `components/creator-badge/` (contains all creator badge components)
+  - ❌ `components/buttons/`, `components/inputs/` (type-based, avoid)
+
+## 3. Hooks
+
+### Naming
+- **MUST** start with `use` prefix
+- **MUST** use camelCase
+- Examples:
+  - ✅ `useAppDispatch`, `useAppSelector`, `useTheme`
+  - ❌ `appDispatch`, `AppDispatch`, `use_app_dispatch`
+
+### File Structure
+- **One hook per file**
+- File name matches hook name: `useHookName.ts`
+- Pattern:
+```typescript
+// ✅ CORRECT - hooks/useAppDispatch.ts
+export const useAppDispatch = () => { ... };
+
+// ❌ WRONG - multiple hooks in one file
+export const useAppDispatch = () => { ... };
+export const useAppSelector = () => { ... };
+```
+
+## 4. Utility Functions
+
+### Naming
+- **MUST** use camelCase
+- Examples:
+  - ✅ `extractColorsFromImage`, `hslToRgb`, `rgbToHex`
+  - ❌ `ExtractColors`, `HSL_TO_RGB`, `rgb_to_hex`
+
+### Organization
+- Group by domain in `/utils` directory
+- One file per domain/concern
+- Examples:
+  - ✅ `utils/color.ts` (all color utilities)
+  - ✅ `utils/format.ts` (all formatting utilities)
+  - ❌ `utils/helpers.ts` (too generic)
+
+## 5. Tailwind Classes
+
+### Inline Classes
+- **DO NOT** inline long utility chains (>5 classes)
+- Extract reusable patterns to `globals.css` with semantic class names
+- Pattern:
+```typescript
+// ❌ WRONG - too long inline
+<div className="w-full flex items-center justify-between rounded-full border border-accent-200/30 bg-white px-10 py-3 shadow-sm">
+
+// ✅ CORRECT - extract to globals.css
+// In globals.css:
+.card-surface {
+  @apply rounded-xl border border-accent-200/30 bg-white p-4 shadow-sm;
+}
+
+// In component:
+<div className="card-surface">
+```
+
+### Semantic Class Names
+- Use descriptive, semantic names in `globals.css`
+- Examples:
+  - ✅ `.card-surface`, `.text-muted`, `.button-primary`
+  - ❌ `.style1`, `.red-box`, `.big-text`
+
+### When to Extract
+- Extract if pattern appears 2+ times
+- Extract if class chain is >5 utilities
+- Extract if it represents a semantic UI element (card, button, etc.)
+
+## 6. Imports
+
+### Import Order
+- Group imports in this order:
+  1. External packages (React, Next.js, etc.)
+  2. Internal absolute imports (`@/...`)
+  3. Relative imports (`../`, `./`)
+  4. Style imports (`.css`, `.scss`)
+
+### Import Style
+- **Prefer absolute imports** using `@/` alias
+- Use named imports for components
+- Pattern:
+```typescript
+// ✅ CORRECT
+import React from "react";
+import { useAppDispatch } from "@/hooks/useAppDispatch";
+import { BasePanel } from "@/components/base-panel";
+import { Upload } from "./upload-feature";
+import "./styles.css";
+
+// ❌ WRONG - relative when absolute available
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+
+// ❌ WRONG - default import for named export
+import BasePanel from "@/components/base-panel";
+```
+
+## Violation Handling
+
+When existing code violates these rules:
+1. **Propose a rename plan** - identify all violations
+2. **Explain why** - explain maintainability benefits
+3. **DO NOT refactor logic** - only rename/restructure, unless explicitly asked
+4. **Update imports** - ensure all references are updated
+
+## Examples of Violations Found
+
+Current violations in codebase:
+- Many components use `export default` (should be named exports)
+- Some components have both named and default exports
+- Long Tailwind class chains should be extracted to `globals.css`
+- Some imports could use absolute paths instead of relative
