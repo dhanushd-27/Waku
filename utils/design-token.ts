@@ -131,10 +131,10 @@ const designTokens = {
         clamp: "clamp(2.5rem, 5vw + 1rem, 4.5rem)"
       },
       h2: {
-        mobile: "2rem",       // 32px
-        tablet: "3rem",       // 48px
-        desktop: "4rem",      // 64px
-        clamp: "clamp(2rem, 4vw + 1rem, 4rem)"
+        mobile: "2.25rem",    // 36px
+        tablet: "3.25rem",    // 52px
+        desktop: "4.25rem",   // 68px
+        clamp: "clamp(2.25rem, 4.5vw + 1rem, 4.25rem)"
       },
       h3: {
         mobile: "1.75rem",    // 28px
@@ -447,7 +447,45 @@ const designTokens = {
     md: "8px",
     lg: "16px",
     pill: "999px"
-  }
+  },
+
+  /* =====================
+   * Landing Page Content
+   * ===================== */
+  landing: {
+    features: [
+      {
+        icon: "Lock",
+        title: "Secure Login",
+        description:
+          "Your account keeps everything safe. Access your saved posts, drafts, and settings from any device, anytime you need them.",
+      },
+      {
+        icon: "Save",
+        title: "Save Drafts",
+        description:
+          "Not ready to post yet? Save your work as a draft and come back later to edit, refine, or publish when the timing is right.",
+      },
+      {
+        icon: "Copy",
+        title: "One-Click Copy",
+        description:
+          "Grab your perfectly formatted post with a single click. Paste it directly into Instagram, X, LinkedIn, or anywhere you share.",
+      },
+      {
+        icon: "Image",
+        title: "Perfect Images",
+        description:
+          "Automatically resize and format images to fit each platform's requirements with clean borders and proper spacing.",
+      },
+      {
+        icon: "Sparkles",
+        title: "AI Polish",
+        description:
+          "Let AI refine your captions and text. Get suggestions that make your content clearer, more engaging, and ready to perform.",
+      },
+    ],
+  },
 };
 
 export default designTokens;

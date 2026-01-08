@@ -16,9 +16,9 @@
     --line-height-h1: 1.15;
     --letter-spacing-h1: -0.02em;
 
-    /* H2: 32px → 64px */
-    --font-size-h2: clamp(2rem, 4vw + 1rem, 4rem);
-    --line-height-h2: 1.2;
+    /* H2: 36px → 68px */
+    --font-size-h2: clamp(2.25rem, 4.5vw + 1rem, 4.25rem);
+    --line-height-h2: 1.15;
     --letter-spacing-h2: -0.02em;
 
     /* H3: 28px → 48px */
@@ -217,7 +217,7 @@
   }
 
   .header-pill {
-    @apply mx-auto flex w-full max-w-4xl items-center justify-between rounded-full border border-transparent bg-(--background) px-14 py-3;
+    @apply mx-auto flex w-full max-w-4xl items-center justify-between rounded-full border border-transparent bg-(--background) px-8 md:px-14 py-3;
   }
 
   .header-pill-scrolled {
@@ -257,6 +257,28 @@
 
   .header-mobile-dropdown-link[data-active="true"] {
     @apply text-(--color-trinidad-600);
+  }
+
+  /* Feature Card */
+  .feature-card {
+    @apply flex flex-col items-start p-8 rounded-2xl bg-(--surface-elevated) text-left min-h-44;
+    border: 1.5px solid rgba(var(--border), 0.5);
+  }
+
+  .feature-card-icon {
+    @apply w-6 h-6 text-(--color-trinidad-600) mb-8;
+  }
+
+  .feature-card-title {
+    @apply font-semibold text-(--text-primary) mb-2 text-left;
+    font-size: var(--font-size-subtitle);
+    line-height: var(--line-height-subtitle);
+  }
+
+  .feature-card-description {
+    @apply text-(--text-muted) text-left;
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
   }
 
   /* Section Label Pill */

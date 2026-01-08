@@ -24,13 +24,13 @@ export const FaqSection: React.FC<FaqSectionProps> = ({
   subheading,
 }) => {
   return (
-    <section className="flex flex-col items-center text-center min-h-screen px-6 py-12" id="faq">
+    <section className="flex flex-col items-center text-center px-6 py-12" id="faq">
       <SectionLabel label="FAQ" />
-      <h2 className="text-h2 mt-4">{heading}</h2>
+      <h3 className="text-h3 mt-4 max-w-80 sm:max-w-120 md:max-w-160">{heading}</h3>
       <p className="text-subtitle mt-2 text-(--text-secondary)">{subheading}</p>
 
       {questions && questions.length > 0 ? (
-        <div className="mt-6 grid gap-4">
+        <div className="mt-8 grid gap-3 w-full max-w-sm sm:max-w-lg md:max-w-2xl">
           {questions.map((q) => (
             <FaqQuestion answer={q.answer} key={q.question} question={q.question} />
           ))}

@@ -17,9 +17,9 @@ export const HomeSection: React.FC<HomeSectionProps> = ({ body, heading, subhead
   return (
     <section className="flex flex-1 flex-col items-center text-center px-6 py-12 overflow-clip relative rounded-b-3xl" id="home">
       <SectionLabel label="Home" />
-      <h1 className="text-h1 mt-4 max-w-80 sm:max-w-120 md:max-w-160">
+      <h2 className="text-h2 mt-4 max-w-80 sm:max-w-120 md:max-w-160">
         {heading}
-      </h1>
+      </h2>
       <p className="text-subtitle mt-2 max-w-xs sm:max-w-md md:max-w-lg text-(--text-secondary)">
         {subheading}
       </p>
